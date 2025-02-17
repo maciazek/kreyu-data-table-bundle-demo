@@ -34,4 +34,14 @@ return [
         'version' => '5.1.1',
         'type' => 'css',
     ],
+    'bootstrap-icons/font/bootstrap-icons.css' => [
+        'version' => '1.11.3',
+        'type' => 'css',
+    ],
+    '@hotwired/stimulus' => [
+        'version' => '3.2.2',
+    ],
+    '@symfony/stimulus-bundle' => [
+        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
+    ],
 ];

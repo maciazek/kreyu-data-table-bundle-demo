@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="pl" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="PLggHn." resname="theme">
+        <source>theme</source>
+        <target>Theme</target>
+      </trans-unit>
+      <trans-unit id="kIumP2R" resname="theme.auto">
+        <source>theme.auto</source>
+        <target>Auto</target>
+      </trans-unit>
+      <trans-unit id="PWATBYO" resname="theme.dark">
+        <source>theme.dark</source>
+        <target>Dark</target>
+      </trans-unit>
+      <trans-unit id="a.8gbaH" resname="theme.light">
+        <source>theme.light</source>
+        <target>Light</target>
+      </trans-unit>
+      <trans-unit id="6MA8sOW" resname="toggle_offcanvas_menu">
+        <source>toggle_offcanvas_menu</source>
+        <target>Toggle offcanvas menu</target>
+      </trans-unit>
+      <trans-unit id="wmDGKrg" resname="toggle_navbar_menu">
+        <source>toggle_navbar_menu</source>
+        <target>Toggle navbar menu</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

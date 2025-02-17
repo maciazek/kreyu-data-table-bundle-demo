@@ -1,11 +1,14 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
-import './styles/app.css';
+// stimulus
+import './bootstrap.js';
+
+// bootstrap
+import * as Bootstrap from 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// fonts
 import '@fontsource/noto-sans/latin.css';
 import '@fontsource/noto-sans/latin-ext.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+// custom styles
+import './styles/app.css';

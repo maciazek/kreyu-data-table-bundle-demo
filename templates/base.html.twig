@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{{ app_name }}{% endblock %}</title>
+        <link rel="icon" href="{{ asset('images/logo.png') }}">
         {% block stylesheets %}
         {% endblock %}
 
@@ -11,7 +12,90 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body class="bg-body-secondary" {{ stimulus_controller('bootstrap') }}>
+        <script>
+            // get user's theme
+            var theme = localStorage.getItem('theme');
+
+            // if theme is undefined, set to 'auto'
+            if (!theme) {
+                theme = 'auto';
+                localStorage.setItem('theme', theme);
+            }
+
+            // if theme is set to 'auto', get OS theme
+            if (theme == 'auto' && window.matchMedia) {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            // apply theme
+            document.body.setAttribute('data-bs-theme', theme);
+        </script>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand app-name d-none d-md-inline" href="{{ path('app_homepage_index') }}">{{ app_name }}</a>
+                    <a class="navbar-brand app-name d-inline d-md-none" href="{{ path('app_homepage_index') }}">{{ app_short_name }}</a>
+                </div>
+
+                <div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas" aria-controls="menuOffcanvas" aria-label="{{ 'toggle_offcanvas_menu'|trans({}, 'buttons') }}">
+                        <i class="bi bi-list d-inline-block" style="font-size: 1.75rem; vertical-align:middle;"></i>
+                    </button>
+                    <button class="navbar-toggler px-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="{{ 'toggle_navbar_menu'|trans({}, 'buttons') }}">
+                        <i class="bi bi-three-dots-vertical d-inline-block" style="font-size: 1.75rem; vertical-align:middle;"></i>
+                    </button>
+                </div>
+
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+                        {# theme switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'theme'|trans({}, 'buttons') }}">
+                                <i class="bi bi-circle-half me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'theme'|trans({}, 'buttons') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdown-language">
+                                <li>
+                                    <a type="button" class="dropdown-item d-flex align-items-center" {{ stimulus_action('bootstrap', 'switchTheme', 'click', {name: 'light'}) }}>
+                                        <i class="bi bi-sun-fill"></i><span class="ms-2">{{ 'theme.light'|trans({}, 'buttons') }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a type="button" class="dropdown-item d-flex align-items-center" {{ stimulus_action('bootstrap', 'switchTheme', 'click', {name: 'dark'}) }}>
+                                        <i class="bi bi-moon-stars-fill"></i><span class="ms-2">{{ 'theme.dark'|trans({}, 'buttons') }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a type="button" class="dropdown-item d-flex align-items-center" {{ stimulus_action('bootstrap', 'switchTheme', 'click', {name: 'auto'}) }}>
+                                        <i class="bi bi-display"></i><span class="ms-2">{{ 'theme.auto'|trans({}, 'buttons') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="d-flex flex-row">
+            {# main menu (offcanvas) #}
+            <aside id="menuOffcanvas" class="offcanvas-md offcanvas-start d-flex flex-column flex-shrink-0 min-vh-100 text-bg-dark" data-bs-theme="dark">
+                <div class="d-flex flex-column flex-nowrap h-100 scrollarea">
+                    {{ component('Menu', {elements: [
+                        {
+                            id: 'homepage',
+                            path: path('app_homepage_index'),
+                            label: 'app_homepage_index'|trans({}, 'routes'),
+                            active_routes: {
+                                'app_homepage_index': null,
+                            },
+                            icon: 'house-door-fill',
+                        },
+                    ]}) }}
+                </div>
+            </aside>
+        </div>
         {% block body %}{% endblock %}
     </body>
 </html>

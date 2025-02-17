@@ -1,3 +1,77 @@
+.app-name {
+    font-weight: 800;
+}
+
+aside {
+    width: 230px !important;
+    z-index: 1041 !important;
+}
+aside .btn {
+    padding: .25rem .5rem;
+    color: var(--bs-secondary-color);
+    background-color: transparent;
+}
+
+aside .btn:hover, aside .btn:focus, aside .btn.active {
+    color: rgba(var(--bs-secondary-color), .85);
+    background-color: var(--bs-tertiary-bg);
+}
+
+aside .btn.active {
+    font-weight: 600;
+}
+
+aside .btn-toggle::before {
+    width: 1.25em;
+    line-height: 0;
+    font-family: 'bootstrap-icons';
+    content: '\F285';
+    margin-right: 0.25rem;
+    transition: transform .35s ease;
+    transform-origin: .5em 50%;
+}
+
+aside .btn-toggle::before [aria-expanded="true"]::before {
+    transform: rotate(90deg);
+}
+
+aside .btn-toggle-nav a {
+    padding: .1875rem .5rem;
+    margin-top: .125rem;
+    margin-left: 1.25rem;
+}
+
+aside .scrollarea {
+    margin-top: 56px;
+    overflow-y: auto;
+}
+
 body {
     font-family: 'Noto Sans', sans-serif;
+}
+
+main {
+    margin-top: 56px;
+    padding: 0.85rem !important;
+}
+
+@media (max-width: 767px) {
+    aside {
+        height: 100vh;
+    }
+}
+
+@media (min-width: 768px) {
+    aside {
+        position: fixed;
+        height: 100vh;
+    }
+    main {
+        margin-left: 230px !important;
+        width: calc(100% - 230px) !important;
+    }
+}
+
+nav {
+    z-index: 1042 !important;
 }

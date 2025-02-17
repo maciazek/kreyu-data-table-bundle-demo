@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomepageController!{% endblock %}
+{% block title %}{{ 'app_homepage_index'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
 
 {% block body %}
 {% endblock %}
