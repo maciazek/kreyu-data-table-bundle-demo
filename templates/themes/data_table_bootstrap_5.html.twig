@@ -376,6 +376,42 @@
     </div>
 {% endblock %}
 
+{% block personalization_form_submit %}
+    <div class="d-grid">
+        <button class="btn btn-primary"><i class="bi bi-gear me-2"></i>{{ 'Apply'|trans({}, 'KreyuDataTable') }}</button>
+    </div>
+{% endblock %}
+
+{% block personalization_modal %}
+    <div class="modal modal-blur fade" id="{{ personalization_form.vars.id ~ '__modal' }}" tabindex="-1" style="display: none;" aria-hidden="true">
+        {% block personalization_modal_dialog %}
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                {% block personalization_modal_content %}
+                    <div class="modal-content">
+                        {% block personalization_modal_header %}
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold">
+                                    {% block personalization_modal_title %}
+                                        {{ 'Personalization'|trans({}, 'KreyuDataTable') }}
+                                    {% endblock %}
+                                </h5>
+                                {% block personalization_modal_header_close_button %}
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                        {% block personalization_modal_body %}
+                            <div class="modal-body">
+                                {{ data_table_personalization_form(personalization_form) }}
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
 {% block table %}
     <div class="table-responsive">
         {% with { table_attr: { class: 'table table-sm table-bordered table-hover table-striped align-middle mb-0' }|merge(table_attr|default({})) } %}
