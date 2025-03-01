@@ -49,13 +49,26 @@
 
                 <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
+                        {# locale switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'locale'|trans({}, 'buttons') }}">
+                                <i class="bi bi-translate me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'locale'|trans({}, 'buttons') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
+                                {% for locale in app.enabled_locales %}
+                                    <li><a class="dropdown-item {{ locale == app.locale ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_locale: locale})) }}" {{ locale == app.locale ? 'aria-pressed="true"' }}>{{ ('locale.' ~ locale)|trans({}, 'buttons') }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
                         {# theme switcher #}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'theme'|trans({}, 'buttons') }}">
                                 <i class="bi bi-circle-half me-2 me-md-0"></i>
                                 <span class="d-inline d-md-none">{{ 'theme'|trans({}, 'buttons') }}</span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdown-language">
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
                                 <li>
                                     <a type="button" class="dropdown-item d-flex align-items-center" {{ stimulus_action('bootstrap', 'switchTheme', 'click', {name: 'light'}) }}>
                                         <i class="bi bi-sun-fill"></i><span class="ms-2">{{ 'theme.light'|trans({}, 'buttons') }}</span>
