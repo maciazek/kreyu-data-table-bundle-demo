@@ -104,7 +104,7 @@ class HomepageDataTableType extends AbstractDataTableType
                 'label' => 'employee.status',
                 'value_attr' => function (EmployeeStatus $status) {
                     return [
-                        'class' => 'badge fw-normal text-wrap w-min-content text-bg-'.$status->getContext(),
+                        'class' => 'badge fw-normal text-wrap text-bg-'.$status->getContext(),
                     ];
                 },
             ])
