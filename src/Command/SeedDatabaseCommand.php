@@ -24,6 +24,11 @@ class SeedDatabaseCommand extends Command
         'employee' => 150,
     ];
 
+    const LOCALE_MAP = [
+        'en' => 'en_US',
+        'pl' => 'pl_PL',
+    ];
+
     public function __construct(
         #[Autowire(env: 'APP_DEFAULT_LOCALE')] private string $locale,
         private EntityManagerInterface $entityManager,
@@ -39,7 +44,7 @@ class SeedDatabaseCommand extends Command
     {
 
         $io = new SymfonyStyle($input, $output);
-        $faker = \Faker\Factory::create($this->locale);
+        $faker = \Faker\Factory::create(self::LOCALE_MAP[$this->locale]);
 
         // employees
         for ($i = 1; $i <= self::COUNTS['employee']; $i++) {
