@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\DataTable\Type\HomepageDataTableType;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
@@ -32,8 +33,8 @@ final class HomepageController extends AbstractController
         return $this->render('homepage/index.html.twig', [
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
-                \App\DataTable\Type\HomepageDataTableType::class,
-                \App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter::class,
+                HomepageDataTableType::class,
+                DateRangeActiveFilterFormatter::class,
             ],
         ]);
     }

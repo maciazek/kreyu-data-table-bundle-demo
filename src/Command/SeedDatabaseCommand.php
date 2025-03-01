@@ -19,12 +19,12 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 )]
 class SeedDatabaseCommand extends Command
 {
-    const COUNTS = [
+    private const COUNTS = [
         '_page' => 25,
         'employee' => 150,
     ];
 
-    const LOCALE_MAP = [
+    private const LOCALE_MAP = [
         'en' => 'en_US',
         'pl' => 'pl_PL',
     ];
@@ -42,7 +42,6 @@ class SeedDatabaseCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
         $io = new SymfonyStyle($input, $output);
         $faker = \Faker\Factory::create(self::LOCALE_MAP[$this->locale]);
 

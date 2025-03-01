@@ -12,7 +12,7 @@ final class SourceCodeModal
 
     public function mount(array $classes): void
     {
-        $this->sourceCodes = array_map(function($item) {
+        $this->sourceCodes = array_map(function ($item) {
             $item = new \ReflectionClass($item);
 
             return [
