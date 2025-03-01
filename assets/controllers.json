@@ -1,4 +1,23 @@
 {
-    "controllers": [],
+    "controllers": {
+        "@kreyu/data-table-bundle": {
+            "personalization": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "batch": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "state": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "bootstrap-modal": {
+                "enabled": false,
+                "fetch": "eager"
+            }
+        }
+    },
     "entrypoints": []
 }

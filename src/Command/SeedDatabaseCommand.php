@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Contract;
 use App\Entity\Employee;
+use App\Enum\EmployeeStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -46,6 +47,7 @@ class SeedDatabaseCommand extends Command
             $employee->setFirstName($faker->firstName());
             $employee->setLastName($faker->lastName());
             $employee->setBirthDate($faker->dateTimeInInterval('-60 years', '+35 years'));
+            $employee->setStatus($faker->randomElement(EmployeeStatus::class));
             $this->entityManager->persist($employee);
 
             // contracts

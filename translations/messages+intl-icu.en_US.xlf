@@ -5,9 +5,9 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="c1KCzX0" resname="app_homepage_index">
-        <source>app_homepage_index</source>
-        <target>Homepage</target>
+      <trans-unit id="tnwk_qo" resname="date_format">
+        <source>date_format</source>
+        <target>Y-m-d</target>
       </trans-unit>
     </body>
   </file>

@@ -1,0 +1,374 @@
+{% extends '@KreyuDataTable/themes/bootstrap_5.html.twig' %}
+
+{% block action_bar %}
+    {% set display_filter_action = filtration_enabled and filters|length > 0 and filtration_form.children|length > 0 %}
+    {% set display_export_action = exporting_enabled and exporters|length > 0 %}
+
+    {% if title or has_active_filters or display_filter_action or display_export_action or personalization_enabled %}
+        <div class="card-header">
+            <div class="card-actions">
+                <div class="d-flex flex-row justify-content-between align-items-end gap-1 mb-1">
+                    {% for action in actions %}
+                        <div>
+                            {{ data_table_action(action) }}
+                        </div>
+                    {% endfor %}
+
+                    {% if display_export_action %}
+                        <div>
+                            {{ block('action_export') }}
+                            {{ block('export_modal') }}
+                        </div>
+                    {% endif %}
+
+                    {% if has_active_filters or display_filter_action %}
+                        <div class="d-flex flex-wrap flex-md-row justify-content-end align-items-center gap-1">
+                            {% if filtration_enabled and filtration_form and filtration_form.vars.search_fields|length > 0 %}
+                                {{ block('action_search') }}
+                            {% endif %}
+                            {% if has_active_filters %}
+                                {{ block('active_filters') }}
+                            {% endif %}
+                            {% if display_filter_action %}
+                                {{ block('action_filter') }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    {% if personalization_enabled %}
+                        <div>
+                            {{ block('action_personalize') }}
+                            {{ block('personalization_modal') }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if filtration_enabled and filtration_form and filters|length > 0 %}
+            <div class="modal fade" tabindex="-1" id="{{ filtration_form.vars.id }}__modal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold">{{ 'Filter'|trans({}, 'KreyuDataTable') }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'close'|trans({}, 'buttons') }}"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ data_table_filters_form(filtration_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if has_batch_actions %}
+        {{ block('batch_action_bar', theme) }}
+    {% endif %}
+{% endblock %}
+
+{% block action_export %}
+    {% set attr = {
+        'type': 'button',
+        'data-bs-toggle': 'modal',
+        'data-bs-target': '#' ~ export_form.vars.id ~ '__modal',
+        'title': 'Export'|trans({}, 'KreyuDataTable'),
+    }|merge(attr|default({})) %}
+
+    {% set attr = attr|merge({'class': 'btn btn-sm btn-primary d-none d-lg-inline'}) %}
+    <button {{ block('attributes') }}>{{ block('action_export_icon') }}{{ 'Export'|trans({}, 'KreyuDataTable') }}</button>
+
+    {% set attr = attr|merge({'class': 'btn btn-sm btn-primary d-inline d-lg-none', 'data-bootstrap-target': 'tooltip', 'data-bs-placement': 'right'}) %}
+    <button {{ block('attributes') }}>{{ block('action_export_icon') }}</button>
+{% endblock %}
+
+{% block action_export_icon %}<i class="bi bi-file-earmark-arrow-down me-2 d-none d-lg-inline"></i><i class="bi bi-file-earmark-arrow-down d-inline d-lg-none"></i>{% endblock %}
+
+{% block action_filter %}
+    {% set attr = {
+        'type': 'button',
+        'data-bs-toggle': 'modal',
+        'data-bs-target': '#' ~ filtration_form.vars.id ~ '__modal',
+        'aria-expanded': 'false',
+        'aria-controls': filtration_form.vars.id ~ '__modal',
+        'title': 'Filter'|trans({}, 'KreyuDataTable'),
+    }|merge(attr|default({})) %}
+
+    {% set attr = attr|merge({'class': 'btn btn-sm btn-primary d-none d-lg-inline'}) %}
+    <button {{ block('attributes') }}>{{ block('action_filter_icon') }}{{ 'Filter'|trans({}, 'KreyuDataTable') }}</button>
+
+    {% set attr = attr|merge({'class': 'btn btn-sm btn-primary d-inline d-lg-none', 'data-bootstrap-target': 'tooltip', 'data-bs-placement': 'left'}) %}
+    <button {{ block('attributes') }}>{{ block('action_filter_icon') }}</button>
+{% endblock %}
+
+{% block action_filter_icon %}<i class="bi bi-funnel me-2 d-none d-lg-inline"></i><i class="bi bi-funnel d-inline d-lg-none"></i>{% endblock %}
+
+{% block active_filters %}
+    {% if has_active_filters %}
+        {{ block('filter_clear_all_button') }}
+    {% endif %}
+
+    {% for filter_name, filter_data in filtration_data.filters|default([])|filter(filter => filter.hasValue()) %}
+        {% with { filter: filters[filter_name] } %}
+            {{ block('filter_clear_button') }}
+        {% endwith %}
+    {% endfor %}
+{% endblock %}
+
+{% block action_search %}
+    {% form_theme filtration_form with [_self, 'bootstrap_5_layout.html.twig'] %}
+
+    <div class="d-inline-block w-auto">
+        {% for child in filtration_form.vars.search_fields %}
+            {{ form_widget(child.value, { attr: { form: filtration_form.vars.id, class: 'form-control-sm' } }) }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block column_actions_value %}
+    <span {{- block('attributes') -}}>
+        {% for action in actions %}
+            {{ data_table_action(action) }}
+        {% endfor %}
+    </span>
+{% endblock %}
+
+{% block column_header %}
+    {% with {
+        active_attr: { class: 'text-primary' ~ ' ' ~ attr.class|default('') },
+        label_attr: { class: 'text-decoration-none text-reset d-block w-100 h-100 py-1' },
+    } %}
+        {% set label_attr = label_attr|default({}) %}
+
+        {% if data_table.vars.sorting_enabled and sortable %}
+            {% set active_attr = active_attr|default({}) %}
+            {% set inactive_attr = inactive_attr|default({}) %}
+
+            {% set attr = attr|merge(sorted ? active_attr : inactive_attr) %}
+
+            <th {{ block('attributes') }}>
+                {% set label_attr = { href: data_table_column_sort_url(data_table, column) }|merge(label_attr) %}
+                {% set label_attr = { 'data-turbo-action': 'advance', 'data-turbo-frame': '_self' }|merge(label_attr) %}
+
+                <a {% with { attr: label_attr } %}{{- block('attributes') -}}{% endwith %}>
+                    {{- block('column_header_label', theme, _context) -}}
+
+                    {% if sorted %}
+                        {% if sort_direction == 'asc' %}
+                            {{ block('sort_arrow_asc', theme, _context) }}
+                        {% else %}
+                            {{ block('sort_arrow_desc', theme, _context) }}
+                        {% endif %}
+                    {% else %}
+                        {{ block('sort_arrow_none', theme, _context) }}
+                    {% endif %}
+                </a>
+            </th>
+        {% else %}
+            <th {{ block('attributes') }}>
+                <span {% with { attr: label_attr } %}{{- block('attributes') -}}{% endwith %}>
+                    {{- block('column_header_label', theme, _context) -}}
+                </span>
+            </th>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block export_modal %}
+    <div class="modal modal-blur fade" id="{{ export_form.vars.name ~ '__modal' }}" tabindex="-1" style="display: none;" aria-hidden="true" data-turbo="false">
+        {% block export_modal_dialog %}
+            <div class="modal-dialog" role="document">
+                {% block export_modal_content %}
+                    <div class="modal-content">
+                        {% block export_modal_header %}
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold">{% block export_modal_title %}</b>{{ 'Export'|trans({}, 'KreyuDataTable') }}{% endblock %}</h5>
+                                {% block export_modal_header_close_button %}
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                        {% block export_modal_body %}
+                            <div class="modal-body">
+                                {{ data_table_export_form(export_form) }}
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block filter_clear_all_button %}
+    {% set attr = {
+        'class': 'btn btn-sm btn-icon btn-outline-danger',
+        'href': data_table_filter_clear_url(data_table, filters),
+        'title': 'Clear all filters'|trans({}, 'KreyuDataTable'),
+        'data-bootstrap-target': 'tooltip',
+        'data-bs-placement': 'top',
+        'data-turbo-action': 'advance',
+    }|merge(attr|default({})) %}
+
+    <a {{ block('attributes') }}>{{ block('filter_clear_all_button_icon') }}</a>
+{% endblock %}
+
+{% block filter_clear_all_button_icon '<i class="bi bi-trash"></i>' %}
+
+{% block filter_clear_button %}
+    <a class="btn btn-sm btn-outline-secondary px-2"
+       href="{{ data_table_filter_clear_url(data_table, filter) }}"
+       data-turbo-action="advance"
+       title="{{ 'Clear filter'|trans({}, 'KreyuDataTable') }}"
+       data-bootstrap-target="tooltip"
+       data-bs-placement="top"
+    >
+        <span class="me-2" aria-hidden="true">{{ block('filter_clear_button_icon') }}</span>
+        <span class="me-1">
+            <strong>{{ filter.vars.label|trans({}, filter.vars.translation_domain) }}</strong>
+
+            {% if filter.vars.operator_selectable %}
+                <span class="text-muted">{{ filter.vars.data.operator.label|trans({}, 'KreyuDataTable') }}</span>
+            {% endif %}
+        </span>
+        <span class="">{{ filter.vars.value|trans({}, filter.vars.translation_domain) }}</span>
+    </a>
+{% endblock %}
+
+{% block filter_clear_button_icon '<i class="bi bi-x-lg"></i>' %}
+
+{% block filtration_form_content %}
+    {% with { attr: { class: 'row gx-3' } } %}
+        <div {{ block('attributes') }}>
+            {% for child in form %}
+                {{ block('filtration_form_row', theme) }}
+            {% endfor %}
+
+            {{ block('filtration_form_submit', theme) }}
+        </div>
+    {% endwith %}
+{% endblock %}
+
+{% block filtration_form_row %}
+    {% with { attr: { class: 'col-12 col-lg-6' }, form_themes: [_self, 'bootstrap_5_layout.html.twig'] } %}
+        <div {{ block('attributes') }}>{{ form_row(child) }}</div>
+    {% endwith %}
+{% endblock %}
+
+{% block filtration_form_submit %}
+    <div class="col-12">
+        {% with { attr: { class: 'btn btn-primary' } } %}
+            <div class="d-grid">
+                <button {% with { attr: attr|default({})|merge({ form: form.vars.id, 'data-turbo-action': 'advance', 'data-turbo-frame': '_self' }) } %}{{ block('attributes') }}{% endwith %}>
+                    <i class="bi bi-funnel me-2"></i>{{ 'Filter'|trans({}, 'KreyuDataTable') }}
+                </button>
+            </div>
+        {% endwith %}
+    </div>
+{% endblock %}
+
+{% block kreyu_data_table_export_form %}
+    {% form_theme form with [_self, 'bootstrap_5_layout.html.twig'] %}
+
+    <div>
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_row(form.filename) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.exporter) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.strategy) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.includePersonalization) }}
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary"><i class="bi bi-file-earmark-arrow-down me-2"></i>{{ 'Export'|trans({}, 'KreyuDataTable') }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block pagination_counters %}
+    <div class="d-flex justify-content-center">
+        <span {{- block('attributes') -}}>
+            {{- block('pagination_counters_message', theme) -}}
+        </span>
+    </div>
+{% endblock %}
+
+{% block pagination_per_page %}
+    <div class="d-flex justify-content-center">
+        {% set choices = data_table.vars.per_page_choices %}
+
+        {% if choices is not empty %}
+            {{ block('pagination_per_page_message', theme) }}
+            {{ block('pagination_per_page_form', theme) }}
+        {% else %}
+            <div></div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block pagination_per_page_form %}
+    {% with { select_attr: { class: 'col form-select form-select-sm' } } %}
+        <form>
+            {% set url_query_parameters = [] %}
+
+            {#
+                Changing the "per page" parameter automatically changes page to the first one.
+                You can disable this behavior by in your own theme that extends this one, for example:
+
+                {% block pagination_per_page_form %}
+                    {% with { should_reset_to_first_page: false } %}
+                        {{ parent() }}
+                    {% endwith %}
+                {% endblock %}
+            #}
+
+            {% if should_reset_to_first_page ?? true %}
+                {% set url_query_parameters = url_query_parameters|merge({ (data_table.vars.page_parameter_name): 1 }) %}
+            {% endif %}
+
+            {{ _self.array_to_form_inputs(url_query_parameters) }}
+
+            {% set select_attr = {
+                name: data_table.vars.per_page_parameter_name,
+                onchange: 'this.form.submit()',
+                autocomplete: 'off',
+            }|merge(select_attr|default({})) %}
+
+            <select {% with { attr: select_attr } %}{{ block('attributes') }}{% endwith %}>
+                {% for choice in choices %}
+                    <option value="{{ choice }}"{{ item_number_per_page == choice ? ' selected' }}>{{ choice }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    {% endwith %}
+{% endblock %}
+
+{% block pagination_widget %}
+    <div class="d-flex flex-column flex-md-row justify-content-between mt-1">
+        {{ block('pagination_per_page', theme) }}
+        {{ block('pagination_counters', theme) }}
+        {% if page_count > 1 %}
+            <div class="pagination pagination-sm justify-content-center">
+                {{ block('pagination_controls', theme) }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block table %}
+    <div class="table-responsive">
+        {% with { table_attr: { class: 'table table-sm table-bordered table-hover table-striped align-middle mb-0' }|merge(table_attr|default({})) } %}
+            {{ parent() }}
+        {% endwith %}
+    </div>
+{% endblock %}
+
+{% block table_body %}
+    <tbody class="table-group-divider">{{ block('table_body_row') }}</tbody>
+{% endblock %}

@@ -26,6 +26,9 @@
             "migrations/.gitignore"
         ]
     },
+    "kreyu/data-table-bundle": {
+        "version": "v0.28.1"
+    },
     "symfony/asset-mapper": {
         "version": "6.4",
         "recipe": {
@@ -157,6 +160,18 @@
         },
         "files": [
             "config/packages/twig_component.yaml"
+        ]
+    },
+    "symfony/validator": {
+        "version": "6.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
+        },
+        "files": [
+            "config/packages/validator.yaml"
         ]
     },
     "symfony/web-profiler-bundle": {

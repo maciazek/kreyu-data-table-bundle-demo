@@ -44,4 +44,7 @@ return [
     '@symfony/stimulus-bundle' => [
         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
+    'sortablejs' => [
+        'version' => '1.15.6',
+    ],
 ];

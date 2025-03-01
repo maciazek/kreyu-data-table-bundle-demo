@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,6 +25,9 @@ class Employee
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthDate = null;
+
+    #[ORM\Column(enumType: EmployeeStatus::class)]
+    private ?EmployeeStatus $status = null;
 
     /**
      * @var Collection<int, Contract>
@@ -73,6 +77,18 @@ class Employee
     public function setBirthDate(\DateTimeInterface $birthDate): static
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function getStatus(): ?EmployeeStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(EmployeeStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
