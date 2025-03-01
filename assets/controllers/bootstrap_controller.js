@@ -1,6 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
+import { Tooltip } from 'bootstrap';
 
 export default class extends Controller {
+    static targets = ['tooltip'];
+
     /**
      * Handles theme switch
      */
@@ -36,6 +39,15 @@ export default class extends Controller {
             // apply theme
             document.body.setAttribute('data-bs-theme', theme);
         });
+    }
+
+    /**
+     * Initialize tooltip on target element
+     *
+     * @param {*} element - Target element
+     */
+    tooltipTargetConnected(element) {
+        new Tooltip(element);
     }
 
     /**
