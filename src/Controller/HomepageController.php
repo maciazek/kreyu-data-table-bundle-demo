@@ -29,22 +29,12 @@ final class HomepageController extends AbstractController
             return $this->file($dataTable->export());
         }
 
-        $sourceCodeFiles = array_map(function($item) {
-            $item = new \ReflectionClass($item);
-
-            return [
-                'id' => $item->getShortName(),
-                'name' => $item->getShortName().'.php',
-                'content' => highlight_file($item->getFileName(), true),
-            ];
-        }, [
-            \App\DataTable\Type\HomepageDataTableType::class,
-            \App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter::class,
-        ]);
-
         return $this->render('homepage/index.html.twig', [
-            'source_code_files' => $sourceCodeFiles,
             'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                \App\DataTable\Type\HomepageDataTableType::class,
+                \App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter::class,
+            ],
         ]);
     }
 }

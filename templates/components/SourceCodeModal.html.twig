@@ -1,4 +1,3 @@
-{% props id = 'sourceCodeModal', files = [] %}
 <div class="modal fade" id="{{ id }}" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -8,15 +7,15 @@
             </div>
             <div class="modal-body">
                 <ul class="nav nav-pills" role="tablist">
-                    {% for file in files %}
+                    {% for sourceCode in sourceCodes %}
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link {{ file.id == (files|first).id ? 'active' }}" id="{{ file.id ~ 'Tab' }}" data-bs-toggle="tab" data-bs-target="#{{ file.id ~ 'TabPane' }}" type="button" role="tab" aria-controls="{{ file.id ~ 'TabPane' }}" aria-selected="{{ file.id == (files|first).id ? 'true' : 'false' }}">{{ file.name }}</button>
+                            <button class="nav-link {{ sourceCode.id == (sourceCodes|first).id ? 'active' }}" id="{{ sourceCode.id ~ 'Tab' }}" data-bs-toggle="tab" data-bs-target="#{{ sourceCode.id ~ 'TabPane' }}" type="button" role="tab" aria-controls="{{ sourceCode.id ~ 'TabPane' }}" aria-selected="{{ sourceCode.id == (sourceCodes|first).id ? 'true' : 'false' }}">{{ sourceCode.name }}</button>
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="tab-content">
-                    {% for file in files %}
-                        <div class="tab-pane fade {{ file.id == (files|first).id ? 'show active' }}" id="{{ file.id ~ 'TabPane' }}" role="tabpanel" aria-labelledby="{{ file.id ~ 'Tab' }}" tabindex="0">{{ file.content|raw }}</div>
+                    {% for sourceCode in sourceCodes %}
+                        <div class="tab-pane fade {{ sourceCode.id == (sourceCodes|first).id ? 'show active' }}" id="{{ sourceCode.id ~ 'TabPane' }}" role="tabpanel" aria-labelledby="{{ sourceCode.id ~ 'Tab' }}" tabindex="0">{{ sourceCode.content|raw }}</div>
                     {% endfor %}
                 </div>
             </div>
