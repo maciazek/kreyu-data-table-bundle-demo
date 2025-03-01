@@ -13,6 +13,7 @@ use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\DateTimeColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Filter\FilterData;
@@ -47,6 +48,13 @@ class HomepageDataTableType extends AbstractDataTableType
                 'export' => true,
                 'format' => $this->translator->trans('date_format', [], 'messages'),
                 'label' => 'employee.birthDate',
+                'sort' => true,
+            ])
+            ->addColumn('salary', MoneyColumnType::class, [
+                'currency' => $this->translator->trans('currency', [], 'messages'),
+                'export' => true,
+                'label' => 'contract.salary',
+                'property_path' => 'currentContract?.salary',
                 'sort' => true,
             ])
             ->addColumn('status', EnumColumnType::class, [

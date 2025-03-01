@@ -17,7 +17,10 @@ final class HomepageController extends AbstractController
     #[Route('/', name: 'app_homepage_index')]
     public function index(Request $request, EmployeeRepository $employeeRepository): Response
     {
-        $queryBuilder = $employeeRepository->createQueryBuilder('employee');
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
+            ->leftJoin('employee.currentContract', 'currentContract')
+            ->addSelect('currentContract')
+        ;
 
         $dataTable = $this->createDataTable(HomepageDataTableType::class, $queryBuilder);
         $dataTable->handleRequest($request);

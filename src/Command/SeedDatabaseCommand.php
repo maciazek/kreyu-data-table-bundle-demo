@@ -63,6 +63,10 @@ class SeedDatabaseCommand extends Command
                 $contract->setBeginDate($faker->dateTimeInInterval('-15 years', '+5 years'));
                 $contract->setEndDate($faker->numberBetween(0, 2) === 0 ? null : $faker->dateTimeInInterval('-10 years', '+8 years'));
                 $this->entityManager->persist($contract);
+
+                if ($employee->getStatus() !== EmployeeStatus::INA) {
+                    $employee->setCurrentContract($contract);
+                }
             }
 
             if ($i % self::COUNTS['_page'] === 0) {

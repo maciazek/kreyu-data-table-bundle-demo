@@ -26,6 +26,9 @@ class Employee
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthDate = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Contract $currentContract = null;
+
     #[ORM\Column(enumType: EmployeeStatus::class)]
     private ?EmployeeStatus $status = null;
 
@@ -77,6 +80,18 @@ class Employee
     public function setBirthDate(\DateTimeInterface $birthDate): static
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function getCurrentContract(): ?Contract
+    {
+        return $this->currentContract;
+    }
+
+    public function setCurrentContract(?Contract $currentContract): static
+    {
+        $this->currentContract = $currentContract;
 
         return $this;
     }
