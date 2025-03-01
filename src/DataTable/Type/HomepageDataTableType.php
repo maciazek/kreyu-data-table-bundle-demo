@@ -6,11 +6,13 @@ namespace App\DataTable\Type;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Enum\EmployeeStatus;
+use Kreyu\Bundle\DataTableBundle\Action\Type\ButtonActionType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\DateRangeFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\DoctrineOrmFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\StringFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\ActionsColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\DateTimeColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
@@ -34,6 +36,46 @@ class HomepageDataTableType extends AbstractDataTableType
     public function buildDataTable(DataTableBuilderInterface $builder, array $options): void
     {
         $builder
+            ->addColumn('actions', ActionsColumnType::class, [
+                'actions' => [
+                    'show' => [
+                        'type' => ButtonActionType::class,
+                        'type_options' => [
+                            'attr' => [
+                                'class' => 'btn btn-sm btn-info',
+                                'data-bootstrap-target' => 'tooltip',
+                                'data-bs-placement' => 'left',
+                                'data-bs-title' => $this->translator->trans('show', [], 'buttons'),
+                            ],
+                            'href' => '#',
+                            'icon' => 'eye',
+                            'label' => '',
+                        ],
+                    ],
+                    'edit' => [
+                        'type' => ButtonActionType::class,
+                        'type_options' => [
+                            'attr' => [
+                                'class' => 'btn btn-sm btn-warning',
+                                'data-bootstrap-target' => 'tooltip',
+                                'data-bs-placement' => 'right',
+                                'data-bs-title' => $this->translator->trans('edit', [], 'buttons'),
+                            ],
+                            'href' => '#',
+                            'icon' => 'pencil',
+                            'label' => '',
+                        ],
+                    ],
+                ],
+                'header_attr' => [
+                    'class' => 'w-0',
+                ],
+                'label' => '',
+                'priority' => 0,
+                'value_attr' => [
+                    'class' => 'text-nowrap small',
+                ],
+            ])
             ->addColumn('firstName', TextColumnType::class, [
                 'export' => true,
                 'label' => 'employee.firstName',
@@ -93,7 +135,7 @@ class HomepageDataTableType extends AbstractDataTableType
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([
                 'page' => 1,
-                'perPage' => 15,
+                'perPage' => 10,
             ]))
         ;
     }

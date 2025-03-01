@@ -9,6 +9,10 @@
         <source>close</source>
         <target>Close</target>
       </trans-unit>
+      <trans-unit id="JiEhxTc" resname="edit">
+        <source>edit</source>
+        <target>Edit</target>
+      </trans-unit>
       <trans-unit id="d9m85KE" resname="locale">
         <source>locale</source>
         <target>Locale</target>
@@ -20,6 +24,10 @@
       <trans-unit id="1FrgRUc" resname="locale.pl">
         <source>locale.pl</source>
         <target>Polish</target>
+      </trans-unit>
+      <trans-unit id="HGMzUJ3" resname="show">
+        <source>show</source>
+        <target>Show</target>
       </trans-unit>
       <trans-unit id="PLggHn." resname="theme">
         <source>theme</source>

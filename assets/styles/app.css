@@ -82,3 +82,10 @@ main {
 nav {
     z-index: 1042 !important;
 }
+
+.w-0 {
+    width: 0;
+}
+.w-min-content {
+    width: min-content;
+}

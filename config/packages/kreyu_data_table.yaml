@@ -2,7 +2,6 @@ kreyu_data_table:
     defaults:
         exporting:
             enabled: true
-        pagination:
-            per_page_choices: [10, 15, 25, 50, 100]
         themes:
             - 'themes/data_table_bootstrap_5.html.twig'
+            - '@KreyuDataTable/themes/bootstrap_icons_webfont.html.twig'
