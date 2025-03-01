@@ -47,4 +47,12 @@ return [
     'sortablejs' => [
         'version' => '1.15.6',
     ],
+    '@fontsource/roboto-mono/latin.css' => [
+        'version' => '5.2.0',
+        'type' => 'css',
+    ],
+    '@fontsource/roboto-mono/latin-ext.css' => [
+        'version' => '5.2.0',
+        'type' => 'css',
+    ],
 ];

@@ -49,6 +49,9 @@ aside .scrollarea {
 body {
     font-family: 'Noto Sans', sans-serif;
 }
+code {
+    font-family: 'Roboto Mono', sans-serif;
+}
 
 header {
     top: 56px !important;

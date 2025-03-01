@@ -2,6 +2,22 @@
 
 {% block title %}{{ 'app_homepage_index'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
 {% block header %}<i class="bi bi-house-door me-2"></i>{{ 'app_homepage_index'|trans({}, 'routes') }}{% endblock %}
+{% block toolbar %}
+    {{ component('Button', {
+        tag: 'button',
+        context: 'outline-dark',
+        icon: 'braces',
+        'data-bs-toggle': 'modal',
+        'data-bs-target': '#sourceCodeModal',
+        label: 'source_code'|trans({}, 'buttons'),
+        tooltip: {placement: 'bottom', title: 'source_code'|trans({}, 'buttons')},
+        responsive: true,
+    }) }}
+{% endblock %}
+
+{% block modals %}
+    {{ component('SourceCodeModal', {files: source_code_files}) }}
+{% endblock %}
 
 {% block body %}
     {{ data_table(employees) }}

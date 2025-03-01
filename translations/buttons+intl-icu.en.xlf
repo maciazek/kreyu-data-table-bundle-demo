@@ -29,6 +29,10 @@
         <source>show</source>
         <target>Show</target>
       </trans-unit>
+      <trans-unit id="TJ.MiOR" resname="source_code">
+        <source>source_code</source>
+        <target>Source code</target>
+      </trans-unit>
       <trans-unit id="PLggHn." resname="theme">
         <source>theme</source>
         <target>Theme</target>

@@ -1,0 +1,9 @@
+{% props tag = 'a', context = 'info', size = null, class = '', display = 'block', icon = null, label = null, tooltip = null, responsive = false %}
+<{{ tag }} class="btn btn-{{ context }} {% if size %}btn-{{ size }}{% endif %} {% if responsive %}d-{{ display }} d-lg-none{% endif %} text-nowrap {{ class }}" {{ attributes }} {% if tooltip %}data-bootstrap-target="tooltip" data-bs-placement="{{ tooltip.placement ?? 'top' }}" data-bs-title="{{ tooltip.title ?? '' }}"{% endif %}>
+    {% if icon %}<i class="bi bi-{{ icon }} {% if not responsive and label %}me-2{% endif %}"></i>{% endif %}{% if not responsive and label %}{{ label }}{% endif %}
+</{{ tag }}>
+{% if responsive %}
+    <{{ tag }} class="btn btn-{{ context }} {% if size %}btn-{{ size }}{% endif %} d-none d-lg-{{ display }} text-nowrap {{ class }}" {{ attributes }}>
+        {% if icon %}<i class="bi bi-{{ icon }} {% if label %}me-2{% endif %}"></i>{% endif %}{{ label }}
+    </{{ tag }}>
+{% endif %}
