@@ -31,7 +31,7 @@ aside .btn-toggle::before {
     transform-origin: .5em 50%;
 }
 
-aside .btn-toggle::before [aria-expanded="true"]::before {
+aside .btn-toggle[aria-expanded="true"]::before {
     transform: rotate(90deg);
 }
 
