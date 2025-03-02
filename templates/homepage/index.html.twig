@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ 'app_homepage_index'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
-{% block header %}<i class="bi bi-{{ icons.app_homepage_index }} me-2"></i>{{ 'app_homepage_index'|trans({}, 'routes') }}{% endblock %}
+{% block header %}{{ 'app_homepage_index'|trans({}, 'routes') }}{% endblock %}
 {% block toolbar %}
     {{ component('Button', {
         tag: 'button',
