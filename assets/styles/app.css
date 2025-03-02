@@ -53,6 +53,12 @@ code {
     font-family: 'Roboto Mono', sans-serif;
 }
 
+[data-bs-theme="dark"] {
+    code {
+        filter: brightness(200%) hue-rotate(45deg);
+    }
+}
+
 header {
     top: 56px !important;
 }
