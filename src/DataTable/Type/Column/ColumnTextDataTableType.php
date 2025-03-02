@@ -29,7 +29,6 @@ class ColumnTextDataTableType extends AbstractDataTableType
             ->addColumn('name', TextColumnType::class, [
                 'export' => true,
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
-                'sort' => true,
             ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)

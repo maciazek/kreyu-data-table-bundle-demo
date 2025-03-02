@@ -30,23 +30,22 @@ class ColumnDateTimeDataTableType extends AbstractDataTableType
             ->addColumn('name', TextColumnType::class, [
                 'export' => true,
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
-                'sort' => true,
             ])
             ->addColumn('basic', DateTimeColumnType::class, [
                 'export' => true,
                 'property_path' => 'lastLoginAt',
-                'sort' => true,
+                'sort' => 'lastLoginAt',
             ])
-            ->addColumn('format', DateTimeColumnType::class, [
+            ->addColumn('customFormat', DateTimeColumnType::class, [
                 'export' => true,
                 'format' => 'm/d/y H:i',
                 'property_path' => 'lastLoginAt',
-                'sort' => true,
+                'sort' => 'lastLoginAt',
             ])
-            ->addColumn('timezone', DateTimeColumnType::class, [
+            ->addColumn('differentTimezone', DateTimeColumnType::class, [
                 'export' => true,
                 'property_path' => 'lastLoginAt',
-                'sort' => true,
+                'sort' => 'lastLoginAt',
                 'timezone' => 'Pacific/Kiritimati',
             ])
             ->addExporter('ods', OdsExporterType::class)

@@ -34,20 +34,26 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
                 'export' => true,
             ])
             ->addColumn('propertyPath', TextColumnType::class, [
+                'export' => true,
                 'property_path' => 'firstName',
                 'sort' => 'firstName',
             ])
-            ->addColumn('exportOptions', TextColumnType::class, [
+            ->addColumn('labels', TextColumnType::class, [
+                'export' => true,
+                'label' => 'Label',
                 'property_path' => 'lastName',
                 'export' => [
-                    'label' => 'Different export label',
+                    'label' => 'Different label in export',
                 ],
+                'sort' => 'lastName',
             ])
             ->addColumn('attrs', TextColumnType::class, [
+                'export' => true,
                 'property_path' => 'firstName',
                 'header_attr' => [
                     'class' => 'text-success',
                 ],
+                'sort' => 'firstName',
                 'value_attr' => function (string $value, Employee $employee) {
                     return [
                         'class' => $employee->getStatus() === EmployeeStatus::INA ? 'text-danger' : '',
@@ -55,12 +61,15 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
                 },
             ])
             ->addColumn('formatter', TextColumnType::class, [
+                'export' => true,
                 'property_path' => 'lastName',
                 'formatter' => function (string $value, Employee $employee, ColumnInterface $column, array $options) {
                     return $employee->getStatus() === EmployeeStatus::INA ? $value.' ❌' : $value;
                 },
+                'sort' => 'lastName',
             ])
             ->addColumn('getter', TextColumnType::class, [
+                'export' => true,
                 'getter' => function (Employee $employee) {
                     return $employee->getFirstName().' '.$employee->getLastName();
                 },
