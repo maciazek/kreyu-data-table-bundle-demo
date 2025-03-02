@@ -5,5 +5,6 @@ kreyu_data_table:
         personalization:
             enabled: true
         themes:
-            - 'themes/data_table_bootstrap_5.html.twig'
+            - 'themes/data_table_bootstrap_5.html.twig' # custom theme
+            # - '@KreyuDataTable/themes/bootstrap_5.html.twig' # default Bootstrap 5 theme
             - '@KreyuDataTable/themes/bootstrap_icons_webfont.html.twig'
