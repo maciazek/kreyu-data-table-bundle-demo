@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DataTable\Type\Column;
 
-use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Employee;
 use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
@@ -21,7 +20,6 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
 {
     public function __construct(
         private TranslatorInterface $translator,
-        private DateRangeActiveFilterFormatter $dateRangeActiveFilterFormatter,
     ) {
     }
 
