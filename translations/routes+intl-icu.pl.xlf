@@ -21,6 +21,10 @@
         <source>app_column_date_time</source>
         <target>Data i czas</target>
       </trans-unit>
+      <trans-unit id="VpFejyj" resname="app_column_enum">
+        <source>app_column_enum</source>
+        <target>Enumeracje</target>
+      </trans-unit>
       <trans-unit id="ev8Wwiv" resname="app_column_money">
         <source>app_column_money</source>
         <target>Pieniądze</target>

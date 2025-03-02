@@ -109,6 +109,7 @@ class HomepageDataTableType extends AbstractDataTableType
             ->addColumn('status', EnumColumnType::class, [
                 'export' => true,
                 'label' => 'employee.status',
+                'sort' => 'status',
                 'value_attr' => function (EmployeeStatus $status) {
                     return [
                         'class' => 'badge fw-normal text-wrap text-bg-'.$status->getContext(),
