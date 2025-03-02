@@ -93,20 +93,18 @@ class HomepageDataTableType extends AbstractDataTableType
                 'label' => 'employee.birthDate',
                 'sort' => true,
             ])
-            ->addColumn('currentContractTitle.name', TextColumnType::class, [
+            ->addColumn('title', TextColumnType::class, [
                 'export' => true,
                 'label' => 'contract.title',
-                'personalizable' => false, // workaround to fix sorting
                 'property_path' => 'currentContract?.title.name',
-                'sort' => true,
+                'sort' => 'currentContractTitle.name',
             ])
-            ->addColumn('currentContract.salary', MoneyColumnType::class, [
+            ->addColumn('salary', MoneyColumnType::class, [
                 'currency' => $this->translator->trans('currency', [], 'messages'),
                 'export' => true,
                 'label' => 'contract.salary',
-                'personalizable' => false, // workaround to fix sorting
                 'property_path' => 'currentContract?.salary',
-                'sort' => true,
+                'sort' => 'currentContract.salary',
             ])
             ->addColumn('status', EnumColumnType::class, [
                 'export' => true,
