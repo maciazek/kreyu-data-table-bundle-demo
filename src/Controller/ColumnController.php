@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataTable\Type\Column\ColumnBasicOptionsDataTableType;
+use App\DataTable\Type\Column\ColumnDateDataTableType;
 use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
 use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
@@ -77,6 +78,26 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnMoneyDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/date', name: 'app_column_date')]
+    public function date(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee');
+
+        $dataTable = $this->createDataTable(ColumnDateDataTableType::class, $queryBuilder);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/date.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnDateDataTableType::class,
             ],
         ]);
     }
