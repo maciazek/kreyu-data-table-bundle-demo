@@ -45,6 +45,10 @@ final class ColumnController extends AbstractController
         $dataTable = $this->createDataTable(ColumnTextDataTableType::class, $queryBuilder);
         $dataTable->handleRequest($request);
 
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
         return $this->render('column/text.html.twig', [
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
@@ -60,6 +64,10 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnDateTimeDataTableType::class, $queryBuilder);
         $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
 
         return $this->render('column/date_time.html.twig', [
             'employees' => $dataTable->createView(),

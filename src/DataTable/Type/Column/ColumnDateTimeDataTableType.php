@@ -6,6 +6,8 @@ namespace App\DataTable\Type\Column;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Employee;
+use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
+use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\DateTimeColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
@@ -26,19 +28,29 @@ class ColumnDateTimeDataTableType extends AbstractDataTableType
     {
         $builder
             ->addColumn('name', TextColumnType::class, [
+                'export' => true,
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
+                'sort' => true,
             ])
             ->addColumn('basic', DateTimeColumnType::class, [
+                'export' => true,
                 'property_path' => 'lastLoginAt',
+                'sort' => true,
             ])
             ->addColumn('format', DateTimeColumnType::class, [
-                'property_path' => 'lastLoginAt',
+                'export' => true,
                 'format' => 'm/d/y H:i',
+                'property_path' => 'lastLoginAt',
+                'sort' => true,
             ])
             ->addColumn('timezone', DateTimeColumnType::class, [
+                'export' => true,
                 'property_path' => 'lastLoginAt',
+                'sort' => true,
                 'timezone' => 'Pacific/Kiritimati',
             ])
+            ->addExporter('ods', OdsExporterType::class)
+            ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([
                 'page' => 1,
                 'perPage' => 10,
