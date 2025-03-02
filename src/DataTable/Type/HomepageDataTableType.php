@@ -92,10 +92,11 @@ class HomepageDataTableType extends AbstractDataTableType
                 'label' => 'employee.birthDate',
                 'sort' => true,
             ])
-            ->addColumn('salary', MoneyColumnType::class, [
+            ->addColumn('currentContract.salary', MoneyColumnType::class, [
                 'currency' => $this->translator->trans('currency', [], 'messages'),
                 'export' => true,
                 'label' => 'contract.salary',
+                'personalizable' => false, // workaround to fix sorting
                 'property_path' => 'currentContract?.salary',
                 'sort' => true,
             ])
