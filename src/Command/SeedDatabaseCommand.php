@@ -71,6 +71,7 @@ class SeedDatabaseCommand extends Command
             $employee->setFirstName($faker->firstName());
             $employee->setLastName($faker->lastName());
             $employee->setBirthDate($faker->dateTimeInInterval('-60 years', '+35 years'));
+            $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : $faker->dateTimeBetween('-5 years'));
             $employee->setStatus($faker->randomElement(EmployeeStatus::class));
             $this->entityManager->persist($employee);
 

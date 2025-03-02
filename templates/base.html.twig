@@ -1,3 +1,10 @@
+{% set icons = {
+    app_homepage_index: 'house-door',
+    app_column_basic_options: 'info-square-fill',
+    app_column_text: 'alphabet',
+    app_column_date_time: 'calendar-date',
+} %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,13 +105,46 @@
                 <div class="d-flex flex-column flex-nowrap h-100 scrollarea">
                     {{ component('Menu', {elements: [
                         {
-                            id: 'homepage',
+                            id: 'app_homepage',
                             path: path('app_homepage_index'),
                             label: 'app_homepage_index'|trans({}, 'routes'),
                             active_routes: {
                                 'app_homepage_index': null,
                             },
-                            icon: 'house-door',
+                            icon: icons.app_homepage_index,
+                        },
+                        {
+                            id: 'app_column',
+                            label: 'app_column'|trans({}, 'routes'),
+                            children: [
+                                {
+                                    id: 'app_column_basic_options',
+                                    path: path('app_column_basic_options'),
+                                    label: 'app_column_basic_options'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_basic_options': null,
+                                    },
+                                    icon: icons.app_column_basic_options,
+                                },
+                                {
+                                    id: 'app_column_text',
+                                    path: path('app_column_text'),
+                                    label: 'app_column_text'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_text': null,
+                                    },
+                                    icon: icons.app_column_text,
+                                },
+                                {
+                                    id: 'app_column_date_time',
+                                    path: path('app_column_date_time'),
+                                    label: 'app_column_date_time'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_date_time': null,
+                                    },
+                                    icon: icons.app_column_date_time,
+                                },
+                            ],
                         },
                     ]}) }}
                 </div>

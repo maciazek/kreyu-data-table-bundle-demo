@@ -9,6 +9,10 @@
         <source>close</source>
         <target>Zamknij</target>
       </trans-unit>
+      <trans-unit id="yvn5BrF" resname="documentation">
+        <source>documentation</source>
+        <target>Dokumentacja</target>
+      </trans-unit>
       <trans-unit id="JiEhxTc" resname="edit">
         <source>edit</source>
         <target>Edytuj</target>

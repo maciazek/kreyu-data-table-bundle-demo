@@ -29,6 +29,9 @@ class Employee
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Contract $currentContract = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $lastLoginAt = null;
+
     #[ORM\Column(enumType: EmployeeStatus::class)]
     private ?EmployeeStatus $status = null;
 
@@ -92,6 +95,18 @@ class Employee
     public function setCurrentContract(?Contract $currentContract): static
     {
         $this->currentContract = $currentContract;
+
+        return $this;
+    }
+
+    public function getLastLoginAt(): ?\DateTimeInterface
+    {
+        return $this->lastLoginAt;
+    }
+
+    public function setLastLoginAt(?\DateTimeInterface $lastLoginAt): static
+    {
+        $this->lastLoginAt = $lastLoginAt;
 
         return $this;
     }

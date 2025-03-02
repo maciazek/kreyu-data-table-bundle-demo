@@ -5,6 +5,22 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
+      <trans-unit id="JS1SrQ3" resname="app_column">
+        <source>app_column</source>
+        <target>Columns</target>
+      </trans-unit>
+      <trans-unit id="1bxbu6S" resname="app_column_basic_options">
+        <source>app_column_basic_options</source>
+        <target>Basic options</target>
+      </trans-unit>
+      <trans-unit id="VkikdJi" resname="app_column_date_time">
+        <source>app_column_date_time</source>
+        <target>Date and time</target>
+      </trans-unit>
+      <trans-unit id="QxXYFz8" resname="app_column_text">
+        <source>app_column_text</source>
+        <target>Text</target>
+      </trans-unit>
       <trans-unit id="c1KCzX0" resname="app_homepage_index">
         <source>app_homepage_index</source>
         <target>Homepage</target>

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app_column'|trans({}, 'routes') }} - {{ 'app_column_date_time'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
+{% block header %}<span class="text-secondary"><i class="bi bi-{{ icons.app_column_date_time }} me-2"></i>{{ 'app_column'|trans({}, 'routes') }}<i class="bi bi-chevron-right mx-1"></i></span>{{ 'app_column_date_time'|trans({}, 'routes') }}{% endblock %}
+{% block toolbar %}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'outline-primary',
+        href: 'https://data-table-bundle.swroblewski.pl/reference/types/column/date-time.html',
+        icon: 'book',
+        target: '_blank',
+        label: 'documentation'|trans({}, 'buttons'),
+        tooltip: {placement: 'bottom', title: 'documentation'|trans({}, 'buttons')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'button',
+        context: 'outline-primary',
+        icon: 'braces',
+        'data-bs-toggle': 'modal',
+        'data-bs-target': '#sourceCodeModal',
+        label: 'source_code'|trans({}, 'buttons'),
+        tooltip: {placement: 'bottom', title: 'source_code'|trans({}, 'buttons')},
+        responsive: true,
+    }) }}
+{% endblock %}
+
+{% block modals %}
+    {{ component('SourceCodeModal', {classes: source_code_classes}) }}
+{% endblock %}
+
+{% block body %}
+    {{ data_table(employees) }}
+{% endblock %}

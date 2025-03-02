@@ -156,6 +156,7 @@ class HomepageDataTableType extends AbstractDataTableType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'personalization_enabled' => true,
             'translation_domain' => 'entities',
         ]);
     }
