@@ -9,6 +9,10 @@
         <source>contract.salary</source>
         <target>Salary</target>
       </trans-unit>
+      <trans-unit id="j2VbLu." resname="contract.title">
+        <source>contract.title</source>
+        <target>Title</target>
+      </trans-unit>
       <trans-unit id="LYDvsWP" resname="employee.birthDate">
         <source>employee.birthDate</source>
         <target>Birth date</target>

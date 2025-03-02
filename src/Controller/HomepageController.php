@@ -20,7 +20,9 @@ final class HomepageController extends AbstractController
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee')
             ->leftJoin('employee.currentContract', 'currentContract')
+            ->leftJoin('currentContract.title', 'title')
             ->addSelect('currentContract')
+            ->addSelect('title')
         ;
 
         $dataTable = $this->createDataTable(HomepageDataTableType::class, $queryBuilder);

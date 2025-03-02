@@ -18,6 +18,10 @@ class Contract
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
 
+    #[ORM\ManyToOne(inversedBy: 'contracts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Title $title = null;
+
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $salary = null;
 
@@ -40,6 +44,18 @@ class Contract
     public function setEmployee(?Employee $employee): static
     {
         $this->employee = $employee;
+
+        return $this;
+    }
+
+    public function getTitle(): ?Title
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?Title $title): static
+    {
+        $this->title = $title;
 
         return $this;
     }

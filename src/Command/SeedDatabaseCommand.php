@@ -4,7 +4,9 @@ namespace App\Command;
 
 use App\Entity\Contract;
 use App\Entity\Employee;
+use App\Entity\Title;
 use App\Enum\EmployeeStatus;
+use App\Repository\TitleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,6 +23,7 @@ class SeedDatabaseCommand extends Command
 {
     private const COUNTS = [
         '_page' => 25,
+        'title' => 25,
         'employee' => 150,
     ];
 
@@ -32,6 +35,7 @@ class SeedDatabaseCommand extends Command
     public function __construct(
         #[Autowire(env: 'APP_DEFAULT_LOCALE')] private string $locale,
         private EntityManagerInterface $entityManager,
+        private TitleRepository $titleRepository,
     ) {
         parent::__construct();
     }
@@ -45,8 +49,24 @@ class SeedDatabaseCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $faker = \Faker\Factory::create(self::LOCALE_MAP[$this->locale]);
 
+        // titles
+        for ($i = 1; $i <= self::COUNTS['title']; $i++) {
+            $title = new Title();
+            $title->setName($faker->unique()->jobTitle());
+            $this->entityManager->persist($title);
+
+            if ($i % self::COUNTS['_page'] === 0) {
+                $this->entityManager->flush();
+                $this->entityManager->clear();
+            }
+        }
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+
         // employees
         for ($i = 1; $i <= self::COUNTS['employee']; $i++) {
+            $titles = $this->titleRepository->findAll();
+
             $employee = new Employee();
             $employee->setFirstName($faker->firstName());
             $employee->setLastName($faker->lastName());
@@ -58,6 +78,7 @@ class SeedDatabaseCommand extends Command
             for ($j = 1; $j <= $faker->numberBetween(1, 4); $j++) {
                 $contract = new Contract();
                 $contract->setEmployee($employee);
+                $contract->setTitle($faker->randomElement($titles));
                 $contract->setSalary($faker->randomFloat(2, 4000, 16000));
                 $contract->setBeginDate($faker->dateTimeInInterval('-15 years', '+5 years'));
                 $contract->setEndDate($faker->numberBetween(0, 2) === 0 ? null : $faker->dateTimeInInterval('-10 years', '+8 years'));
