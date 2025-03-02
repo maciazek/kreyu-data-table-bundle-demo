@@ -40,6 +40,19 @@ class ColumnDateDataTableType extends AbstractDataTableType
                 'property_path' => 'lastLoginAt',
                 'sort' => 'lastLoginAt',
             ])
+            ->addColumn('customTimezone', DateColumnType::class, [
+                'export' => true,
+                'property_path' => 'lastLoginAt',
+                'sort' => 'lastLoginAt',
+                'timezone' => 'Pacific/Kiritimati',
+            ])
+            ->addColumn('customAll', DateColumnType::class, [
+                'export' => true,
+                'format' => 'm/d/y',
+                'property_path' => 'lastLoginAt',
+                'sort' => 'lastLoginAt',
+                'timezone' => 'Pacific/Kiritimati',
+            ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([

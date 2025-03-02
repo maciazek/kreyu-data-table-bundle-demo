@@ -17,6 +17,10 @@
         <source>app_column_date</source>
         <target>Date</target>
       </trans-unit>
+      <trans-unit id="DhDFbA2" resname="app_column_date_period">
+        <source>app_column_date_period</source>
+        <target>Date period</target>
+      </trans-unit>
       <trans-unit id="Is2Nw2W" resname="app_column_date_time">
         <source>app_column_date_time</source>
         <target>Date and time</target>

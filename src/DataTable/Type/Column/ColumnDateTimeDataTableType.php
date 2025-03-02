@@ -40,8 +40,15 @@ class ColumnDateTimeDataTableType extends AbstractDataTableType
                 'property_path' => 'lastLoginAt',
                 'sort' => 'lastLoginAt',
             ])
-            ->addColumn('differentTimezone', DateTimeColumnType::class, [
+            ->addColumn('customTimezone', DateTimeColumnType::class, [
                 'export' => true,
+                'property_path' => 'lastLoginAt',
+                'sort' => 'lastLoginAt',
+                'timezone' => 'Pacific/Kiritimati',
+            ])
+            ->addColumn('customAll', DateTimeColumnType::class, [
+                'export' => true,
+                'format' => 'm/d/y H:i',
                 'property_path' => 'lastLoginAt',
                 'sort' => 'lastLoginAt',
                 'timezone' => 'Pacific/Kiritimati',

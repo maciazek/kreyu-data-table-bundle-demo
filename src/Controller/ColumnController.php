@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DataTable\Type\Column\ColumnBasicOptionsDataTableType;
 use App\DataTable\Type\Column\ColumnDateDataTableType;
+use App\DataTable\Type\Column\ColumnDatePeriodDataTableType;
 use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
 use App\DataTable\Type\Column\ColumnEnumDataTableType;
 use App\DataTable\Type\Column\ColumnMoneyDataTableType;
@@ -119,6 +120,29 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnDateTimeDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/date_period', name: 'app_column_date_period')]
+    public function datePeriod(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
+            ->innerJoin('employee.currentContract', 'currentContract')
+            ->addSelect('currentContract')
+        ;
+
+        $dataTable = $this->createDataTable(ColumnDatePeriodDataTableType::class, $queryBuilder);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/date_period.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnDatePeriodDataTableType::class,
             ],
         ]);
     }
