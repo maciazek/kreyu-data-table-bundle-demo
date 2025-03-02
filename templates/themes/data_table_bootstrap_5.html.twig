@@ -4,7 +4,7 @@
     {% set display_filter_action = filtration_enabled and filters|length > 0 and filtration_form.children|length > 0 %}
     {% set display_export_action = exporting_enabled and exporters|length > 0 %}
 
-    {% if title or has_active_filters or display_filter_action or display_export_action or personalization_enabled %}
+    {% if title or has_active_filters or display_filter_action or display_export_action or filtration_enabled or personalization_enabled %}
         <div class="card-header">
             <div class="card-actions">
                 <div class="d-flex flex-row justify-content-between align-items-end gap-1 mb-1">
@@ -14,30 +14,31 @@
                         </div>
                     {% endfor %}
 
-                    {% if display_export_action %}
-                        <div>
+                    <div class="d-flex flex-wrap flex-md-row align-items-center gap-1">
+                        {% if display_export_action %}
                             {{ block('action_export') }}
                             {{ block('export_modal') }}
-                        </div>
-                    {% endif %}
+                        {% endif %}
 
-                    <div class="d-flex flex-wrap flex-md-row justify-content-end align-items-center gap-1">
-                    {% if personalization_enabled or has_active_filters or display_filter_action %}
                         {% if personalization_enabled %}
                             {{ block('action_personalize') }}
                             {{ block('personalization_modal') }}
                         {% endif %}
+                    </div>
 
+                    <div class="d-flex flex-wrap flex-md-row justify-content-end align-items-center gap-1">
                         {% if filtration_enabled and filtration_form and filtration_form.vars.search_fields|length > 0 %}
                             {{ block('action_search') }}
                         {% endif %}
-                        {% if has_active_filters %}
-                            {{ block('active_filters') }}
+
+                        {% if has_active_filters or display_filter_action %}
+                            {% if has_active_filters %}
+                                {{ block('active_filters') }}
+                            {% endif %}
+                            {% if display_filter_action %}
+                                {{ block('action_filter') }}
+                            {% endif %}
                         {% endif %}
-                        {% if display_filter_action %}
-                            {{ block('action_filter') }}
-                        {% endif %}
-                    {% endif %}
                     </div>
                 </div>
             </div>

@@ -20,6 +20,7 @@ use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Filter\FilterData;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
+use Kreyu\Bundle\DataTableBundle\Query\ProxyQueryInterface;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -92,7 +93,7 @@ class HomepageDataTableType extends AbstractDataTableType
                 'label' => 'employee.birthDate',
                 'sort' => true,
             ])
-            ->addColumn('title.name', TextColumnType::class, [
+            ->addColumn('currentContractTitle.name', TextColumnType::class, [
                 'export' => true,
                 'label' => 'contract.title',
                 'personalizable' => false, // workaround to fix sorting
@@ -116,6 +117,12 @@ class HomepageDataTableType extends AbstractDataTableType
                     ];
                 },
             ])
+            ->setSearchHandler(function (ProxyQueryInterface $query, string $search) {
+                return $query
+                    ->andWhere('employee.firstName LIKE :search OR employee.lastName LIKE :search OR currentContractTitle.name LIKE :search')
+                    ->setParameter('search', '%'.$search.'%')
+                ;
+            })
             ->addFilter('firstName', StringFilterType::class, [
                 'label' => 'employee.firstName',
             ])
