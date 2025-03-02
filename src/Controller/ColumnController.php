@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DataTable\Type\Column\ColumnBasicOptionsDataTableType;
 use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
+use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
@@ -53,6 +54,29 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnTextDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/money', name: 'app_column_money')]
+    public function money(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
+            ->leftJoin('employee.currentContract', 'currentContract')
+            ->addSelect('currentContract')
+        ;
+
+        $dataTable = $this->createDataTable(ColumnMoneyDataTableType::class, $queryBuilder);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/money.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnMoneyDataTableType::class,
             ],
         ]);
     }

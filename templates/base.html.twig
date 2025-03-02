@@ -2,6 +2,7 @@
     app_homepage_index: 'house-door',
     app_column_basic_options: 'info-square-fill',
     app_column_text: 'alphabet',
+    app_column_money: 'currency-dollar',
     app_column_date_time: 'calendar-date',
 } %}
 
@@ -134,6 +135,15 @@
                                         'app_column_text': null,
                                     },
                                     icon: icons.app_column_text,
+                                },
+                                {
+                                    id: 'app_column_money',
+                                    path: path('app_column_money'),
+                                    label: 'app_column_money'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_money': null,
+                                    },
+                                    icon: icons.app_column_money,
                                 },
                                 {
                                     id: 'app_column_date_time',

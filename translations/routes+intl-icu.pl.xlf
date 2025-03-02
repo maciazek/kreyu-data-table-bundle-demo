@@ -13,9 +13,13 @@
         <source>app_column_basic_options</source>
         <target>Opcje podstawowe</target>
       </trans-unit>
-      <trans-unit id="VkikdJi" resname="app_column_date_time">
+      <trans-unit id="Is2Nw2W" resname="app_column_date_time">
         <source>app_column_date_time</source>
         <target>Data i czas</target>
+      </trans-unit>
+      <trans-unit id="ev8Wwiv" resname="app_column_money">
+        <source>app_column_money</source>
+        <target>Pieniądze</target>
       </trans-unit>
       <trans-unit id="QxXYFz8" resname="app_column_text">
         <source>app_column_text</source>

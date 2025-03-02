@@ -22,6 +22,9 @@ class Contract
     #[ORM\JoinColumn(nullable: false)]
     private ?Title $title = null;
 
+    #[ORM\Column]
+    private ?int $salaryInCents = null;
+
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $salary = null;
 
@@ -56,6 +59,18 @@ class Contract
     public function setTitle(?Title $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSalaryInCents(): ?int
+    {
+        return $this->salaryInCents;
+    }
+
+    public function setSalaryInCents(int $salaryInCents): static
+    {
+        $this->salaryInCents = $salaryInCents;
 
         return $this;
     }
