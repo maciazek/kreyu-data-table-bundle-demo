@@ -29,6 +29,10 @@
         <source>app_column_enum</source>
         <target>Enumeracje</target>
       </trans-unit>
+      <trans-unit id="jRmpR5o" resname="app_column_icon">
+        <source>app_column_icon</source>
+        <target>Ikona</target>
+      </trans-unit>
       <trans-unit id="ev8Wwiv" resname="app_column_money">
         <source>app_column_money</source>
         <target>Pieniądze</target>

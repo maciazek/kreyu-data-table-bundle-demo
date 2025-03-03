@@ -7,6 +7,7 @@ use App\DataTable\Type\Column\ColumnDateDataTableType;
 use App\DataTable\Type\Column\ColumnDatePeriodDataTableType;
 use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
 use App\DataTable\Type\Column\ColumnEnumDataTableType;
+use App\DataTable\Type\Column\ColumnIconDataTableType;
 use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
 use App\Repository\EmployeeRepository;
@@ -163,6 +164,26 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnEnumDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/icon', name: 'app_column_icon')]
+    public function icon(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee');
+
+        $dataTable = $this->createDataTable(ColumnIconDataTableType::class, $queryBuilder);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/icon.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnIconDataTableType::class,
             ],
         ]);
     }

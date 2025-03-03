@@ -20,4 +20,13 @@ enum EmployeeStatus: string implements TranslatableInterface
             self::LTL => 'warning',
         };
     }
+
+    public function getIcon(): string
+    {
+        return match ($this) {
+            self::ACT => 'check-circle-fill',
+            self::INA => 'x-square-fill',
+            self::LTL => 'exclamation-triangle-fill',
+        };
+    }
 }

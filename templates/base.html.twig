@@ -7,6 +7,7 @@
     app_column_date_time: 'caret-right-fill',
     app_column_date_period: 'caret-right-fill',
     app_column_enum: 'caret-right-fill',
+    app_column_icon: 'caret-right-fill',
 } %}
 
 <!DOCTYPE html>
@@ -183,6 +184,15 @@
                                         'app_column_enum': null,
                                     },
                                     icon: icons.app_column_enum,
+                                },
+                                {
+                                    id: 'app_column_icon',
+                                    path: path('app_column_icon'),
+                                    label: 'app_column_icon'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_icon': null,
+                                    },
+                                    icon: icons.app_column_icon,
                                 },
                             ],
                         },
