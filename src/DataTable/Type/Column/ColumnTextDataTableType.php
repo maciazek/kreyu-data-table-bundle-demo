@@ -28,6 +28,22 @@ class ColumnTextDataTableType extends AbstractDataTableType
                 'export' => true,
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
             ])
+            ->addColumn('badge', TextColumnType::class, [
+                'export' => true,
+                'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
+                'value_attr' => fn (string $value, Employee $employee) => [
+                    'class' => 'badge fw-normal text-wrap text-bg-'.$employee->getStatus()->getContext(),
+                ],
+            ])
+            ->addColumn('tooltip', TextColumnType::class, [
+                'export' => true,
+                'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
+                'value_attr' => fn (string $value, Employee $employee) => [
+                    'data-bootstrap-target' => 'tooltip', // you will most likely use 'data-bs-toggle' attribute
+                    'data-bs-placement' => 'left',
+                    'data-bs-title' => $employee->getStatus()->trans($this->translator),
+                ],
+            ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([
