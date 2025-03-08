@@ -41,6 +41,18 @@
         <source>app_column_text</source>
         <target>Tekst</target>
       </trans-unit>
+      <trans-unit id="qfOF7qJ" resname="app_filter">
+        <source>app_filter</source>
+        <target>Filtry</target>
+      </trans-unit>
+      <trans-unit id="fJoxNb3" resname="app_filter_search_advanced">
+        <source>app_filter_search_advanced</source>
+        <target>Wyszukiwanie (złożone)</target>
+      </trans-unit>
+      <trans-unit id="3gi3ZkV" resname="app_filter_search_simple">
+        <source>app_filter_search_simple</source>
+        <target>Wyszukiwanie (proste)</target>
+      </trans-unit>
       <trans-unit id="c1KCzX0" resname="app_homepage_index">
         <source>app_homepage_index</source>
         <target>Strona główna</target>

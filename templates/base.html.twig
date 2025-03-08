@@ -8,6 +8,8 @@
     app_column_date_period: 'caret-right-fill',
     app_column_enum: 'caret-right-fill',
     app_column_icon: 'caret-right-fill',
+    app_filter_search_simple: 'caret-right-fill',
+    app_filter_search_advanced: 'caret-right-fill',
 } %}
 
 <!DOCTYPE html>
@@ -193,6 +195,30 @@
                                         'app_column_icon': null,
                                     },
                                     icon: icons.app_column_icon,
+                                },
+                            ],
+                        },
+                        {
+                            id: 'app_filter',
+                            label: 'app_filter'|trans({}, 'routes'),
+                            children: [
+                                {
+                                    id: 'app_filter_search_simple',
+                                    path: path('app_filter_search_simple'),
+                                    label: 'app_filter_search_simple'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_filter_search_simple': null,
+                                    },
+                                    icon: icons.app_filter_search_simple,
+                                },
+                                {
+                                    id: 'app_filter_search_advanced',
+                                    path: path('app_filter_search_advanced'),
+                                    label: 'app_filter_search_advanced'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_filter_search_advanced': null,
+                                    },
+                                    icon: icons.app_filter_search_advanced,
                                 },
                             ],
                         },
