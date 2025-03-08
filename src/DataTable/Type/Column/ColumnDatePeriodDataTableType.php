@@ -55,18 +55,6 @@ class ColumnDatePeriodDataTableType extends AbstractDataTableType
                 'separator' => ' — ',
                 'timezone' => 'Pacific/Kiritimati',
             ])
-            // ->addColumn('customFormat', DateTimeColumnType::class, [
-            //     'export' => true,
-            //     'format' => 'm/d/y H:i',
-            //     'property_path' => 'lastLoginAt',
-            //     'sort' => 'lastLoginAt',
-            // ])
-            // ->addColumn('differentTimezone', DateTimeColumnType::class, [
-            //     'export' => true,
-            //     'property_path' => 'lastLoginAt',
-            //     'sort' => 'lastLoginAt',
-            //     'timezone' => 'Pacific/Kiritimati',
-            // ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([
