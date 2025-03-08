@@ -19,6 +19,7 @@ use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Filter\FilterData;
+use Kreyu\Bundle\DataTableBundle\Filter\Type\SearchFilterType;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Query\ProxyQueryInterface;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
@@ -116,12 +117,17 @@ class HomepageDataTableType extends AbstractDataTableType
                     ];
                 },
             ])
-            ->setSearchHandler(function (ProxyQueryInterface $query, string $search) {
-                return $query
-                    ->andWhere('employee.firstName LIKE :search OR employee.lastName LIKE :search OR currentContractTitle.name LIKE :search')
-                    ->setParameter('search', '%'.$search.'%')
-                ;
-            })
+            ->addFilter(DataTableBuilderInterface::SEARCH_FILTER_NAME, SearchFilterType::class, [
+                'handler' => function (ProxyQueryInterface $query, string $search) {
+                    return $query
+                        ->andWhere('employee.firstName LIKE :search OR employee.lastName LIKE :search OR currentContractTitle.name LIKE :search')
+                        ->setParameter('search', '%'.$search.'%')
+                    ;
+                },
+                'form_options' => [
+                    'translation_domain' => 'KreyuDataTable',
+                ],
+            ])
             ->addFilter('firstName', StringFilterType::class, [
                 'label' => 'employee.firstName',
             ])

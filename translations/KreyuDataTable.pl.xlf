@@ -169,6 +169,10 @@
         <source>Cancel</source>
         <target>Nie, anuluj</target>
       </trans-unit>
+      <trans-unit id="f1U4Ihn" resname="Search...">
+        <source>Search...</source>
+        <target>Szukaj...</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
