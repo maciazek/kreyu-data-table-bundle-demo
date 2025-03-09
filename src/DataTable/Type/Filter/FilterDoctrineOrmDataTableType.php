@@ -6,11 +6,13 @@ namespace App\DataTable\Type\Filter;
 
 use App\Entity\Employee;
 use App\Entity\Title;
+use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\BooleanFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\EntityFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\NumericFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\StringFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\BooleanColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
@@ -33,11 +35,11 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
         $builder
             ->addColumn('firstName', TextColumnType::class, [
                 'export' => true,
-                'sort' => 'employee.firstName',
+                'sort' => true,
             ])
             ->addColumn('lastName', TextColumnType::class, [
                 'export' => true,
-                'sort' => 'employee.lastName',
+                'sort' => true,
             ])
             ->addColumn('salaryInCents', MoneyColumnType::class, [
                 'currency' => 'USD',
@@ -52,6 +54,11 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'label' => 'contract.title',
                 'property_path' => 'currentContract?.title.name',
                 'sort' => 'currentContractTitle.name',
+            ])
+            ->addColumn('isManager', BooleanColumnType::class, [
+                'export' => true,
+                'label' => 'employee.isManager',
+                'sort' => true,
             ])
             ->addFilter('firstName', StringFilterType::class, [
                 'label' => 'employee.firstName',
@@ -78,6 +85,9 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'label' => 'contract.title',
                 'query_path' => 'currentContract.title',
                 'translation_domain' => 'entities',
+            ])
+            ->addFilter('isManager', BooleanFilterType::class, [
+                'label' => 'employee.isManager',
             ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)

@@ -13,6 +13,10 @@
         <source>app_column_basic_options</source>
         <target>Opcje podstawowe</target>
       </trans-unit>
+      <trans-unit id="fyofILX" resname="app_column_boolean">
+        <source>app_column_boolean</source>
+        <target>Logiczna</target>
+      </trans-unit>
       <trans-unit id="VkikdJi" resname="app_column_date">
         <source>app_column_date</source>
         <target>Data</target>

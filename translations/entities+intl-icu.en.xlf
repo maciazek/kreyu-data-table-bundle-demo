@@ -33,6 +33,10 @@
         <source>employee.firstName</source>
         <target>First name</target>
       </trans-unit>
+      <trans-unit id="JwcYeuf" resname="employee.isManager">
+        <source>employee.isManager</source>
+        <target>Is manager</target>
+      </trans-unit>
       <trans-unit id="iQO.iMi" resname="employee.lastName">
         <source>employee.lastName</source>
         <target>Last name</target>

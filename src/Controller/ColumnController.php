@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataTable\Type\Column\ColumnBasicOptionsDataTableType;
+use App\DataTable\Type\Column\ColumnBooleanDataTableType;
 use App\DataTable\Type\Column\ColumnDateDataTableType;
 use App\DataTable\Type\Column\ColumnDatePeriodDataTableType;
 use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
@@ -100,6 +101,31 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnMoneyDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/boolean', name: 'app_column_boolean')]
+    public function boolean(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee');
+
+        $dataTable = $this->createDataTable(ColumnBooleanDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/boolean.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnBooleanDataTableType::class,
             ],
         ]);
     }

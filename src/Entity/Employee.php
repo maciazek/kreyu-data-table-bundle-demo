@@ -29,6 +29,9 @@ class Employee
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Contract $currentContract = null;
 
+    #[ORM\Column]
+    private ?bool $isManager = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $lastLoginAt = null;
 
@@ -95,6 +98,18 @@ class Employee
     public function setCurrentContract(?Contract $currentContract): static
     {
         $this->currentContract = $currentContract;
+
+        return $this;
+    }
+
+    public function getIsManager(): ?bool
+    {
+        return $this->isManager;
+    }
+
+    public function setIsManager(bool $isManager): static
+    {
+        $this->isManager = $isManager;
 
         return $this;
     }

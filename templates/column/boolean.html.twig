@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'app_filter'|trans({}, 'routes') }} - {{ 'app_filter_doctrine_orm'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
-{% block header %}<span class="text-secondary">{{ 'app_filter'|trans({}, 'routes') }}<i class="bi bi-chevron-right mx-1"></i></span>{{ 'app_filter_doctrine_orm'|trans({}, 'routes') }}{% endblock %}
+{% block title %}{{ 'app_column'|trans({}, 'routes') }} - {{ 'app_column_boolean'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
+{% block header %}<span class="text-secondary">{{ 'app_column'|trans({}, 'routes') }}<i class="bi bi-chevron-right mx-1"></i></span>{{ 'app_column_boolean'|trans({}, 'routes') }}{% endblock %}
 {% block toolbar %}
     {{ component('Button', {
         tag: 'a',
         context: 'outline-primary',
-        href: 'https://data-table-bundle.swroblewski.pl/reference/types/filter#doctrine-orm',
+        href: 'https://data-table-bundle.swroblewski.pl/reference/types/column/boolean.html',
         icon: 'book',
         target: '_blank',
         label: 'documentation'|trans({}, 'buttons'),
