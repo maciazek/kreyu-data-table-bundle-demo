@@ -45,6 +45,10 @@
         <source>app_filter</source>
         <target>Filtry</target>
       </trans-unit>
+      <trans-unit id="3FctCm7" resname="app_filter_doctrine_orm">
+        <source>app_filter_doctrine_orm</source>
+        <target>Doctrine ORM</target>
+      </trans-unit>
       <trans-unit id="fJoxNb3" resname="app_filter_search_advanced">
         <source>app_filter_search_advanced</source>
         <target>Wyszukiwanie (złożone)</target>

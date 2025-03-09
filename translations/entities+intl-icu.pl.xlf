@@ -9,6 +9,18 @@
         <source>contract.salary</source>
         <target>Wynagrodzenie</target>
       </trans-unit>
+      <trans-unit id="_rvFf.X" resname="contract.salaryInCents">
+        <source>contract.salaryInCents</source>
+        <target>Wynagrodzenie w centach</target>
+      </trans-unit>
+      <trans-unit id="GtOybb_" resname="contract.salaryInCentsFrom">
+        <source>contract.salaryInCentsFrom</source>
+        <target>Wynagrodzenie w centach [od]</target>
+      </trans-unit>
+      <trans-unit id="zdzesn9" resname="contract.salaryInCentsTo">
+        <source>contract.salaryInCentsTo</source>
+        <target>Wynagrodzenie w centach [do]</target>
+      </trans-unit>
       <trans-unit id="j2VbLu." resname="contract.title">
         <source>contract.title</source>
         <target>Stanowisko</target>
@@ -24,6 +36,10 @@
       <trans-unit id="iQO.iMi" resname="employee.lastName">
         <source>employee.lastName</source>
         <target>Nazwisko</target>
+      </trans-unit>
+      <trans-unit id="ymFLvqW" resname="employee.name">
+        <source>employee.name</source>
+        <target>Imię i nazwisko</target>
       </trans-unit>
       <trans-unit id="A0jfo_t" resname="employee.status">
         <source>employee.status</source>

@@ -10,6 +10,7 @@
     app_column_icon: 'caret-right-fill',
     app_filter_search_simple: 'caret-right-fill',
     app_filter_search_advanced: 'caret-right-fill',
+    app_filter_doctrine_orm: 'caret-right-fill',
 } %}
 
 <!DOCTYPE html>
@@ -202,6 +203,15 @@
                             id: 'app_filter',
                             label: 'app_filter'|trans({}, 'routes'),
                             children: [
+                                {
+                                    id: 'app_filter_doctrine_orm',
+                                    path: path('app_filter_doctrine_orm'),
+                                    label: 'app_filter_doctrine_orm'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_filter_doctrine_orm': null,
+                                    },
+                                    icon: icons.app_filter_doctrine_orm,
+                                },
                                 {
                                     id: 'app_filter_search_simple',
                                     path: path('app_filter_search_simple'),

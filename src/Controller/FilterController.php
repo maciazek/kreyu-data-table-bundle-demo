@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTable\Type\Filter\FilterDoctrineOrmDataTableType;
 use App\DataTable\Type\Filter\FilterSearchAdvancedDataTableType;
 use App\DataTable\Type\Filter\FilterSearchSimpleDataTableType;
 use App\Repository\EmployeeRepository;
@@ -62,6 +63,31 @@ final class FilterController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 FilterSearchAdvancedDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/doctrine_orm', name: 'app_filter_doctrine_orm')]
+    public function doctrineOrm(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
+            ->leftJoin('employee.currentContract', 'currentContract')
+            ->leftJoin('currentContract.title', 'currentContractTitle')
+            ->addSelect('currentContract')
+            ->addSelect('currentContractTitle')
+        ;
+
+        $dataTable = $this->createDataTable(FilterDoctrineOrmDataTableType::class, $queryBuilder);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('filter/doctrine_orm.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                FilterDoctrineOrmDataTableType::class,
             ],
         ]);
     }
