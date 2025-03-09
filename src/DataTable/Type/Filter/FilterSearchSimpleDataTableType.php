@@ -27,12 +27,15 @@ class FilterSearchSimpleDataTableType extends AbstractDataTableType
         $builder
             ->addColumn('firstName', TextColumnType::class, [
                 'export' => true,
+                'label' => 'employee.firstName',
             ])
             ->addColumn('lastName', TextColumnType::class, [
                 'export' => true,
+                'label' => 'employee.lastName',
             ])
             ->addColumn('title', TextColumnType::class, [
                 'export' => true,
+                'label' => 'contract.title',
                 'property_path' => 'currentContract?.title.name',
             ])
             ->setSearchHandler(function (ProxyQueryInterface $query, string $search) {
@@ -52,5 +55,8 @@ class FilterSearchSimpleDataTableType extends AbstractDataTableType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $resolver->setDefaults([
+            'translation_domain' => 'entities',
+        ]);
     }
 }

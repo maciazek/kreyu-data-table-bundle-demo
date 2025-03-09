@@ -28,12 +28,15 @@ class FilterSearchAdvancedDataTableType extends AbstractDataTableType
         $builder
             ->addColumn('firstName', TextColumnType::class, [
                 'export' => true,
+                'label' => 'employee.firstName',
             ])
             ->addColumn('lastName', TextColumnType::class, [
                 'export' => true,
+                'label' => 'employee.lastName',
             ])
             ->addColumn('title', TextColumnType::class, [
                 'export' => true,
+                'label' => 'contract.title',
                 'property_path' => 'currentContract?.title.name',
             ])
             ->addFilter(DataTableBuilderInterface::SEARCH_FILTER_NAME, SearchFilterType::class, [
@@ -59,5 +62,8 @@ class FilterSearchAdvancedDataTableType extends AbstractDataTableType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $resolver->setDefaults([
+            'translation_domain' => 'entities',
+        ]);
     }
 }

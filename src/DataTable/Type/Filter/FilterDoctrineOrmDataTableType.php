@@ -35,10 +35,12 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
         $builder
             ->addColumn('firstName', TextColumnType::class, [
                 'export' => true,
+                'label' => 'employee.firstName',
                 'sort' => true,
             ])
             ->addColumn('lastName', TextColumnType::class, [
                 'export' => true,
+                'label' => 'employee.lastName',
                 'sort' => true,
             ])
             ->addColumn('salaryInCents', MoneyColumnType::class, [
