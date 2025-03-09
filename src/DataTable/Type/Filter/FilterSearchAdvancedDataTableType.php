@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DataTable\Type\Filter;
 
-use App\Entity\Employee;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;

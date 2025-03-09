@@ -40,6 +40,5 @@ enum EmployeeStatus: string implements TranslatableInterface
                 };
                 break;
         }
-
     }
 }
