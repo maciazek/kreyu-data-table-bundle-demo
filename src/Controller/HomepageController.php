@@ -6,6 +6,7 @@ use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\DataTable\Type\HomepageDataTableType;
 use App\Enum\DataTableIconTheme;
 use App\Enum\DataTableTheme;
+use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,6 +44,7 @@ final class HomepageController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 HomepageDataTableType::class,
+                EmployeeStatus::class,
                 DateRangeActiveFilterFormatter::class,
             ],
         ]);

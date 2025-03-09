@@ -12,6 +12,7 @@ use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
 use App\Enum\DataTableIconTheme;
 use App\Enum\DataTableTheme;
+use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +46,7 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnBasicOptionsDataTableType::class,
+                EmployeeStatus::class,
             ],
         ]);
     }
@@ -201,6 +203,7 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnEnumDataTableType::class,
+                EmployeeStatus::class,
             ],
         ]);
     }
@@ -226,6 +229,7 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnIconDataTableType::class,
+                EmployeeStatus::class,
             ],
         ]);
     }
