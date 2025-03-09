@@ -24,7 +24,7 @@ class SeedDatabaseCommand extends Command
     private const COUNTS = [
         '_page' => 25,
         'title' => 25,
-        'employee' => 150,
+        'employee' => 500,
     ];
 
     private const LOCALE_MAP = [
