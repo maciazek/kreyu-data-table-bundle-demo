@@ -41,6 +41,14 @@ class ColumnBooleanDataTableType extends AbstractDataTableType
                 'property_path' => 'isManager',
                 'sort' => 'isManager',
             ])
+            ->addColumn('hiddenNull', BooleanColumnType::class, [
+                'export' => true,
+                'property_path' => 'isManager',
+                'sort' => 'isManager',
+                'value_attr' => fn (?bool $value) => [
+                    'class' => $value === null ? 'd-none' : '',
+                ],
+            ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([

@@ -29,7 +29,7 @@ class Employee
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Contract $currentContract = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $isManager = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -107,7 +107,7 @@ class Employee
         return $this->isManager;
     }
 
-    public function setIsManager(bool $isManager): static
+    public function setIsManager(?bool $isManager): static
     {
         $this->isManager = $isManager;
 
