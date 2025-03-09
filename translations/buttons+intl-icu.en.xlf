@@ -17,6 +17,10 @@
         <source>data_table_icon_theme.BIW</source>
         <target>Bootstrap Icons (webfont)</target>
       </trans-unit>
+      <trans-unit id="R4YBjPF" resname="data_table_icon_theme.TIW">
+        <source>data_table_icon_theme.TIW</source>
+        <target>Tabler Icons (webfont)</target>
+      </trans-unit>
       <trans-unit id="WCq2AlX" resname="data_table_theme">
         <source>data_table_theme</source>
         <target>Data table theme</target>

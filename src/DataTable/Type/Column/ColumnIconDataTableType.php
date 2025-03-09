@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DataTable\Type\Column;
 
 use App\Entity\Employee;
+use App\Enum\DataTableIconTheme;
 use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
@@ -13,6 +14,7 @@ use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -20,6 +22,7 @@ class ColumnIconDataTableType extends AbstractDataTableType
 {
     public function __construct(
         private TranslatorInterface $translator,
+        private RequestStack $requestStack,
     ) {
     }
 
@@ -34,11 +37,11 @@ class ColumnIconDataTableType extends AbstractDataTableType
                 ],
             ])
             ->addColumn('basic', IconColumnType::class, [
-                'icon' => 'music-note-beamed',
+                'icon' => 'clock',
                 'property_path' => false,
             ])
             ->addColumn('customAttrs', IconColumnType::class, [
-                'icon' => 'brightness-high-fill',
+                'icon' => 'sun',
                 'icon_attr' => [
                     'class' => 'text-danger',
                 ],
@@ -46,7 +49,7 @@ class ColumnIconDataTableType extends AbstractDataTableType
             ])
             ->addColumn('dynamic', IconColumnType::class, [
                 'export' => true,
-                'icon' => fn (EmployeeStatus $status) => $status->getIcon(),
+                'icon' => fn (EmployeeStatus $status) => $status->getIcon(DataTableIconTheme::from($this->requestStack->getSession()->get('_data_table_icon_theme'))),
                 'icon_attr' => fn (EmployeeStatus $status) => [
                     'class' => 'text-'.$status->getContext(),
                 ],

@@ -34,7 +34,7 @@ return [
         'version' => '5.1.1',
         'type' => 'css',
     ],
-    'bootstrap-icons/font/bootstrap-icons.css' => [
+    'bootstrap-icons/font/bootstrap-icons.min.css' => [
         'version' => '1.11.3',
         'type' => 'css',
     ],
@@ -53,6 +53,10 @@ return [
     ],
     '@fontsource/roboto-mono/latin-ext.css' => [
         'version' => '5.2.0',
+        'type' => 'css',
+    ],
+    '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
+        'version' => '3.31.0',
         'type' => 'css',
     ],
 ];

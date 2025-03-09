@@ -21,12 +21,25 @@ enum EmployeeStatus: string implements TranslatableInterface
         };
     }
 
-    public function getIcon(): string
+    public function getIcon(DataTableIconTheme $dataTableIconTheme): string
     {
-        return match ($this) {
-            self::ACT => 'check-circle-fill',
-            self::INA => 'x-square-fill',
-            self::LTL => 'exclamation-triangle-fill',
-        };
+        switch ($dataTableIconTheme) {
+            case DataTableIconTheme::BIW:
+            default:
+                return match ($this) {
+                    self::ACT => 'check-circle-fill',
+                    self::INA => 'x-square-fill',
+                    self::LTL => 'exclamation-triangle-fill',
+                };
+                break;
+            case DataTableIconTheme::TIW:
+                return match ($this) {
+                    self::ACT => 'circle-check-filled',
+                    self::INA => 'square-x-filled',
+                    self::LTL => 'alert-triangle-filled',
+                };
+                break;
+        }
+
     }
 }
