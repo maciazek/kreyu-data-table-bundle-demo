@@ -72,6 +72,13 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
                     return $employee->getFirstName().' '.$employee->getLastName();
                 },
             ])
+            ->addColumn('translation', TextColumnType::class, [
+                'export' => true,
+                'getter' => function (Employee $employee) {
+                    return 'App\\Enum\\EmployeeStatus::'.$employee->getStatus()->value;
+                },
+                'value_translation_domain' => 'enums',
+            ])
             ->addColumn('invisible', TextColumnType::class, [
                 'visible' => false,
             ])
