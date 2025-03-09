@@ -12,6 +12,7 @@
     app_filter_search_advanced: 'caret-right-fill',
     app_filter_doctrine_orm: 'caret-right-fill',
 } %}
+{% set data_table_theme = app.session.get('_data_table_theme') %}
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,13 @@
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% block importmap %}
+                {% if data_table_theme in ['B5S', 'B5C'] %}
+                    {{ importmap('app_bootstrap') }}
+                {% elseif data_table_theme in ['TAB'] %}
+                    {{ importmap('app_tabler') }}
+                {% endif %}
+            {% endblock %}
         {% endblock %}
     </head>
     <body class="bg-body-secondary" {{ stimulus_controller('bootstrap') }}>
@@ -81,7 +88,7 @@
                         {# datatable theme switcher #}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'locale'|trans({}, 'buttons') }}">
-                                <i class="bi bi-image me-2 me-md-0"></i>
+                                <i class="bi bi-brush me-2 me-md-0"></i>
                                 <span class="d-inline d-md-none">{{ 'data_table_theme'|trans({}, 'buttons') }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow">

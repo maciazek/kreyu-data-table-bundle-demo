@@ -12,8 +12,12 @@
  * The "importmap:require" command can be used to add new entries to this file.
  */
 return [
-    'app' => [
-        'path' => './assets/app.js',
+    'app_bootstrap' => [
+        'path' => './assets/app_bootstrap.js',
+        'entrypoint' => true,
+    ],
+    'app_tabler' => [
+        'path' => './assets/app_tabler.js',
         'entrypoint' => true,
     ],
     'bootstrap' => [
@@ -57,6 +61,19 @@ return [
     ],
     '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
         'version' => '3.31.0',
+        'type' => 'css',
+    ],
+    '@tabler/core' => [
+        'version' => '1.1.1',
+    ],
+    'autosize' => [
+        'version' => '6.0.1',
+    ],
+    'imask' => [
+        'version' => '7.6.1',
+    ],
+    '@tabler/core/dist/css/tabler.min.css' => [
+        'version' => '1.1.1',
         'type' => 'css',
     ],
 ];

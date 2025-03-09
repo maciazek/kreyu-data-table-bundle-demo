@@ -33,6 +33,10 @@
         <source>data_table_theme.B5S</source>
         <target>Bootstrap 5 (standardowy)</target>
       </trans-unit>
+      <trans-unit id="PsPv0nw" resname="data_table_theme.TAB">
+        <source>data_table_theme.TAB</source>
+        <target>Tabler</target>
+      </trans-unit>
       <trans-unit id="yvn5BrF" resname="documentation">
         <source>documentation</source>
         <target>Dokumentacja</target>
