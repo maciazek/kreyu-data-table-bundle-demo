@@ -9,6 +9,26 @@
         <source>close</source>
         <target>Zamknij</target>
       </trans-unit>
+      <trans-unit id="a7P9rhE" resname="data_table_icon_theme">
+        <source>data_table_icon_theme</source>
+        <target>Motyw ikon tabel</target>
+      </trans-unit>
+      <trans-unit id="hb2pihc" resname="data_table_icon_theme.BIW">
+        <source>data_table_icon_theme.BIW</source>
+        <target>Bootstrap Icons (webfont)</target>
+      </trans-unit>
+      <trans-unit id="WCq2AlX" resname="data_table_theme">
+        <source>data_table_theme</source>
+        <target>Motyw tabel</target>
+      </trans-unit>
+      <trans-unit id="eut6Kt3" resname="data_table_theme.B5C">
+        <source>data_table_theme.B5C</source>
+        <target>Bootstrap 5 (niestandardowy)</target>
+      </trans-unit>
+      <trans-unit id="dEEoFiN" resname="data_table_theme.B5S">
+        <source>data_table_theme.B5S</source>
+        <target>Bootstrap 5 (standardowy)</target>
+      </trans-unit>
       <trans-unit id="yvn5BrF" resname="documentation">
         <source>documentation</source>
         <target>Dokumentacja</target>

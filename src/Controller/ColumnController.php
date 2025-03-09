@@ -10,6 +10,8 @@ use App\DataTable\Type\Column\ColumnEnumDataTableType;
 use App\DataTable\Type\Column\ColumnIconDataTableType;
 use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
+use App\Enum\DataTableIconTheme;
+use App\Enum\DataTableTheme;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +29,12 @@ final class ColumnController extends AbstractController
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee');
 
-        $dataTable = $this->createDataTable(ColumnBasicOptionsDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnBasicOptionsDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {
@@ -47,7 +54,12 @@ final class ColumnController extends AbstractController
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee');
 
-        $dataTable = $this->createDataTable(ColumnTextDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnTextDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {
@@ -70,7 +82,12 @@ final class ColumnController extends AbstractController
             ->addSelect('currentContract')
         ;
 
-        $dataTable = $this->createDataTable(ColumnMoneyDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnMoneyDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {
@@ -90,7 +107,12 @@ final class ColumnController extends AbstractController
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee');
 
-        $dataTable = $this->createDataTable(ColumnDateDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnDateDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {
@@ -110,7 +132,12 @@ final class ColumnController extends AbstractController
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee');
 
-        $dataTable = $this->createDataTable(ColumnDateTimeDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnDateTimeDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {
@@ -133,7 +160,12 @@ final class ColumnController extends AbstractController
             ->addSelect('currentContract')
         ;
 
-        $dataTable = $this->createDataTable(ColumnDatePeriodDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnDatePeriodDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {
@@ -153,7 +185,12 @@ final class ColumnController extends AbstractController
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee');
 
-        $dataTable = $this->createDataTable(ColumnEnumDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnEnumDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {
@@ -173,7 +210,12 @@ final class ColumnController extends AbstractController
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee');
 
-        $dataTable = $this->createDataTable(ColumnIconDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(ColumnIconDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {

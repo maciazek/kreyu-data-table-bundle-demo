@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\DataTable\Type\HomepageDataTableType;
+use App\Enum\DataTableIconTheme;
+use App\Enum\DataTableTheme;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +27,12 @@ final class HomepageController extends AbstractController
             ->addSelect('currentContractTitle')
         ;
 
-        $dataTable = $this->createDataTable(HomepageDataTableType::class, $queryBuilder);
+        $dataTable = $this->createDataTable(HomepageDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
         $dataTable->handleRequest($request);
 
         if ($dataTable->isExporting()) {

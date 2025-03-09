@@ -65,6 +65,25 @@
 
                 <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
+                        {# datatable theme switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'locale'|trans({}, 'buttons') }}">
+                                <i class="bi bi-image me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'data_table_theme'|trans({}, 'buttons') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
+                                <li><h6 class="dropdown-header">{{ 'data_table_theme'|trans({}, 'buttons') }}</h6></li>
+                                {% for data_table_theme in enum_cases('App\\Enum\\DataTableTheme') %}
+                                    <li><a class="dropdown-item {{ data_table_theme.value == app.session.get('_data_table_theme') ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_data_table_theme: data_table_theme.value})) }}" {{ data_table_theme.value == app.session.get('_data_table_theme') ? 'aria-pressed="true"' }}>{{ ('data_table_theme.' ~ data_table_theme.value)|trans({}, 'buttons') }}</a></li>
+                                {% endfor %}
+
+                                <li><h6 class="dropdown-header">{{ 'data_table_icon_theme'|trans({}, 'buttons') }}</h6></li>
+                                {% for data_table_icon_theme in enum_cases('App\\Enum\\DataTableIconTheme') %}
+                                    <li><a class="dropdown-item {{ data_table_icon_theme.value == app.session.get('_data_table_icon_theme') ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_data_table_icon_theme: data_table_icon_theme.value})) }}" {{ data_table_icon_theme.value == app.session.get('_data_table_icon_theme') ? 'aria-pressed="true"' }}>{{ ('data_table_icon_theme.' ~ data_table_icon_theme.value)|trans({}, 'buttons') }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
                         {# locale switcher #}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'locale'|trans({}, 'buttons') }}">

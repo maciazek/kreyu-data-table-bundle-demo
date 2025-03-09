@@ -17,6 +17,14 @@
         <source>App\Enum\EmployeeStatus::LTL</source>
         <target>Długotrwałe zwolnienie</target>
       </trans-unit>
+      <trans-unit id="dLDg9OL" resname="App\Enum\Theme::B5C">
+        <source>App\Enum\Theme::B5C</source>
+        <target>Bootstrap 5 (niestandardowa)</target>
+      </trans-unit>
+      <trans-unit id="uXsGH1e" resname="App\Enum\Theme::B5S">
+        <source>App\Enum\Theme::B5S</source>
+        <target>Bootstrap 5 (standardowa)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
