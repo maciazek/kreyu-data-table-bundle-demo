@@ -59,6 +59,9 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'export' => true,
                 'label' => 'employee.isManager',
                 'sort' => true,
+                'value_attr' => fn (?bool $value) => [
+                    'class' => $value === null ? 'd-none' : '',
+                ],
             ])
             ->addFilter('firstName', StringFilterType::class, [
                 'label' => 'employee.firstName',
