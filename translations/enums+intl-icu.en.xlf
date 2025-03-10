@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="06yENw1" resname="App\Enum\DataTableTheme::B5C">
         <source>App\Enum\DataTableTheme::B5C</source>
-        <target>Bootstrap 5 (niestandardowy)</target>
+        <target>Bootstrap 5 (custom)</target>
       </trans-unit>
       <trans-unit id="ydhOZ7o" resname="App\Enum\DataTableTheme::B5S">
         <source>App\Enum\DataTableTheme::B5S</source>
