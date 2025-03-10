@@ -1,10 +1,8 @@
 {% props elements = [] %}
 <ul class="list-unstyled px-2 pb-2 mb-auto">
     {% for element in elements %}
-        {% if element.children is defined %} {# jeśli ma elementy podrzędne, wyświetl menu rozwijalne #}
+        {% if element.children is defined %}
             {% if element.visible ?? true %}
-                {# sprawdź, czy aktualna ścieżka zawiera się w aktywnych ścieżkach któregokolwiek elementu podrzędnego #}
-                {# jeśli tak - wtedy menu jest rozwinięte #}
                 {% set is_expanded = false %}
                 {% for child in element.children %}
                     {%
@@ -15,14 +13,14 @@
                     {% endif %}
                 {% endfor %}
 
-                {# menu rozwijalne #}
+                {# expandable menu #}
                 <li class="mb-1 d-grid">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 {{ is_expanded ? 'active' : 'collapsed' }}" data-bs-toggle="collapse" data-bs-target="#{{ element.id }}_menu" aria-expanded="{{ is_expanded ? 'true' : 'false' }}">
                         {{ element.label }}
                     </button>
                     <div class="collapse {{ is_expanded ? 'show' }}" id="{{ element.id }}_menu">
                         <ul class="btn-toggle-nav list-unstyled fw-normal">
-                            {# elementy podrzędne menu rozwijalnego #}
+                            {# children #}
                             {% for child in element.children %}
                                 {% if child.visible ?? true %}
                                     {%
@@ -38,7 +36,7 @@
                     </div>
                 </li>
             {% endif %}
-        {% else %} {# jeśli nie ma elementów podrzędnych, wyświetl zwykły element menu #}
+        {% else %} {# if there is no children #}
             {% if element.visible ?? true %}
                 {%
                     set is_active = app.current_route in element.active_routes|keys and

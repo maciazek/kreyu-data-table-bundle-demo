@@ -8,7 +8,7 @@ enum DataTableTheme: string implements TranslatableInterface
 {
     use TranslatableEnumTrait;
 
-    case B5S = 'B5S'; // Bootstrap 5 (standard)
+    case B5S = 'B5S'; // Bootstrap 5
     case B5C = 'B5C'; // Bootstrap 5 (custom)
     case TAB = 'TAB'; // Tabler
 

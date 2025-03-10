@@ -1,0 +1,292 @@
+{% set icons = {
+    app_homepage_index: 'house-door',
+    app_column_basic_options: 'caret-right-fill',
+    app_column_text: 'caret-right-fill',
+    app_column_money: 'caret-right-fill',
+    app_column_boolean: 'caret-right-fill',
+    app_column_date: 'caret-right-fill',
+    app_column_date_time: 'caret-right-fill',
+    app_column_date_period: 'caret-right-fill',
+    app_column_enum: 'caret-right-fill',
+    app_column_icon: 'caret-right-fill',
+    app_filter_search_simple: 'caret-right-fill',
+    app_filter_search_advanced: 'caret-right-fill',
+    app_filter_doctrine_orm: 'caret-right-fill',
+} %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{{ app_name }}{% endblock %}</title>
+        <link rel="icon" href="{{ asset('images/logo.png') }}">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}
+                {{ importmap('app_tabler') }}
+            {% endblock %}
+        {% endblock %}
+    </head>
+    <body class="bg-body-secondary" {{ stimulus_controller('bootstrap') }}>
+        <script>
+            // get user's theme
+            var theme = localStorage.getItem('theme');
+
+            // if theme is undefined, set to 'auto'
+            if (!theme) {
+                theme = 'auto';
+                localStorage.setItem('theme', theme);
+            }
+
+            // if theme is set to 'auto', get OS theme
+            if (theme == 'auto' && window.matchMedia) {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            // apply theme
+            document.body.setAttribute('data-bs-theme', theme);
+        </script>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('images/logo.png') }}" class="me-2" style="height: 32px;">
+                    <a class="navbar-brand app-name d-none d-md-inline" href="{{ path('app_homepage_index') }}">{{ app_name }}</a>
+                    <a class="navbar-brand app-name d-inline d-md-none" href="{{ path('app_homepage_index') }}">{{ app_short_name }}</a>
+                </div>
+
+                <div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas" aria-controls="menuOffcanvas" aria-label="{{ 'toggle_offcanvas_menu'|trans({}, 'buttons') }}">
+                        <i class="bi bi-list d-inline-block" style="font-size: 1.75rem; vertical-align:middle;"></i>
+                    </button>
+                    <button class="navbar-toggler px-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="{{ 'toggle_navbar_menu'|trans({}, 'buttons') }}">
+                        <i class="bi bi-three-dots-vertical d-inline-block" style="font-size: 1.75rem; vertical-align:middle;"></i>
+                    </button>
+                </div>
+
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+                        {# locale switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'locale'|trans({}, 'buttons') }}">
+                                <i class="bi bi-translate me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'locale'|trans({}, 'buttons') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
+                                {% for locale in app.enabled_locales %}
+                                    <li><a class="dropdown-item {{ locale == app.locale ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_locale: locale})) }}" {{ locale == app.locale ? 'aria-pressed="true"' }}>{{ ('locale.' ~ locale)|trans({}, 'buttons') }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        {# datatable theme switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'locale'|trans({}, 'buttons') }}">
+                                <i class="bi bi-brush me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'App\\Enum\\DataTableTheme'|trans({}, 'enums') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
+                                <li><h6 class="dropdown-header">{{ 'App\\Enum\\DataTableTheme'|trans({}, 'enums') }}</h6></li>
+                                {% for data_table_theme in enum_cases('App\\Enum\\DataTableTheme') %}
+                                    <li><a class="dropdown-item {{ data_table_theme.value == app.session.get('_data_table_theme') ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_data_table_theme: data_table_theme.value})) }}" {{ data_table_theme.value == app.session.get('_data_table_theme') ? 'aria-pressed="true"' }}>{{ ('App\\Enum\\DataTableTheme::' ~ data_table_theme.value)|trans({}, 'enums') }}</a></li>
+                                {% endfor %}
+
+                                <li><h6 class="dropdown-header">{{ 'App\\Enum\\DataTableIconTheme'|trans({}, 'enums') }}</h6></li>
+                                {% for data_table_icon_theme in enum_cases('App\\Enum\\DataTableIconTheme') %}
+                                    <li><a class="dropdown-item {{ data_table_icon_theme.value == app.session.get('_data_table_icon_theme') ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_data_table_icon_theme: data_table_icon_theme.value})) }}" {{ data_table_icon_theme.value == app.session.get('_data_table_icon_theme') ? 'aria-pressed="true"' }}>{{ ('App\\Enum\\DataTableIconTheme::' ~ data_table_icon_theme.value)|trans({}, 'enums') }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        {# theme switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'theme'|trans({}, 'buttons') }}">
+                                <i class="bi bi-circle-half me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'theme'|trans({}, 'buttons') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
+                                <li>
+                                    <a type="button" class="dropdown-item d-flex align-items-center" {{ stimulus_action('bootstrap', 'switchTheme', 'click', {name: 'light'}) }}>
+                                        <i class="bi bi-sun-fill"></i><span class="ms-2">{{ 'theme.light'|trans({}, 'buttons') }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a type="button" class="dropdown-item d-flex align-items-center" {{ stimulus_action('bootstrap', 'switchTheme', 'click', {name: 'dark'}) }}>
+                                        <i class="bi bi-moon-stars-fill"></i><span class="ms-2">{{ 'theme.dark'|trans({}, 'buttons') }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a type="button" class="dropdown-item d-flex align-items-center" {{ stimulus_action('bootstrap', 'switchTheme', 'click', {name: 'auto'}) }}>
+                                        <i class="bi bi-display"></i><span class="ms-2">{{ 'theme.auto'|trans({}, 'buttons') }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="d-flex flex-row">
+            {# main menu (offcanvas) #}
+            <aside id="menuOffcanvas" class="offcanvas-md offcanvas-start d-flex flex-column flex-shrink-0 min-vh-100 text-bg-dark" data-bs-theme="dark">
+                <div class="d-flex flex-column flex-nowrap h-100 scrollarea">
+                    {{ component('BootstrapMenu', {elements: [
+                        {
+                            id: 'app_homepage',
+                            path: path('app_homepage_index'),
+                            label: 'app_homepage_index'|trans({}, 'routes'),
+                            active_routes: {
+                                'app_homepage_index': null,
+                            },
+                            icon: icons.app_homepage_index,
+                        },
+                        {
+                            id: 'app_column',
+                            label: 'app_column'|trans({}, 'routes'),
+                            children: [
+                                {
+                                    id: 'app_column_basic_options',
+                                    path: path('app_column_basic_options'),
+                                    label: 'app_column_basic_options'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_basic_options': null,
+                                    },
+                                    icon: icons.app_column_basic_options,
+                                },
+                                {
+                                    id: 'app_column_text',
+                                    path: path('app_column_text'),
+                                    label: 'app_column_text'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_text': null,
+                                    },
+                                    icon: icons.app_column_text,
+                                },
+                                {
+                                    id: 'app_column_money',
+                                    path: path('app_column_money'),
+                                    label: 'app_column_money'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_money': null,
+                                    },
+                                    icon: icons.app_column_money,
+                                },
+                                {
+                                    id: 'app_column_boolean',
+                                    path: path('app_column_boolean'),
+                                    label: 'app_column_boolean'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_boolean': null,
+                                    },
+                                    icon: icons.app_column_boolean,
+                                },
+                                {
+                                    id: 'app_column_date',
+                                    path: path('app_column_date'),
+                                    label: 'app_column_date'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_date': null,
+                                    },
+                                    icon: icons.app_column_date,
+                                },
+                                {
+                                    id: 'app_column_date_time',
+                                    path: path('app_column_date_time'),
+                                    label: 'app_column_date_time'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_date_time': null,
+                                    },
+                                    icon: icons.app_column_date_time,
+                                },
+                                {
+                                    id: 'app_column_date_period',
+                                    path: path('app_column_date_period'),
+                                    label: 'app_column_date_period'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_date_period': null,
+                                    },
+                                    icon: icons.app_column_date_period,
+                                },
+                                {
+                                    id: 'app_column_enum',
+                                    path: path('app_column_enum'),
+                                    label: 'app_column_enum'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_enum': null,
+                                    },
+                                    icon: icons.app_column_enum,
+                                },
+                                {
+                                    id: 'app_column_icon',
+                                    path: path('app_column_icon'),
+                                    label: 'app_column_icon'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_column_icon': null,
+                                    },
+                                    icon: icons.app_column_icon,
+                                },
+                            ],
+                        },
+                        {
+                            id: 'app_filter',
+                            label: 'app_filter'|trans({}, 'routes'),
+                            children: [
+                                {
+                                    id: 'app_filter_doctrine_orm',
+                                    path: path('app_filter_doctrine_orm'),
+                                    label: 'app_filter_doctrine_orm'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_filter_doctrine_orm': null,
+                                    },
+                                    icon: icons.app_filter_doctrine_orm,
+                                },
+                                {
+                                    id: 'app_filter_search_simple',
+                                    path: path('app_filter_search_simple'),
+                                    label: 'app_filter_search_simple'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_filter_search_simple': null,
+                                    },
+                                    icon: icons.app_filter_search_simple,
+                                },
+                                {
+                                    id: 'app_filter_search_advanced',
+                                    path: path('app_filter_search_advanced'),
+                                    label: 'app_filter_search_advanced'|trans({}, 'routes'),
+                                    active_routes: {
+                                        'app_filter_search_advanced': null,
+                                    },
+                                    icon: icons.app_filter_search_advanced,
+                                },
+                            ],
+                        },
+                    ]}) }}
+                </div>
+            </aside>
+        </div>
+
+        {# main content #}
+        <main class="container-fluid {% if block('header') or block('toolbar') %}pt-0 px-0{% endif %}">
+            {% if block('header') or block('toolbar') %}
+                <header class="d-flex row-gap-1 flex-wrap justify-content-between py-3 px-3 mb-3 border-bottom border-secondary border-2 bg-body-tertiary sticky-top shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <h3 class="me-2 mb-0 fw-bold">{% block header %}{% endblock %}</h3>
+                    </div>
+                    <div class="d-flex column-gap-1">
+                        {% block toolbar %}{% endblock %}
+                    </div>
+                </header>
+            {% endif %}
+            {% block modals %}{% endblock %}
+
+            <div class="row {% if block('header') or block('toolbar') %}mx-0 px-0{% endif %}">
+                <div class="col-12 {% if block('header') or block('toolbar') %}mx-0 px-3{% endif %}">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
