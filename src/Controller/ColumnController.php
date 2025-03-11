@@ -8,6 +8,7 @@ use App\DataTable\Type\Column\ColumnDateDataTableType;
 use App\DataTable\Type\Column\ColumnDatePeriodDataTableType;
 use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
 use App\DataTable\Type\Column\ColumnEnumDataTableType;
+use App\DataTable\Type\Column\ColumnHtmlDataTableType;
 use App\DataTable\Type\Column\ColumnIconDataTableType;
 use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
@@ -229,6 +230,32 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnEnumDataTableType::class,
+                EmployeeStatus::class,
+            ],
+        ]);
+    }
+
+    #[Route('/html', name: 'app_column_html')]
+    public function html(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee');
+
+        $dataTable = $this->createDataTable(ColumnHtmlDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/html.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnHtmlDataTableType::class,
                 EmployeeStatus::class,
             ],
         ]);

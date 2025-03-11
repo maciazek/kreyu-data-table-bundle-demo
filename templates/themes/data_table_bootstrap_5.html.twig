@@ -190,6 +190,15 @@
     {% endwith %}
 {% endblock %}
 
+{% block column_html_value -%}
+    {% if strip_tags %}
+        {% set value = value|striptags(allowed_tags) %}
+    {% endif %}
+    <span {{- block('attributes') -}}>
+        {{ raw ? value|raw : value }}
+    </span>
+{%- endblock %}
+
 {% block export_modal %}
     <div class="modal modal-blur fade" id="{{ export_form.vars.name ~ '__modal' }}" tabindex="-1" style="display: none;" aria-hidden="true" data-turbo="false">
         {% block export_modal_dialog %}

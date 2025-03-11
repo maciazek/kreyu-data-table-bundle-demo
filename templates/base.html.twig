@@ -6,4 +6,162 @@
     {% set template = 'app_tabler.html.twig' %}
 {% endif %}
 
+{% set icons = {
+    app_homepage_index: 'house-door',
+    app_column_basic_options: 'caret-right-fill',
+    app_column_text: 'caret-right-fill',
+    app_column_money: 'caret-right-fill',
+    app_column_boolean: 'caret-right-fill',
+    app_column_date: 'caret-right-fill',
+    app_column_date_time: 'caret-right-fill',
+    app_column_date_period: 'caret-right-fill',
+    app_column_enum: 'caret-right-fill',
+    app_column_html: 'caret-right-fill',
+    app_column_icon: 'caret-right-fill',
+    app_filter_search_simple: 'caret-right-fill',
+    app_filter_search_advanced: 'caret-right-fill',
+    app_filter_doctrine_orm: 'caret-right-fill',
+} %}
+
+{% set menu = component('BootstrapMenu', {elements: [
+    {
+        id: 'app_homepage',
+        path: path('app_homepage_index'),
+        label: 'app_homepage_index'|trans({}, 'routes'),
+        active_routes: {
+            'app_homepage_index': null,
+        },
+        icon: icons.app_homepage_index,
+    },
+    {
+        id: 'app_column',
+        label: 'app_column'|trans({}, 'routes'),
+        children: [
+            {
+                id: 'app_column_basic_options',
+                path: path('app_column_basic_options'),
+                label: 'app_column_basic_options'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_basic_options': null,
+                },
+                icon: icons.app_column_basic_options,
+            },
+            {
+                id: 'app_column_text',
+                path: path('app_column_text'),
+                label: 'app_column_text'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_text': null,
+                },
+                icon: icons.app_column_text,
+            },
+            {
+                id: 'app_column_money',
+                path: path('app_column_money'),
+                label: 'app_column_money'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_money': null,
+                },
+                icon: icons.app_column_money,
+            },
+            {
+                id: 'app_column_boolean',
+                path: path('app_column_boolean'),
+                label: 'app_column_boolean'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_boolean': null,
+                },
+                icon: icons.app_column_boolean,
+            },
+            {
+                id: 'app_column_date',
+                path: path('app_column_date'),
+                label: 'app_column_date'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_date': null,
+                },
+                icon: icons.app_column_date,
+            },
+            {
+                id: 'app_column_date_time',
+                path: path('app_column_date_time'),
+                label: 'app_column_date_time'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_date_time': null,
+                },
+                icon: icons.app_column_date_time,
+            },
+            {
+                id: 'app_column_date_period',
+                path: path('app_column_date_period'),
+                label: 'app_column_date_period'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_date_period': null,
+                },
+                icon: icons.app_column_date_period,
+            },
+            {
+                id: 'app_column_enum',
+                path: path('app_column_enum'),
+                label: 'app_column_enum'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_enum': null,
+                },
+                icon: icons.app_column_enum,
+            },
+            {
+                id: 'app_column_html',
+                path: path('app_column_html'),
+                label: 'app_column_html'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_html': null,
+                },
+                icon: icons.app_column_html,
+            },
+            {
+                id: 'app_column_icon',
+                path: path('app_column_icon'),
+                label: 'app_column_icon'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_icon': null,
+                },
+                icon: icons.app_column_icon,
+            },
+        ],
+    },
+    {
+        id: 'app_filter',
+        label: 'app_filter'|trans({}, 'routes'),
+        children: [
+            {
+                id: 'app_filter_doctrine_orm',
+                path: path('app_filter_doctrine_orm'),
+                label: 'app_filter_doctrine_orm'|trans({}, 'routes'),
+                active_routes: {
+                    'app_filter_doctrine_orm': null,
+                },
+                icon: icons.app_filter_doctrine_orm,
+            },
+            {
+                id: 'app_filter_search_simple',
+                path: path('app_filter_search_simple'),
+                label: 'app_filter_search_simple'|trans({}, 'routes'),
+                active_routes: {
+                    'app_filter_search_simple': null,
+                },
+                icon: icons.app_filter_search_simple,
+            },
+            {
+                id: 'app_filter_search_advanced',
+                path: path('app_filter_search_advanced'),
+                label: 'app_filter_search_advanced'|trans({}, 'routes'),
+                active_routes: {
+                    'app_filter_search_advanced': null,
+                },
+                icon: icons.app_filter_search_advanced,
+            },
+        ],
+    },
+]}) %}
+
 {% extends template %}

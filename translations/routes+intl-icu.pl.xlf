@@ -33,6 +33,10 @@
         <source>app_column_enum</source>
         <target>Enumeracje</target>
       </trans-unit>
+      <trans-unit id="uaFYi9R" resname="app_column_html">
+        <source>app_column_html</source>
+        <target>HTML</target>
+      </trans-unit>
       <trans-unit id="jRmpR5o" resname="app_column_icon">
         <source>app_column_icon</source>
         <target>Ikona</target>
