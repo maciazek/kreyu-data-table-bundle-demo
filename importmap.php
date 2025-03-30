@@ -20,6 +20,9 @@ return [
         'path' => './assets/app_tabler.js',
         'entrypoint' => true,
     ],
+    '@symfony/stimulus-bundle' => [
+        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
+    ],
     'bootstrap' => [
         'version' => '5.3.3',
     ],
@@ -31,11 +34,11 @@ return [
         'type' => 'css',
     ],
     '@fontsource/noto-sans/latin.css' => [
-        'version' => '5.1.1',
+        'version' => '5.2.6',
         'type' => 'css',
     ],
     '@fontsource/noto-sans/latin-ext.css' => [
-        'version' => '5.1.1',
+        'version' => '5.2.6',
         'type' => 'css',
     ],
     'bootstrap-icons/font/bootstrap-icons.min.css' => [
@@ -45,18 +48,15 @@ return [
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],
-    '@symfony/stimulus-bundle' => [
-        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
-    ],
     'sortablejs' => [
         'version' => '1.15.6',
     ],
     '@fontsource/roboto-mono/latin.css' => [
-        'version' => '5.2.0',
+        'version' => '5.2.5',
         'type' => 'css',
     ],
     '@fontsource/roboto-mono/latin-ext.css' => [
-        'version' => '5.2.0',
+        'version' => '5.2.5',
         'type' => 'css',
     ],
     '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
