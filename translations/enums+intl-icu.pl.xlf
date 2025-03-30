@@ -5,17 +5,17 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="sOwgKCK" resname="App\Enum\EmployeeStatus::ACT">
-        <source>App\Enum\EmployeeStatus::ACT</source>
-        <target>Aktywny</target>
+      <trans-unit id="dyBU1D7" resname="App\Enum\Asynchronicity">
+        <source>App\Enum\Asynchronicity</source>
+        <target>Asynchroniczność</target>
       </trans-unit>
-      <trans-unit id="XFjUtVx" resname="App\Enum\EmployeeStatus::INA">
-        <source>App\Enum\EmployeeStatus::INA</source>
-        <target>Nieaktywny</target>
+      <trans-unit id="h2zOUWp" resname="App\Enum\Asynchronicity::ASY">
+        <source>App\Enum\Asynchronicity::ASY</source>
+        <target>Asynchronicznie</target>
       </trans-unit>
-      <trans-unit id="_xkl.ZI" resname="App\Enum\EmployeeStatus::LTL">
-        <source>App\Enum\EmployeeStatus::LTL</source>
-        <target>Długotrwałe zwolnienie</target>
+      <trans-unit id="wVMI8Sl" resname="App\Enum\Asynchronicity::SYN">
+        <source>App\Enum\Asynchronicity::SYN</source>
+        <target>Synchronicznie</target>
       </trans-unit>
       <trans-unit id="1OyjiM1" resname="App\Enum\DataTableIconTheme">
         <source>App\Enum\DataTableIconTheme</source>
@@ -44,6 +44,18 @@
       <trans-unit id="KYdAQNh" resname="App\Enum\DataTableTheme::TAB">
         <source>App\Enum\DataTableTheme::TAB</source>
         <target>Tabler</target>
+      </trans-unit>
+      <trans-unit id="sOwgKCK" resname="App\Enum\EmployeeStatus::ACT">
+        <source>App\Enum\EmployeeStatus::ACT</source>
+        <target>Aktywny</target>
+      </trans-unit>
+      <trans-unit id="XFjUtVx" resname="App\Enum\EmployeeStatus::INA">
+        <source>App\Enum\EmployeeStatus::INA</source>
+        <target>Nieaktywny</target>
+      </trans-unit>
+      <trans-unit id="_xkl.ZI" resname="App\Enum\EmployeeStatus::LTL">
+        <source>App\Enum\EmployeeStatus::LTL</source>
+        <target>Długotrwałe zwolnienie</target>
       </trans-unit>
     </body>
   </file>

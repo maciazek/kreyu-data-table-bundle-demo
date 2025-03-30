@@ -46,6 +46,29 @@ class RequestSubscriber implements EventSubscriberInterface
             $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
         }
 
+        // try to see if asynchronicity option has been set as a _async routing parameter
+        if ($async = $request->query->get('_asynchronicity')) {
+            // store new asynchronicity option in session
+            $request->getSession()->set('_asynchronicity', $async);
+
+            // remove asynchronicity option from URL
+            $queryInputBag = $request->query;
+            $queryInputBag->remove('_asynchronicity');
+            $event->setResponse(
+                new RedirectResponse(
+                    $this->router->generate(
+                        $request->attributes->get('_route'),
+                        array_merge(
+                            $request->attributes->get('_route_params'),
+                            $queryInputBag->all(),
+                        ),
+                    ),
+                ),
+            );
+        } else { // if no explicit asynchronicity option has been set on this request, use one from the session
+            $request->getSession()->set('_asynchronicity', $request->getSession()->get('_asynchronicity', 'SYN'));
+        }
+
         // try to see if the data table theme has been set as a routing parameter
         if ($dataTableTheme = $request->query->get('_data_table_theme')) {
             // store new data table theme in session

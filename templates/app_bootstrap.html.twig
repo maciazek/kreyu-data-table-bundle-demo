@@ -14,7 +14,7 @@
             {% endblock %}
         {% endblock %}
     </head>
-    <body class="bg-body-secondary" {{ stimulus_controller('bootstrap') }}>
+    <body class="bg-body-secondary" {{ stimulus_controller('bootstrap') }} {% if app.session.get('_asynchronicity') == enum('App\\Enum\\Asynchronicity').SYN.value %}data-turbo="false"{% endif %}>
         <script>
             // get user's theme
             var theme = localStorage.getItem('theme');
@@ -61,6 +61,19 @@
                             <ul class="dropdown-menu dropdown-menu-end shadow">
                                 {% for locale in app.enabled_locales %}
                                     <li><a class="dropdown-item {{ locale == app.locale ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_locale: locale})) }}" {{ locale == app.locale ? 'aria-pressed="true"' }}>{{ ('locale.' ~ locale)|trans({}, 'buttons') }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        {# asynchronicity switcher #}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'App\\Enum\\Asynchronicity'|trans({}, 'enums') }}">
+                                <i class="bi bi-lightning me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'App\\Enum\\Asynchronicity'|trans({}, 'enums') }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
+                                {% for asynchronicity in enum_cases('App\\Enum\\Asynchronicity') %}
+                                    <li><a class="dropdown-item {{ asynchronicity.value == app.session.get('_asynchronicity') ? 'active' }}" href="{{ path(app.current_route, app.current_route_parameters|merge(app.request.query)|merge({_asynchronicity: asynchronicity.value})) }}" {{ asynchronicity.value == app.session.get('_asynchronicity') ? 'aria-pressed="true"' }}>{{ ('App\\Enum\\Asynchronicity::' ~ asynchronicity.value)|trans({}, 'enums') }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
