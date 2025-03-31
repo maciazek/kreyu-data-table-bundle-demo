@@ -1,4 +1,4 @@
-name: data-table-bundle-demo
+name: kreyu-data-table-bundle-demo
 type: php
 docroot: "public"
 php_version: "8.2"
