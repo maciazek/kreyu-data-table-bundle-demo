@@ -1,7 +1,8 @@
 ## Features
 - Theme switcher (Bootstrap 5, Tabler)
 - Locale switcher (Polish and English)
-- Light/Dark mode
+- Async switcher
+- Light/Dark mode switcher
 - AssetMapper (Node.JS not required)
 - Source code preview for each table
 - Tables...
