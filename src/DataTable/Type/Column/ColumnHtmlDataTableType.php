@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DataTable\Type\Column;
 
 use App\Entity\Employee;
-use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\HtmlColumnType;
