@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\EmployeeRole;
 use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -31,6 +32,9 @@ class Employee
 
     #[ORM\Column(nullable: true)]
     private ?bool $isManager = null;
+
+    #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true, enumType: EmployeeRole::class)]
+    private ?array $roles = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $lastLoginAt = null;
@@ -110,6 +114,21 @@ class Employee
     public function setIsManager(?bool $isManager): static
     {
         $this->isManager = $isManager;
+
+        return $this;
+    }
+
+    /**
+     * @return EmployeeRole[]|null
+     */
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(?array $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
     }

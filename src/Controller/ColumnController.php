@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DataTable\Type\Column\ColumnBasicOptionsDataTableType;
 use App\DataTable\Type\Column\ColumnBooleanDataTableType;
+use App\DataTable\Type\Column\ColumnCollectionDataTableType;
 use App\DataTable\Type\Column\ColumnDateDataTableType;
 use App\DataTable\Type\Column\ColumnDatePeriodDataTableType;
 use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
@@ -14,6 +15,7 @@ use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
 use App\Enum\DataTableIconTheme;
 use App\Enum\DataTableTheme;
+use App\Enum\EmployeeRole;
 use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
@@ -205,6 +207,35 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnDatePeriodDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/collection', name: 'app_column_collection')]
+    public function collection(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
+            ->leftJoin('employee.contracts', 'contracts')
+            ->addSelect('contracts')
+        ;
+
+        $dataTable = $this->createDataTable(ColumnCollectionDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/collection.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnCollectionDataTableType::class,
+                EmployeeRole::class,
             ],
         ]);
     }

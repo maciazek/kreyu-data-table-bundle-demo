@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Entity\Contract;
 use App\Entity\Employee;
 use App\Entity\Title;
+use App\Enum\EmployeeRole;
 use App\Enum\EmployeeStatus;
 use App\Repository\TitleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,6 +72,7 @@ class SeedDatabaseCommand extends Command
             $employee->setFirstName($faker->firstName());
             $employee->setLastName($faker->lastName());
             $employee->setBirthDate($faker->dateTimeInInterval('-60 years', '+35 years'));
+            $employee->setRoles($faker->numberBetween(0, 3) !== 0 ? $faker->randomElements(EmployeeRole::class, $faker->numberBetween(1, count(EmployeeRole::cases()))) : null);
             $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : $faker->dateTimeBetween('-5 years'));
             $employee->setStatus($faker->randomElement(EmployeeStatus::class));
             $this->entityManager->persist($employee);

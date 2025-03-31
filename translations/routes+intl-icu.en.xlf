@@ -17,6 +17,10 @@
         <source>app_column_boolean</source>
         <target>Boolean</target>
       </trans-unit>
+      <trans-unit id="app_column_collection" resname="app_column_collection">
+        <source>app_column_collection</source>
+        <target>Collection</target>
+      </trans-unit>
       <trans-unit id="VkikdJi" resname="app_column_date">
         <source>app_column_date</source>
         <target>Date</target>
