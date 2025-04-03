@@ -17,7 +17,7 @@
         <source>app_column_boolean</source>
         <target>Logiczna</target>
       </trans-unit>
-      <trans-unit id="app_column_collection" resname="app_column_collection">
+      <trans-unit id="c9BwlBA" resname="app_column_collection">
         <source>app_column_collection</source>
         <target>Kolekcja</target>
       </trans-unit>
@@ -48,6 +48,10 @@
       <trans-unit id="ev8Wwiv" resname="app_column_money">
         <source>app_column_money</source>
         <target>Pieniądze</target>
+      </trans-unit>
+      <trans-unit id="4IsYflk" resname="app_column_template">
+        <source>app_column_template</source>
+        <target>Szablon</target>
       </trans-unit>
       <trans-unit id="QxXYFz8" resname="app_column_text">
         <source>app_column_text</source>

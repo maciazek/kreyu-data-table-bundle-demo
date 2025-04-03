@@ -17,7 +17,7 @@
         <source>app_column_boolean</source>
         <target>Boolean</target>
       </trans-unit>
-      <trans-unit id="app_column_collection" resname="app_column_collection">
+      <trans-unit id="c9BwlBA" resname="app_column_collection">
         <source>app_column_collection</source>
         <target>Collection</target>
       </trans-unit>
@@ -52,6 +52,10 @@
       <trans-unit id="QxXYFz8" resname="app_column_text">
         <source>app_column_text</source>
         <target>Text</target>
+      </trans-unit>
+      <trans-unit id="4IsYflk" resname="app_column_template">
+        <source>app_column_template</source>
+        <target>Template</target>
       </trans-unit>
       <trans-unit id="qfOF7qJ" resname="app_filter">
         <source>app_filter</source>

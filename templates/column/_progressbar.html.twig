@@ -1,0 +1,7 @@
+{% if value is not null %}
+    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar {{ value == 100 ? 'text-bg-success' : 'text-bg-primary' }}" style="width: {{ value }}%">{{ value }}%</div>
+    </div>
+{% else %}
+❌
+{% endif %}

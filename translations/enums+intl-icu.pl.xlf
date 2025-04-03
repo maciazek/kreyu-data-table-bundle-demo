@@ -45,15 +45,15 @@
         <source>App\Enum\DataTableTheme::TAB</source>
         <target>Tabler</target>
       </trans-unit>
-      <trans-unit id="AUD" resname="App\Enum\EmployeeRole::AUD">
+      <trans-unit id="ZO5MmeY" resname="App\Enum\EmployeeRole::AUD">
         <source>App\Enum\EmployeeRole::AUD</source>
         <target>Audytor</target>
       </trans-unit>
-      <trans-unit id="MEN" resname="App\Enum\EmployeeRole::MEN">
+      <trans-unit id="qR0cWGX" resname="App\Enum\EmployeeRole::MEN">
         <source>App\Enum\EmployeeRole::MEN</source>
         <target>Mentor</target>
       </trans-unit>
-      <trans-unit id="MNG" resname="App\Enum\EmployeeRole::MNG">
+      <trans-unit id="h_lDeEF" resname="App\Enum\EmployeeRole::MNG">
         <source>App\Enum\EmployeeRole::MNG</source>
         <target>Menedżer</target>
       </trans-unit>

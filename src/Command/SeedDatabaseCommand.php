@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Contract;
 use App\Entity\Employee;
+use App\Entity\Target;
 use App\Entity\Title;
 use App\Enum\EmployeeRole;
 use App\Enum\EmployeeStatus;
@@ -71,9 +72,9 @@ class SeedDatabaseCommand extends Command
             $employee = new Employee();
             $employee->setFirstName($faker->firstName());
             $employee->setLastName($faker->lastName());
-            $employee->setBirthDate($faker->dateTimeInInterval('-60 years', '+35 years'));
+            $employee->setBirthDate(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval('-60 years', '+35 years')));
             $employee->setRoles($faker->numberBetween(0, 3) !== 0 ? $faker->randomElements(EmployeeRole::class, $faker->numberBetween(1, count(EmployeeRole::cases()))) : null);
-            $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : $faker->dateTimeBetween('-5 years'));
+            $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-5 years')));
             $employee->setStatus($faker->randomElement(EmployeeStatus::class));
             $this->entityManager->persist($employee);
 
@@ -84,13 +85,27 @@ class SeedDatabaseCommand extends Command
                 $contract->setTitle($faker->randomElement($titles));
                 $contract->setSalaryInCents($faker->numberBetween(400000, 1600000));
                 $contract->setSalary((float) $contract->getSalaryInCents() / 100);
-                $contract->setBeginDate($faker->dateTimeInInterval('-15 years', '+5 years'));
-                $contract->setEndDate($faker->numberBetween(0, 2) === 0 ? null : $faker->dateTimeInInterval('-10 years', '+8 years'));
+                $contract->setBeginDate(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval('-15 years', '+5 years')));
+                $contract->setEndDate($faker->numberBetween(0, 2) === 0 ? null : \DateTimeImmutable::createFromMutable($faker->dateTimeInInterval('-10 years', '+8 years')));
                 $this->entityManager->persist($contract);
 
                 if ($employee->getStatus() !== EmployeeStatus::INA) {
                     $employee->setCurrentContract($contract);
                     $employee->setIsManager($faker->boolean(25));
+                }
+
+                // targets
+                $end = $contract->getEndDate()?->modify('first day of this month') ?? new \DateTimeImmutable('first day of this month');
+                $begin = $end->modify('-1 year');
+                $period = new \DatePeriod($begin, \DateInterval::createFromDateString('1 month'), $end);
+                foreach ($period as $month) {
+                    $target = new Target();
+                    $target->setContract($contract);
+                    $target->setMonth($month);
+                    $target->setValue($faker->numberBetween(0, 4) === 0 ? 100 : $faker->numberBetween(10, 100));
+                    $this->entityManager->persist($target);
+
+                    $contract->setCurrentTarget($target);
                 }
             }
 

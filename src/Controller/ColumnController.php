@@ -12,6 +12,7 @@ use App\DataTable\Type\Column\ColumnEnumDataTableType;
 use App\DataTable\Type\Column\ColumnHtmlDataTableType;
 use App\DataTable\Type\Column\ColumnIconDataTableType;
 use App\DataTable\Type\Column\ColumnMoneyDataTableType;
+use App\DataTable\Type\Column\ColumnTemplateDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
 use App\Enum\DataTableIconTheme;
 use App\Enum\DataTableTheme;
@@ -262,6 +263,36 @@ final class ColumnController extends AbstractController
             'source_code_classes' => [
                 ColumnEnumDataTableType::class,
                 EmployeeStatus::class,
+            ],
+        ]);
+    }
+
+    #[Route('/template', name: 'app_column_template')]
+    public function template(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
+            ->leftJoin('employee.currentContract', 'currentContract')
+            ->leftJoin('currentContract.currentTarget', 'currentTarget')
+            ->addSelect('currentContract')
+            ->addSelect('currentTarget')
+        ;
+
+        $dataTable = $this->createDataTable(ColumnTemplateDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/template.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnTemplateDataTableType::class,
             ],
         ]);
     }

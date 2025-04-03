@@ -24,8 +24,8 @@ class Employee
     #[ORM\Column(length: 100)]
     private ?string $lastName = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $birthDate = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $birthDate = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Contract $currentContract = null;
@@ -36,8 +36,8 @@ class Employee
     #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true, enumType: EmployeeRole::class)]
     private ?array $roles = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $lastLoginAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $lastLoginAt = null;
 
     #[ORM\Column(enumType: EmployeeStatus::class)]
     private ?EmployeeStatus $status = null;
@@ -82,12 +82,12 @@ class Employee
         return $this;
     }
 
-    public function getBirthDate(): ?\DateTimeInterface
+    public function getBirthDate(): ?\DateTimeImmutable
     {
         return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTimeInterface $birthDate): static
+    public function setBirthDate(\DateTimeImmutable $birthDate): static
     {
         $this->birthDate = $birthDate;
 
@@ -133,12 +133,12 @@ class Employee
         return $this;
     }
 
-    public function getLastLoginAt(): ?\DateTimeInterface
+    public function getLastLoginAt(): ?\DateTimeImmutable
     {
         return $this->lastLoginAt;
     }
 
-    public function setLastLoginAt(?\DateTimeInterface $lastLoginAt): static
+    public function setLastLoginAt(?\DateTimeImmutable $lastLoginAt): static
     {
         $this->lastLoginAt = $lastLoginAt;
 
