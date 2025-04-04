@@ -1,4 +1,4 @@
-# Kreyu DataTableBundle demo
+# Kreyu DataTableBundle Demo
 
 This is an unofficial demo application that aims to showcase the main features of [DataTableBundle](https://github.com/Kreyu/data-table-bundle) by [Kreyu](https://github.com/Kreyu). Work in progress.
 
