@@ -41,7 +41,7 @@ class ColumnEnumDataTableType extends AbstractDataTableType
                 'sort' => 'status',
                 'value_attr' => function (EmployeeStatus $status) {
                     return [
-                        'class' => 'badge fw-normal text-wrap text-bg-'.$status->getContext(),
+                        'class' => 'badge fw-normal text-bg-'.$status->getContext(),
                     ];
                 },
             ])

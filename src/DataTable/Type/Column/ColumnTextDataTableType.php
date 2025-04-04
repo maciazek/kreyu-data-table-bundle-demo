@@ -32,7 +32,7 @@ class ColumnTextDataTableType extends AbstractDataTableType
                 'export' => true,
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
                 'value_attr' => fn (string $value, Employee $employee) => [
-                    'class' => 'badge fw-normal text-wrap text-bg-'.$employee->getStatus()->getContext(),
+                    'class' => 'badge fw-normal text-bg-'.$employee->getStatus()->getContext(),
                 ],
             ])
             ->addColumn('tooltip', TextColumnType::class, [
