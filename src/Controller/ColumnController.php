@@ -188,7 +188,7 @@ final class ColumnController extends AbstractController
     public function datePeriod(Request $request, EmployeeRepository $employeeRepository): Response
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee')
-            ->innerJoin('employee.currentContract', 'currentContract')
+            ->leftJoin('employee.currentContract', 'currentContract')
             ->addSelect('currentContract')
         ;
 
