@@ -273,8 +273,10 @@ final class ColumnController extends AbstractController
         $queryBuilder = $employeeRepository->createQueryBuilder('employee')
             ->leftJoin('employee.currentContract', 'currentContract')
             ->leftJoin('currentContract.currentTarget', 'currentTarget')
+            ->leftJoin('currentContract.targets', 'targets')
             ->addSelect('currentContract')
             ->addSelect('currentTarget')
+            ->addSelect('targets')
         ;
 
         $dataTable = $this->createDataTable(ColumnTemplateDataTableType::class, $queryBuilder, options: [

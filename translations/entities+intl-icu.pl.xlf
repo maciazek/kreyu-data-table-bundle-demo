@@ -49,6 +49,10 @@
         <source>employee.status</source>
         <target>Status</target>
       </trans-unit>
+      <trans-unit id="Sa0zxpQ" resname="target.value">
+        <source>target.value</source>
+        <target>Wartość</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
