@@ -30,6 +30,9 @@ class ReloadDatabaseCommand extends Command
 
         $commands = [
             [
+                'command' => $this->getApplication()->find('cache:clear'),
+            ],
+            [
                 'command' => $this->getApplication()->find('doctrine:schema:drop'),
                 'arguments' => [
                     '--full-database' => true,
@@ -51,7 +54,7 @@ class ReloadDatabaseCommand extends Command
         ];
 
         foreach ($commands as $command) {
-            $arrayInput = new ArrayInput($command['arguments']);
+            $arrayInput = new ArrayInput($command['arguments'] ?? []);
             $arrayInput->setInteractive(false);
             $command['command']->run($arrayInput, $output);
         }
