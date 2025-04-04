@@ -1,3 +1,7 @@
+# Kreyu DataTableBundle demo
+
+This is an unofficial demo application that aims to showcase the main features of [DataTableBundle](https://github.com/Kreyu/data-table-bundle) by [Kreyu](https://github.com/Kreyu). Work in progress.
+
 ## Features
 - Theme switcher (Bootstrap 5, Tabler)
 - Locale switcher (Polish and English)
