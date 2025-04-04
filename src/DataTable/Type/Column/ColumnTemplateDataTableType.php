@@ -58,7 +58,7 @@ class ColumnTemplateDataTableType extends AbstractDataTableType
                         ];
                     }
 
-                    $values = array_map(function($target) {
+                    $values = array_map(function ($target) {
                         return [
                             'month' => $target->getMonth()->format('Y-m'),
                             'backgroundColor' => $target->getValue() == 100 ? 'rgba(25, 135, 84, 0.5)' : 'rgba(13, 110, 253, 0.5)',
