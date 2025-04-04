@@ -1367,16 +1367,16 @@
         },
         {
             "name": "kreyu/data-table-bundle",
-            "version": "v0.29.1",
+            "version": "v0.29.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kreyu/data-table-bundle.git",
-                "reference": "f2623803e6362040778e173859b8858acc9b0741"
+                "reference": "b6664dd46ba9904604b20ac08d56da84075585c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/f2623803e6362040778e173859b8858acc9b0741",
-                "reference": "f2623803e6362040778e173859b8858acc9b0741",
+                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/b6664dd46ba9904604b20ac08d56da84075585c9",
+                "reference": "b6664dd46ba9904604b20ac08d56da84075585c9",
                 "shasum": ""
             },
             "require": {
@@ -1427,7 +1427,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kreyu/data-table-bundle/issues",
-                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.29.1"
+                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.29.2"
             },
             "funding": [
                 {
@@ -1435,7 +1435,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-27T12:57:45+00:00"
+            "time": "2025-04-02T19:44:58+00:00"
         },
         {
             "name": "openspout/openspout",
@@ -6502,16 +6502,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.74.0",
+            "version": "v3.75.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "6b7cb12a6cf592fd9a2b46a2d5d4c3b44003973d"
+                "reference": "399a128ff2fdaf4281e4e79b755693286cdf325c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/6b7cb12a6cf592fd9a2b46a2d5d4c3b44003973d",
-                "reference": "6b7cb12a6cf592fd9a2b46a2d5d4c3b44003973d",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/399a128ff2fdaf4281e4e79b755693286cdf325c",
+                "reference": "399a128ff2fdaf4281e4e79b755693286cdf325c",
                 "shasum": ""
             },
             "require": {
@@ -6594,7 +6594,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.74.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.75.0"
             },
             "funding": [
                 {
@@ -6602,7 +6602,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-27T22:31:30+00:00"
+            "time": "2025-03-31T18:40:42+00:00"
         },
         {
             "name": "nikic/php-parser",

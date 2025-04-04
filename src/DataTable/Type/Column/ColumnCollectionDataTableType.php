@@ -6,11 +6,10 @@ namespace App\DataTable\Type\Column;
 
 use App\Entity\Contract;
 use App\Entity\Employee;
-use App\Enum\EmployeeRole;
-use Doctrine\ORM\PersistentCollection;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\CollectionColumnType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\LinkColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
@@ -35,20 +34,16 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
             ])
             ->addColumn('entities', CollectionColumnType::class, [
                 'export' => true,
-                'formatter' => function (PersistentCollection $contracts): array { // workaround for use with entities
-                    return array_map(function (Contract $contract): string {
+                'entry_options' => [
+                    'formatter' => function (Contract $contract): string {
                         return $contract->getTitle()->getName();
-                    }, $contracts->getValues());
-                },
+                    },
+                ],
                 'property_path' => 'contracts',
             ])
             ->addColumn('enums', CollectionColumnType::class, [
+                'entry_type' => EnumColumnType::class,
                 'export' => true,
-                'formatter' => function (array $roles): array { // workaround for use with enums
-                    return array_map(function (EmployeeRole $role): string {
-                        return $role->trans($this->translator);
-                    }, $roles);
-                },
                 'property_path' => 'roles',
                 'sort' => 'roles',
             ])
@@ -58,7 +53,6 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
                     'formatter' => function (Contract $contract): string {
                         return $contract->getTitle()->getName();
                     },
-                    'getter' => fn (Contract $contract) => $contract, // workaround for use with entities
                     'href' => function ($contract): string {
                         return '#fakeroute'.$contract->getId();
                     },
@@ -67,14 +61,10 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
                 'property_path' => 'contracts',
             ])
             ->addColumn('customSeparator', CollectionColumnType::class, [
+                'entry_type' => EnumColumnType::class,
                 'export' => true,
-                'formatter' => function (array $roles): array { // workaround for use with enums
-                    return array_map(function (EmployeeRole $role): string {
-                        return $role->trans($this->translator);
-                    }, $roles);
-                },
                 'property_path' => 'roles',
-                'separator' => '➕',
+                'separator' => ' ➕ ',
                 'sort' => 'roles',
             ])
             ->addExporter('ods', OdsExporterType::class)
