@@ -37,6 +37,7 @@ class ColumnTemplateDataTableType extends AbstractDataTableType
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
             ])
             ->addColumn('progressbar', TemplateColumnType::class, [
+                'export' => true,
                 'property_path' => 'currentContract?.currentTarget.value',
                 'template_path' => 'column/_progressbar.html.twig',
                 'template_vars' => function (?int $value) {
