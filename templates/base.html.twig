@@ -10,6 +10,7 @@
     app_homepage_index: 'house-door',
     app_column_basic_options: 'caret-right-fill',
     app_column_text: 'caret-right-fill',
+    app_column_number: 'caret-right-fill',
     app_column_money: 'caret-right-fill',
     app_column_boolean: 'caret-right-fill',
     app_column_date: 'caret-right-fill',
@@ -56,6 +57,15 @@
                     'app_column_text': null,
                 },
                 icon: icons.app_column_text,
+            },
+            {
+                id: 'app_column_number',
+                path: path('app_column_number'),
+                label: 'app_column_number'|trans({}, 'routes'),
+                active_routes: {
+                    'app_column_number': null,
+                },
+                icon: icons.app_column_number,
             },
             {
                 id: 'app_column_money',

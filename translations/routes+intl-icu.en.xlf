@@ -49,6 +49,10 @@
         <source>app_column_money</source>
         <target>Money</target>
       </trans-unit>
+      <trans-unit id="N88urmw" resname="app_column_number">
+        <source>app_column_number</source>
+        <target>Number</target>
+      </trans-unit>
       <trans-unit id="QxXYFz8" resname="app_column_text">
         <source>app_column_text</source>
         <target>Text</target>

@@ -49,6 +49,10 @@
         <source>app_column_money</source>
         <target>Pieniądze</target>
       </trans-unit>
+      <trans-unit id="N88urmw" resname="app_column_number">
+        <source>app_column_number</source>
+        <target>Liczba</target>
+      </trans-unit>
       <trans-unit id="4IsYflk" resname="app_column_template">
         <source>app_column_template</source>
         <target>Szablon</target>

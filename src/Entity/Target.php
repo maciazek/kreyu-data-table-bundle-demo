@@ -24,6 +24,9 @@ class Target
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $value = null;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
+    private ?string $valueDecimal = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class Target
     public function setValue(int $value): static
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function getValueDecimal(): ?string
+    {
+        return $this->valueDecimal;
+    }
+
+    public function setValueDecimal(string $valueDecimal): static
+    {
+        $this->valueDecimal = $valueDecimal;
 
         return $this;
     }

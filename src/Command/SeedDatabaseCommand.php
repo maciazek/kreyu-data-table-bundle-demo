@@ -103,6 +103,7 @@ class SeedDatabaseCommand extends Command
                     $target->setContract($contract);
                     $target->setMonth($month);
                     $target->setValue($faker->numberBetween(0, 4) === 0 ? 100 : $faker->numberBetween(10, 100));
+                    $target->setValueDecimal((float) $target->getValue() / 100);
                     $this->entityManager->persist($target);
 
                     $contract->setCurrentTarget($target);
