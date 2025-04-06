@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Enum\Asynchronicity;
 use App\Enum\DataTableIconTheme;
 use App\Enum\DataTableTheme;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -46,10 +47,10 @@ class RequestSubscriber implements EventSubscriberInterface
             $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
         }
 
-        // try to see if asynchronicity option has been set as a _async routing parameter
-        if ($async = $request->query->get('_asynchronicity')) {
+        // try to see if asynchronicity option has been set as a _asynchronicity routing parameter
+        if ($asynchronicity = $request->query->get('_asynchronicity')) {
             // store new asynchronicity option in session
-            $request->getSession()->set('_asynchronicity', $async);
+            $request->getSession()->set('_asynchronicity', $asynchronicity);
 
             // remove asynchronicity option from URL
             $queryInputBag = $request->query;
@@ -66,7 +67,7 @@ class RequestSubscriber implements EventSubscriberInterface
                 ),
             );
         } else { // if no explicit asynchronicity option has been set on this request, use one from the session
-            $request->getSession()->set('_asynchronicity', $request->getSession()->get('_asynchronicity', 'SYN'));
+            $request->getSession()->set('_asynchronicity', $request->getSession()->get('_asynchronicity', Asynchronicity::SYN->value));
         }
 
         // try to see if the data table theme has been set as a routing parameter
