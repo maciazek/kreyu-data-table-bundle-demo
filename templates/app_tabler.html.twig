@@ -10,7 +10,7 @@
 
         {% block javascripts %}
             {% block importmap %}
-                {{ importmap('app_tabler') }}
+                {{ importmap(['app', 'app_tabler']) }}
             {% endblock %}
         {% endblock %}
     </head>
@@ -130,7 +130,7 @@
             {# main menu (offcanvas) #}
             <aside id="menuOffcanvas" class="offcanvas-md offcanvas-start d-flex flex-column flex-shrink-0 min-vh-100 text-bg-dark" data-bs-theme="dark">
                 <div class="d-flex flex-column flex-nowrap h-100 scrollarea">
-                    {{ menu|raw }}
+                    {{ menu_component|raw }}
                 </div>
             </aside>
         </div>

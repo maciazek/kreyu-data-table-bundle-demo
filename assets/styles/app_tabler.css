@@ -1,0 +1,7 @@
+aside .btn.active {
+    background-color: rgba(var(--tblr-gray-700-rgb),var(--tblr-bg-opacity)) !important;
+}
+
+nav {
+    box-shadow: none !important;
+}

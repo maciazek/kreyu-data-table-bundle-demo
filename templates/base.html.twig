@@ -2,8 +2,10 @@
 
 {% if data_table_theme in ['B5S', 'B5C'] %}
     {% set template = 'app_bootstrap.html.twig' %}
+    {% set menu = 'BootstrapMenu' %}
 {% elseif data_table_theme in ['TAB'] %}
     {% set template = 'app_tabler.html.twig' %}
+    {% set menu = 'TablerMenu' %}
 {% endif %}
 
 {% set icons = {
@@ -26,7 +28,7 @@
     app_filter_doctrine_orm: 'caret-right-fill',
 } %}
 
-{% set menu = component('BootstrapMenu', {elements: [
+{% set menu_component = component(menu, {elements: [
     {
         id: 'app_homepage',
         path: path('app_homepage_index'),
