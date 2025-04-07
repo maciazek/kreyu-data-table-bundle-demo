@@ -5,9 +5,9 @@
     {% set display_export_action = exporting_enabled and exporters|length > 0 %}
 
     {% if title or has_active_filters or display_filter_action or display_export_action or filtration_enabled or personalization_enabled %}
-        <div class="card-header">
+        <div class="card-header px-2">
             <div class="card-actions">
-                <div class="d-flex flex-row justify-content-between align-items-end gap-1 mb-1">
+                <div class="d-flex flex-row justify-content-between align-items-end gap-1">
                     {% for action in actions %}
                         <div>
                             {{ data_table_action(action) }}
@@ -139,6 +139,10 @@
             {{ form_widget(child.value, { attr: { form: filtration_form.vars.id, class: 'form-control-sm' } }) }}
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block table_head %}
+    <thead style="--bs-table-bg: var(--bs-card-cap-bg);">{{ block('table_head_row', theme) }}</thead>
 {% endblock %}
 
 {% block column_actions_value %}
@@ -317,7 +321,7 @@
 {% endblock %}
 
 {% block pagination_counters %}
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center align-items-center">
         <span {{- block('attributes') -}}>
             {{- block('pagination_counters_message', theme) -}}
         </span>
@@ -375,14 +379,16 @@
 {% endblock %}
 
 {% block pagination_widget %}
-    <div class="d-flex flex-column flex-md-row justify-content-between mt-1">
-        {{ block('pagination_per_page', theme) }}
-        {{ block('pagination_counters', theme) }}
-        {% if page_count > 1 %}
-            <div class="pagination pagination-sm justify-content-center">
-                {{ block('pagination_controls', theme) }}
-            </div>
-        {% endif %}
+    <div class="card-footer border-top border-2 border-secondary-subtle px-2">
+        <div class="d-flex flex-column flex-md-row justify-content-between">
+            {{ block('pagination_per_page', theme) }}
+            {{ block('pagination_counters', theme) }}
+            {% if page_count > 1 %}
+                <div class="pagination pagination-sm justify-content-center">
+                    {{ block('pagination_controls', theme) }}
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
@@ -424,12 +430,15 @@
 
 {% block table %}
     <div class="table-responsive">
-        {% with { table_attr: { class: 'table table-sm table-bordered table-hover table-striped align-middle mb-0' }|merge(table_attr|default({})) } %}
-            {{ parent() }}
+        {% with { table_attr: { class: 'table table-sm table-hover align-middle mb-0' }|merge(table_attr|default({})) } %}
+            <table {% with { attr: table_attr|default({}) } %}{{- block('attributes') -}}{% endwith %}>
+                {{ block('table_head', theme) }}
+                {{ block('table_body', theme) }}
+            </table>
         {% endwith %}
     </div>
 {% endblock %}
 
 {% block table_body %}
-    <tbody class="table-group-divider">{{ block('table_body_row') }}</tbody>
+    <tbody class="table-group-divider" style="border-top-color: var(--bs-secondary-border-subtle);">{{ block('table_body_row') }}</tbody>
 {% endblock %}
