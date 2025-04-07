@@ -1,3 +1,10 @@
+:root, [data-bs-theme="light"] {
+    --bs-font-sans-serif: 'Noto Sans', sans-serif;
+    --bs-font-monospace: 'Roboto Mono', sans-serif;
+    --tblr-font-sans-serif: 'Noto Sans', sans-serif;
+    --tblr-font-monospace: 'Roboto Mono', sans-serif;
+}
+
 .app-name {
     font-weight: 800;
 }
@@ -44,13 +51,6 @@ aside .btn-toggle-nav a {
 aside .scrollarea {
     margin-top: 56px;
     overflow-y: auto;
-}
-
-body {
-    font-family: 'Noto Sans', sans-serif;
-}
-code {
-    font-family: 'Roboto Mono', sans-serif;
 }
 
 [data-bs-theme="dark"] {
