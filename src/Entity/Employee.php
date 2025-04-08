@@ -48,6 +48,9 @@ class Employee
     #[ORM\OneToMany(targetEntity: Contract::class, mappedBy: 'employee', orphanRemoval: true)]
     private Collection $contracts;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Address $address = null;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
@@ -183,6 +186,18 @@ class Employee
                 $contract->setEmployee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): static
+    {
+        $this->address = $address;
 
         return $this;
     }

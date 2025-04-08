@@ -23,9 +23,10 @@
     app_column_template: 'caret-right-fill',
     app_column_html: 'caret-right-fill',
     app_column_icon: 'caret-right-fill',
+    app_filter_doctrine_orm: 'caret-right-fill',
     app_filter_search_simple: 'caret-right-fill',
     app_filter_search_advanced: 'caret-right-fill',
-    app_filter_doctrine_orm: 'caret-right-fill',
+    app_filter_events: 'caret-right-fill',
 } %}
 
 {% set menu_component = component(menu, {elements: [
@@ -191,6 +192,15 @@
                     'app_filter_search_advanced': null,
                 },
                 icon: icons.app_filter_search_advanced,
+            },
+            {
+                id: 'app_filter_events',
+                path: path('app_filter_events'),
+                label: 'app_filter_events'|trans({}, 'routes'),
+                active_routes: {
+                    'app_filter_events': null,
+                },
+                icon: icons.app_filter_events,
             },
         ],
     },

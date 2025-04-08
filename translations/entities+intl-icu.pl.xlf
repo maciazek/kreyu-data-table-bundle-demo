@@ -5,6 +5,10 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
+      <trans-unit id="dTJ7GaX" resname="address.city">
+        <source>address.city</source>
+        <target>Miasto</target>
+      </trans-unit>
       <trans-unit id="bnWq7uq" resname="contract.salary">
         <source>contract.salary</source>
         <target>Wynagrodzenie</target>

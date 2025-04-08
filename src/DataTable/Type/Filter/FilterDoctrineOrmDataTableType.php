@@ -87,7 +87,6 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'choice_label' => 'name',
                 'label' => 'contract.title',
                 'query_path' => 'currentContract.title',
-                'translation_domain' => 'entities',
             ])
             ->addFilter('isManager', BooleanFilterType::class, [
                 'label' => 'employee.isManager',

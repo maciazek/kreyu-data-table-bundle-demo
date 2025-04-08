@@ -69,6 +69,10 @@
         <source>app_filter_doctrine_orm</source>
         <target>Doctrine ORM</target>
       </trans-unit>
+      <trans-unit id="Mxl3pVH" resname="app_filter_events">
+        <source>app_filter_events</source>
+        <target>Events</target>
+      </trans-unit>
       <trans-unit id="fJoxNb3" resname="app_filter_search_advanced">
         <source>app_filter_search_advanced</source>
         <target>Search (advanced)</target>

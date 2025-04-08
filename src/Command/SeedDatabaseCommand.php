@@ -2,12 +2,15 @@
 
 namespace App\Command;
 
+use App\Entity\Address;
+use App\Entity\City;
 use App\Entity\Contract;
 use App\Entity\Employee;
 use App\Entity\Target;
 use App\Entity\Title;
 use App\Enum\EmployeeRole;
 use App\Enum\EmployeeStatus;
+use App\Repository\CityRepository;
 use App\Repository\TitleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -26,6 +29,7 @@ class SeedDatabaseCommand extends Command
     private const COUNTS = [
         '_page' => 25,
         'title' => 25,
+        'city' => 25,
         'employee' => 500,
     ];
 
@@ -38,6 +42,7 @@ class SeedDatabaseCommand extends Command
         #[Autowire(env: 'APP_DEFAULT_LOCALE')] private string $locale,
         private EntityManagerInterface $entityManager,
         private TitleRepository $titleRepository,
+        private CityRepository $cityRepository,
     ) {
         parent::__construct();
     }
@@ -65,9 +70,24 @@ class SeedDatabaseCommand extends Command
         $this->entityManager->flush();
         $this->entityManager->clear();
 
+        // cities
+        for ($i = 1; $i <= self::COUNTS['city']; $i++) {
+            $city = new City();
+            $city->setName($faker->unique()->city());
+            $this->entityManager->persist($city);
+
+            if ($i % self::COUNTS['_page'] === 0) {
+                $this->entityManager->flush();
+                $this->entityManager->clear();
+            }
+        }
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+
         // employees
         for ($i = 1; $i <= self::COUNTS['employee']; $i++) {
             $titles = $this->titleRepository->findAll();
+            $cities = $this->cityRepository->findAll();
 
             $employee = new Employee();
             $employee->setFirstName($faker->firstName());
@@ -77,6 +97,17 @@ class SeedDatabaseCommand extends Command
             $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-5 years')));
             $employee->setStatus($faker->randomElement(EmployeeStatus::class));
             $this->entityManager->persist($employee);
+
+            // address
+            if ($employee->getStatus() !== EmployeeStatus::INA) {
+                $address = new Address();
+                $address->setStreetName($faker->streetName());
+                $address->setBuildingNumber($faker->buildingNumber());
+                $address->setPostcode($faker->postcode());
+                $address->setCity($faker->randomElement($cities));
+                $this->entityManager->persist($address);
+                $employee->setAddress($address);
+            }
 
             // contracts
             for ($j = 1; $j <= $faker->numberBetween(1, 4); $j++) {

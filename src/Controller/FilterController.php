@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataTable\Type\Filter\FilterDoctrineOrmDataTableType;
+use App\DataTable\Type\Filter\FilterEventsDataTableType;
 use App\DataTable\Type\Filter\FilterSearchAdvancedDataTableType;
 use App\DataTable\Type\Filter\FilterSearchSimpleDataTableType;
 use App\Enum\DataTableIconTheme;
@@ -18,6 +19,36 @@ use Symfony\Component\Routing\Attribute\Route;
 final class FilterController extends AbstractController
 {
     use DataTableFactoryAwareTrait;
+
+    #[Route('/doctrine_orm', name: 'app_filter_doctrine_orm')]
+    public function doctrineOrm(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
+            ->leftJoin('employee.currentContract', 'currentContract')
+            ->leftJoin('currentContract.title', 'currentContractTitle')
+            ->addSelect('currentContract')
+            ->addSelect('currentContractTitle')
+        ;
+
+        $dataTable = $this->createDataTable(FilterDoctrineOrmDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('filter/doctrine_orm.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                FilterDoctrineOrmDataTableType::class,
+            ],
+        ]);
+    }
 
     #[Route('/search_simple', name: 'app_filter_search_simple')]
     public function searchSimple(Request $request, EmployeeRepository $employeeRepository): Response
@@ -79,17 +110,17 @@ final class FilterController extends AbstractController
         ]);
     }
 
-    #[Route('/doctrine_orm', name: 'app_filter_doctrine_orm')]
-    public function doctrineOrm(Request $request, EmployeeRepository $employeeRepository): Response
+    #[Route('/events', name: 'app_filter_events')]
+    public function events(Request $request, EmployeeRepository $employeeRepository): Response
     {
         $queryBuilder = $employeeRepository->createQueryBuilder('employee')
-            ->leftJoin('employee.currentContract', 'currentContract')
-            ->leftJoin('currentContract.title', 'currentContractTitle')
-            ->addSelect('currentContract')
-            ->addSelect('currentContractTitle')
+            ->leftJoin('employee.address', 'address')
+            ->leftJoin('address.city', 'city')
+            ->addSelect('address')
+            ->addSelect('city')
         ;
 
-        $dataTable = $this->createDataTable(FilterDoctrineOrmDataTableType::class, $queryBuilder, options: [
+        $dataTable = $this->createDataTable(FilterEventsDataTableType::class, $queryBuilder, options: [
             'themes' => [
                 DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
                 DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
@@ -101,10 +132,10 @@ final class FilterController extends AbstractController
             return $this->file($dataTable->export());
         }
 
-        return $this->render('filter/doctrine_orm.html.twig', [
+        return $this->render('filter/events.html.twig', [
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
-                FilterDoctrineOrmDataTableType::class,
+                FilterEventsDataTableType::class,
             ],
         ]);
     }
