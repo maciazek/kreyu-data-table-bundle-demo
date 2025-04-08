@@ -5,7 +5,7 @@
     {% set display_export_action = exporting_enabled and exporters|length > 0 %}
 
     {% if title or has_active_filters or display_filter_action or display_export_action or filtration_enabled or personalization_enabled %}
-        <div class="card-header px-2">
+        <div class="card-header border-bottom px-2">
             <div class="card-actions">
                 <div class="d-flex flex-row justify-content-between align-items-end gap-1">
                     {% for action in actions %}
@@ -430,7 +430,7 @@
 
 {% block table %}
     <div class="table-responsive">
-        {% with { table_attr: { class: 'table table-sm table-hover align-middle mb-0' }|merge(table_attr|default({})) } %}
+        {% with { table_attr: { class: 'table table-sm table-bordered table-hover align-middle mb-0', style: 'border-collapse: collapse; border-style: hidden;' }|merge(table_attr|default({})) } %}
             <table {% with { attr: table_attr|default({}) } %}{{- block('attributes') -}}{% endwith %}>
                 {{ block('table_head', theme) }}
                 {{ block('table_body', theme) }}
