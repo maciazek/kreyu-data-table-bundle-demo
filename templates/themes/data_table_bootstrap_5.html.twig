@@ -379,7 +379,7 @@
 {% endblock %}
 
 {% block pagination_widget %}
-    <div class="card-footer border-top border-2 border-secondary-subtle px-2">
+    <div class="card-footer border-top border-2 border-secondary px-2" style="--bs-border-opacity: 0.75;">
         <div class="d-flex flex-column flex-md-row justify-content-between">
             {{ block('pagination_per_page', theme) }}
             {{ block('pagination_counters', theme) }}
@@ -440,5 +440,5 @@
 {% endblock %}
 
 {% block table_body %}
-    <tbody class="table-group-divider" style="border-top-color: var(--bs-secondary-border-subtle);">{{ block('table_body_row') }}</tbody>
+    <tbody class="table-group-divider" style="--bs-border-opacity: 0.75; border-top-color: rgba(var(--bs-secondary-rgb),var(--bs-border-opacity)) !important;">{{ block('table_body_row') }}</tbody>
 {% endblock %}
