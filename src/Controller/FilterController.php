@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\DataTable\Type\Filter\FilterDoctrineOrmDataTableType;
-use App\DataTable\Type\Filter\FilterExpressionTransformersDataTableType;
 use App\DataTable\Type\Filter\FilterEventsDataTableType;
+use App\DataTable\Type\Filter\FilterExpressionTransformersDataTableType;
 use App\DataTable\Type\Filter\FilterSearchAdvancedDataTableType;
 use App\DataTable\Type\Filter\FilterSearchSimpleDataTableType;
 use App\Enum\DataTableIconTheme;
