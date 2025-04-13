@@ -16,6 +16,7 @@
         "fakerphp/faker": "^1.24",
         "kreyu/data-table-bundle": "^0.29.1",
         "openspout/openspout": "^4.28",
+        "scienta/doctrine-json-functions": "^6.3",
         "symfony/asset": "6.4.*",
         "symfony/asset-mapper": "6.4.*",
         "symfony/console": "6.4.*",

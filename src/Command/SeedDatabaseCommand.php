@@ -93,9 +93,12 @@ class SeedDatabaseCommand extends Command
             $employee->setFirstName($faker->firstName());
             $employee->setLastName($faker->lastName());
             $employee->setBirthDate(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval('-60 years', '+35 years')));
-            $employee->setRoles($faker->numberBetween(0, 3) !== 0 ? $faker->randomElements(EmployeeRole::class, $faker->numberBetween(1, count(EmployeeRole::cases()))) : null);
             $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-5 years')));
             $employee->setStatus($faker->randomElement(EmployeeStatus::class));
+            if ($employee->getStatus() !== EmployeeStatus::INA) {
+                $employee->setRoles($faker->randomElements(EmployeeRole::class, $faker->numberBetween(0, count(EmployeeRole::cases()))));
+            }
+
             $this->entityManager->persist($employee);
 
             // address

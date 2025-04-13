@@ -49,6 +49,14 @@
         <source>employee.name</source>
         <target>Imię i nazwisko</target>
       </trans-unit>
+      <trans-unit id="TDMYCdn" resname="employee.numberOfRoles">
+        <source>employee.numberOfRoles</source>
+        <target>Liczba ról</target>
+      </trans-unit>
+      <trans-unit id="HtSLEOJ" resname="employee.roles">
+        <source>employee.roles</source>
+        <target>Role</target>
+      </trans-unit>
       <trans-unit id="A0jfo_t" resname="employee.status">
         <source>employee.status</source>
         <target>Status</target>

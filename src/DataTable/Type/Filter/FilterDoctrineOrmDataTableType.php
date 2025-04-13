@@ -12,12 +12,15 @@ use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\StringFilterTyp
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\BooleanColumnType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\CollectionColumnType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Filter\Operator;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -63,6 +66,13 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                     'class' => $value === null ? 'd-none' : '',
                 ],
             ])
+            ->addColumn('roles', CollectionColumnType::class, [
+                'entry_type' => EnumColumnType::class,
+                'export' => true,
+                'label' => 'employee.roles',
+                'property_path' => 'roles',
+                'sort' => 'roles',
+            ])
             ->addFilter('firstName', StringFilterType::class, [
                 'label' => 'employee.firstName',
             ])
@@ -90,6 +100,11 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ])
             ->addFilter('isManager', BooleanFilterType::class, [
                 'label' => 'employee.isManager',
+            ])
+            ->addFilter('numberOfRoles', NumericFilterType::class, [
+                'label' => 'employee.numberOfRoles',
+                'query_path' => 'JSON_ARRAY_LENGTH(employee.roles)', // https://github.com/ScientaNL/DoctrineJsonFunctions
+                'form_type' => IntegerType::class,
             ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)

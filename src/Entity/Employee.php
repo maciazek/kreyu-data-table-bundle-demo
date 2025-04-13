@@ -33,7 +33,7 @@ class Employee
     #[ORM\Column(nullable: true)]
     private ?bool $isManager = null;
 
-    #[ORM\Column(type: Types::SIMPLE_ARRAY, nullable: true, enumType: EmployeeRole::class)]
+    #[ORM\Column(type: Types::JSON, nullable: true, enumType: EmployeeRole::class)]
     private ?array $roles = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]

@@ -24,6 +24,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        dql:
+            numeric_functions:
+                JSON_ARRAY_LENGTH: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Sqlite\JsonArrayLength
 
 when@test:
     doctrine:
