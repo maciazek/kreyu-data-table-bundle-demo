@@ -103,7 +103,12 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ])
             ->addFilter('numberOfRoles', NumericFilterType::class, [
                 'label' => 'employee.numberOfRoles',
-                'query_path' => 'JSON_ARRAY_LENGTH(employee.roles)', // https://github.com/ScientaNL/DoctrineJsonFunctions
+
+                // to use JSON functions, install "scienta/doctrine-json-functions"
+                // https://github.com/ScientaNL/DoctrineJsonFunctions
+                'query_path' => 'JSON_ARRAY_LENGTH(employee.roles)', // SQLite
+                // 'query_path' => 'JSON_LENGTH(employee.roles)', // MySQL/MariaDB
+
                 'form_type' => IntegerType::class,
             ])
             ->addExporter('ods', OdsExporterType::class)

@@ -49,11 +49,28 @@ class FilterExpressionTransformersDataTableType extends AbstractDataTableType
                 },
                 'expression_transformers' => [
                     new CallbackExpressionTransformer(function (mixed $expression) {
+                        // to use JSON functions, install "scienta/doctrine-json-functions"
+                        // https://github.com/ScientaNL/DoctrineJsonFunctions
+
+                        // SQLite:
                         return new Expr\Comparison(
                             $expression->getLeftExpr(),
                             'LIKE',
-                            'CONCAT(\'%\', JSON_QUOTE('.$expression->getRightExpr().'), \'%\')', // https://github.com/ScientaNL/DoctrineJsonFunctions
+                            new Expr\Func(
+                                'CONCAT',
+                                ['\'%\'', new Expr\Func('JSON_QUOTE', $expression->getRightExpr()), '\'%\''],
+                            ),
                         );
+
+                        // MySQL/MariaDB:
+                        // return new Expr\Comparison(
+                        //     new Expr\Func(
+                        //         'JSON_CONTAINS',
+                        //         [$expression->getLeftExpr(), new Expr\Func('JSON_QUOTE', [$expression->getRightExpr()])],
+                        //     ),
+                        //     $expression->getOperator(),
+                        //     true,
+                        // );
                     }),
                 ],
                 'form_options' => [
