@@ -73,6 +73,10 @@
         <source>app_filter_events</source>
         <target>Zdarzenia</target>
       </trans-unit>
+      <trans-unit id="dnPBxmb" resname="app_filter_expression_transformers">
+        <source>app_filter_expression_transformers</source>
+        <target>Transformatory wyrażeń</target>
+      </trans-unit>
       <trans-unit id="fJoxNb3" resname="app_filter_search_advanced">
         <source>app_filter_search_advanced</source>
         <target>Wyszukiwanie (złożone)</target>

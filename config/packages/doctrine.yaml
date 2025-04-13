@@ -27,6 +27,7 @@ doctrine:
         dql:
             numeric_functions:
                 JSON_ARRAY_LENGTH: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Sqlite\JsonArrayLength
+                JSON_QUOTE: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Sqlite\JsonQuote
 
 when@test:
     doctrine:

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataTable\Type\Filter\FilterDoctrineOrmDataTableType;
+use App\DataTable\Type\Filter\FilterExpressionTransformersDataTableType;
 use App\DataTable\Type\Filter\FilterEventsDataTableType;
 use App\DataTable\Type\Filter\FilterSearchAdvancedDataTableType;
 use App\DataTable\Type\Filter\FilterSearchSimpleDataTableType;
@@ -106,6 +107,31 @@ final class FilterController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 FilterSearchAdvancedDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/expression_transformers', name: 'app_filter_expression_transformers')]
+    public function expressionTransformers(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee');
+
+        $dataTable = $this->createDataTable(FilterExpressionTransformersDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('filter/expression_transformers.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                FilterExpressionTransformersDataTableType::class,
             ],
         ]);
     }

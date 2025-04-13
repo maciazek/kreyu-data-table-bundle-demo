@@ -26,6 +26,7 @@
     app_filter_doctrine_orm: 'caret-right-fill',
     app_filter_search_simple: 'caret-right-fill',
     app_filter_search_advanced: 'caret-right-fill',
+    app_filter_expression_transformers: 'caret-right-fill',
     app_filter_events: 'caret-right-fill',
 } %}
 
@@ -192,6 +193,15 @@
                     'app_filter_search_advanced': null,
                 },
                 icon: icons.app_filter_search_advanced,
+            },
+            {
+                id: 'app_filter_expression_transformers',
+                path: path('app_filter_expression_transformers'),
+                label: 'app_filter_expression_transformers'|trans({}, 'routes'),
+                active_routes: {
+                    'app_filter_expression_transformers': null,
+                },
+                icon: icons.app_filter_expression_transformers,
             },
             {
                 id: 'app_filter_events',
