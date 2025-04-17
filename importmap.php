@@ -28,13 +28,13 @@ return [
         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
     'bootstrap' => [
-        'version' => '5.3.3',
+        'version' => '5.3.5',
     ],
     '@popperjs/core' => [
         'version' => '2.11.8',
     ],
     'bootstrap/dist/css/bootstrap.min.css' => [
-        'version' => '5.3.3',
+        'version' => '5.3.5',
         'type' => 'css',
     ],
     '@fontsource/noto-sans/latin.css' => [
@@ -68,7 +68,7 @@ return [
         'type' => 'css',
     ],
     '@tabler/core' => [
-        'version' => '1.1.1',
+        'version' => '1.2.0',
     ],
     'autosize' => [
         'version' => '6.0.1',
@@ -77,13 +77,16 @@ return [
         'version' => '7.6.1',
     ],
     '@tabler/core/dist/css/tabler.min.css' => [
-        'version' => '1.1.1',
+        'version' => '1.2.0',
         'type' => 'css',
     ],
     '@hotwired/turbo' => [
-        'version' => '7.3.0',
+        'version' => '8.0.13',
     ],
     'chart.js' => [
-        'version' => '3.9.1',
+        'version' => '4.4.9',
+    ],
+    '@kurkle/color' => [
+        'version' => '0.3.4',
     ],
 ];
