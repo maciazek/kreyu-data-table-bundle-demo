@@ -442,20 +442,3 @@
 {% block table_body %}
     <tbody class="table-group-divider" style="--bs-border-opacity: 0.75; border-top-color: rgba(var(--bs-secondary-rgb),var(--bs-border-opacity)) !important;">{{ block('table_body_row') }}</tbody>
 {% endblock %}
-
-{# fix boolean column in DataTableBundle 0.30.0 #}
-{% block column_value -%}
-    <span{{ _self.attributes(attr) }}>
-        {%- if translatable -%}
-            {%- if is_instance_of_translatable -%}
-                {{- translation_key|trans -}}
-            {%- elseif translation_key -%}
-                {{- translation_key|trans(translation_parameters, translation_domain) -}}
-            {%- else -%}
-                {{- value|trans({}, translation_domain) -}}
-            {%- endif -%}
-        {%- else -%}
-            {{- value -}}
-        {%- endif -%}
-    </span>
-{%- endblock %}
