@@ -75,9 +75,15 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
             ->addColumn('translation', TextColumnType::class, [
                 'export' => true,
                 'getter' => function (Employee $employee) {
-                    return 'App\\Enum\\EmployeeStatus::'.$employee->getStatus()->value;
+                    return count($employee->getRoles() ?? []);
                 },
-                'value_translation_domain' => 'enums',
+                'value_translation_domain' => 'entities',
+                'value_translation_key' => 'employee.rolesCount',
+                'value_translation_parameters' => function (int $count, Employee $employee) {
+                    return [
+                        'count' => $count,
+                    ];
+                },
             ])
             ->addColumn('invisible', TextColumnType::class, [
                 'visible' => false,

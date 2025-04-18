@@ -57,6 +57,10 @@
         <source>employee.roles</source>
         <target>Role</target>
       </trans-unit>
+      <trans-unit id="V72dkJ1" resname="employee.rolesCount">
+        <source>employee.rolesCount</source>
+        <target>{count, plural, =0 {Nie posiada ról} =1 {Posiada # rolę} other {Posiada # role}}</target>
+      </trans-unit>
       <trans-unit id="A0jfo_t" resname="employee.status">
         <source>employee.status</source>
         <target>Status</target>
