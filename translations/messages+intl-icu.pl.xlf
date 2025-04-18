@@ -5,6 +5,10 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
+      <trans-unit id="YgERG4O" resname="and">
+        <source>and</source>
+        <target> i </target>
+      </trans-unit>
       <trans-unit id="Rm5bnNV" resname="currency">
         <source>currency</source>
         <target>PLN</target>

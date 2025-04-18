@@ -153,6 +153,22 @@
     </span>
 {% endblock %}
 
+{# fix HTML separator in DataTableBundle 0.30.1 #}
+{% block column_collection_value -%}
+    {% for child in children -%}
+        {{- data_table_column_value(child) -}}
+        <span>
+            {%- if not loop.last -%}
+                {%- if separator_translatable -%}
+                    {%- set separator = separator|trans -%}
+                {%- endif -%}
+
+                {{ separator_html ? separator|raw : separator }}
+            {%- endif -%}
+        </span>
+    {%- endfor %}
+{%- endblock %}
+
 {% block column_header %}
     {% with {
         active_attr: { class: 'text-primary' ~ ' ' ~ attr.class|default('') },

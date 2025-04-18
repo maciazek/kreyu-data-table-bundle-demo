@@ -9,13 +9,13 @@ use App\Entity\Employee;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\CollectionColumnType;
-use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\LinkColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ColumnCollectionDataTableType extends AbstractDataTableType
@@ -42,7 +42,6 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
                 'property_path' => 'contracts',
             ])
             ->addColumn('enums', CollectionColumnType::class, [
-                'entry_type' => EnumColumnType::class,
                 'export' => true,
                 'property_path' => 'roles',
                 'sort' => 'roles',
@@ -61,10 +60,22 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
                 'property_path' => 'contracts',
             ])
             ->addColumn('customSeparator', CollectionColumnType::class, [
-                'entry_type' => EnumColumnType::class,
                 'export' => true,
                 'property_path' => 'roles',
                 'separator' => ' ➕ ',
+                'sort' => 'roles',
+            ])
+            ->addColumn('customHtmlSeparator', CollectionColumnType::class, [
+                'export' => true,
+                'property_path' => 'roles',
+                'separator' => '<br>',
+                'separator_html' => true,
+                'sort' => 'roles',
+            ])
+            ->addColumn('customTranslatableSeparator', CollectionColumnType::class, [
+                'export' => true,
+                'property_path' => 'roles',
+                'separator' => new TranslatableMessage('and', [], 'messages'),
                 'sort' => 'roles',
             ])
             ->addExporter('ods', OdsExporterType::class)
