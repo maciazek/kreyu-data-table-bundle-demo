@@ -5,9 +5,37 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
+      <trans-unit id="M1SZbMc" resname="address.buildingNumber">
+        <source>address.buildingNumber</source>
+        <target>Nr domu</target>
+      </trans-unit>
       <trans-unit id="dTJ7GaX" resname="address.city">
         <source>address.city</source>
         <target>Miasto</target>
+      </trans-unit>
+      <trans-unit id="uzz7s7i" resname="address.postcode">
+        <source>address.postcode</source>
+        <target>Kod pocztowy</target>
+      </trans-unit>
+      <trans-unit id="3VydgAd" resname="address.streetName">
+        <source>address.streetName</source>
+        <target>Ulica</target>
+      </trans-unit>
+      <trans-unit id="HwgeP9A" resname="contract.beginDate">
+        <source>contract.beginDate</source>
+        <target>Data początkowa</target>
+      </trans-unit>
+      <trans-unit id="Egq2B1r" resname="contract.currentTarget">
+        <source>contract.currentTarget</source>
+        <target>Aktualny cel</target>
+      </trans-unit>
+      <trans-unit id="Te3WaAu" resname="contract.endDate">
+        <source>contract.endDate</source>
+        <target>Data końcowa</target>
+      </trans-unit>
+      <trans-unit id="DfCeuWQ" resname="contract.id">
+        <source>contract.id</source>
+        <target>#</target>
       </trans-unit>
       <trans-unit id="bnWq7uq" resname="contract.salary">
         <source>contract.salary</source>
@@ -33,13 +61,25 @@
         <source>employee.birthDate</source>
         <target>Data urodzenia</target>
       </trans-unit>
+      <trans-unit id="llcdkmd" resname="employee.currentContract">
+        <source>employee.currentContract</source>
+        <target>Aktualna umowa</target>
+      </trans-unit>
       <trans-unit id="kMZYJ3g" resname="employee.firstName">
         <source>employee.firstName</source>
         <target>Imię</target>
       </trans-unit>
+      <trans-unit id="5Pkv_yf" resname="employee.id">
+        <source>employee.id</source>
+        <target>#</target>
+      </trans-unit>
       <trans-unit id="JwcYeuf" resname="employee.isManager">
         <source>employee.isManager</source>
         <target>Jest kierownikiem</target>
+      </trans-unit>
+      <trans-unit id="Mb_9ERz" resname="employee.lastLoginAt">
+        <source>employee.lastLoginAt</source>
+        <target>Data ostatniego logowania</target>
       </trans-unit>
       <trans-unit id="iQO.iMi" resname="employee.lastName">
         <source>employee.lastName</source>
@@ -65,9 +105,21 @@
         <source>employee.status</source>
         <target>Status</target>
       </trans-unit>
+      <trans-unit id="3H_luNC" resname="target.id">
+        <source>target.id</source>
+        <target>#</target>
+      </trans-unit>
+      <trans-unit id="z0HAPxC" resname="target.month">
+        <source>target.month</source>
+        <target>Miesiąc</target>
+      </trans-unit>
       <trans-unit id="Sa0zxpQ" resname="target.value">
         <source>target.value</source>
         <target>Wartość</target>
+      </trans-unit>
+      <trans-unit id="HzhpuNa" resname="target.valueDecimal">
+        <source>target.valueDecimal</source>
+        <target>Wartość dziesiętna</target>
       </trans-unit>
     </body>
   </file>

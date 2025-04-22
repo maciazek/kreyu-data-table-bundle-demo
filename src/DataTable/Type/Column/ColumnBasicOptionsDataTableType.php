@@ -14,6 +14,7 @@ use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ColumnBasicOptionsDataTableType extends AbstractDataTableType
@@ -74,6 +75,7 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
             ])
             ->addColumn('translation', TextColumnType::class, [
                 'export' => true,
+                'label' => new TranslatableMessage('translation', [], 'messages'),
                 'getter' => function (Employee $employee) {
                     return count($employee->getRoles() ?? []);
                 },

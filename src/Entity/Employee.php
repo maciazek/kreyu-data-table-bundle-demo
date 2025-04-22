@@ -30,6 +30,9 @@ class Employee
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Contract $currentContract = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Address $address = null;
+
     #[ORM\Column(nullable: true)]
     private ?bool $isManager = null;
 
@@ -47,9 +50,6 @@ class Employee
      */
     #[ORM\OneToMany(targetEntity: Contract::class, mappedBy: 'employee', orphanRemoval: true)]
     private Collection $contracts;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Address $address = null;
 
     public function __construct()
     {
@@ -105,6 +105,18 @@ class Employee
     public function setCurrentContract(?Contract $currentContract): static
     {
         $this->currentContract = $currentContract;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): static
+    {
+        $this->address = $address;
 
         return $this;
     }
@@ -186,18 +198,6 @@ class Employee
                 $contract->setEmployee(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?Address $address): static
-    {
-        $this->address = $address;
 
         return $this;
     }

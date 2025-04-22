@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app_contract_edit'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
+{% block header %}{{ 'app_contract_edit'|trans({}, 'routes') }}{% endblock %}
+{% block toolbar %}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'info',
+        href: path('app_contract_show', {id: contract.id}),
+        icon: 'arrow-counterclockwise',
+        label: 'app_contract_show'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_contract_show'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'info',
+        href: path('app_employee_show', {id: contract.employee.id}),
+        icon: 'arrow-counterclockwise',
+        label: 'app_employee_show'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_employee_show'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'button',
+        type: 'submit',
+        form: form.vars.id,
+        context: 'success',
+        icon: 'check-lg',
+        label: 'save'|trans({}, 'buttons'),
+        tooltip: {placement: 'bottom', title: 'save'|trans({}, 'buttons')},
+        responsive: true,
+    }) }}
+    {{ include('contract/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    {{ include('contract/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

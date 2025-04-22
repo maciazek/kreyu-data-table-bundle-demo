@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app_target_show'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
+{% block header %}{{ 'app_target_show'|trans({}, 'routes') }}{% endblock %}
+{% block toolbar %}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'info',
+        href: path('app_contract_show', {id: target.contract.id}),
+        icon: 'arrow-counterclockwise',
+        label: 'app_contract_show'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_contract_show'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'info',
+        href: path('app_employee_show', {id: target.contract.employee.id}),
+        icon: 'arrow-counterclockwise',
+        label: 'app_employee_show'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_employee_show'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'warning',
+        href: path('app_target_edit', {id: target.id}),
+        icon: 'pencil-square',
+        label: 'app_target_edit'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_target_edit'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ include('target/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xl-6">
+            <table class="table table-hover table-bordered">
+                <tbody>
+                    <tr>
+                        <th>{{ 'target.id'|trans({}, 'entities') }}</th>
+                        <td>{{ target.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'target.month'|trans({}, 'entities') }}</th>
+                        <td>{{ target.month ? target.month|date('Y-m') }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'target.value'|trans({}, 'entities') }}</th>
+                        <td>{{ target.value }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'target.valueDecimal'|trans({}, 'entities') }}</th>
+                        <td>{{ target.valueDecimal }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

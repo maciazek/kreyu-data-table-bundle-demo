@@ -8,12 +8,6 @@
         <div class="card-header border-bottom px-2">
             <div class="card-actions">
                 <div class="d-flex flex-row justify-content-between align-items-end gap-1">
-                    {% for action in actions %}
-                        <div>
-                            {{ data_table_action(action) }}
-                        </div>
-                    {% endfor %}
-
                     <div class="d-flex flex-wrap flex-md-row align-items-center gap-1">
                         {% if display_export_action %}
                             {{ block('action_export') }}
@@ -24,6 +18,12 @@
                             {{ block('action_personalize') }}
                             {{ block('personalization_modal') }}
                         {% endif %}
+
+                        {% for action in actions %}
+                            <div>
+                                {{ data_table_action(action) }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="d-flex flex-wrap flex-md-row justify-content-end align-items-center gap-1">
@@ -65,6 +65,55 @@
         {{ block('batch_action_bar', theme) }}
     {% endif %}
 {% endblock %}
+
+{% block action_button_control -%}
+    {%- set variants = {
+        destructive: 'btn-danger',
+        danger: 'btn-danger',
+        primary: 'btn-primary',
+        secondary: 'btn-secondary',
+        success: 'btn-success',
+        info: 'btn-info',
+        warning: 'btn-warning',
+        light: 'btn-light',
+        dark: 'btn-dark',
+        link: 'btn-link',
+        'outline-destructive': 'btn-outline-danger',
+        'outline-danger': 'btn-outline-danger',
+        'outline-primary': 'btn-outline-primary',
+        'outline-secondary': 'btn-outline-secondary',
+        'outline-success': 'btn-outline-success',
+        'outline-info': 'btn-outline-info',
+        'outline-warning': 'btn-outline-warning',
+        'outline-light': 'btn-outline-light',
+        'outline-dark': 'btn-outline-dark',
+    }|merge(variants ?? {})|filter(e => e is not same as false) -%}
+
+    {% set base_classes = base_classes ?? 'btn btn-sm d-inline-flex align-items-center gap-2' %}
+    {% set variant_classes = variant_classes ?? variants[variant ?? default_variant ?? 'primary'] %}
+
+    {% set attr = attr|merge({ class: (base_classes ~ ' ' ~ variant_classes ~ ' ' ~ attr.class|default(''))|trim }) %}
+    {% set icon_attr = icon_attr|merge({ class: ('lh-base ' ~ icon_attr.class|default(''))|trim }) %}
+
+    {% if confirmation %}
+        {% set attr = {
+            'data-bs-toggle': 'modal',
+            'data-bs-target': '#' ~ confirmation.identifier,
+        }|merge(attr) %}
+
+        {% set confirm_button_attr = { href }|merge(confirm_button_attr|default({})) %}
+
+        {% if batch %}
+            {% set confirm_button_attr = {
+                'data-kreyu--data-table-bundle--batch-target': 'identifierHolder',
+            }|merge(confirm_button_attr) %}
+        {% endif %}
+
+        {% with { attr, confirm_button_attr } %}{{ block('action_confirmation_modal') }}{% endwith %}
+    {% endif %}
+
+    {{ parent() }}
+{%- endblock %}
 
 {% block action_export %}
     {% set attr = {
@@ -152,22 +201,6 @@
         {% endfor %}
     </span>
 {% endblock %}
-
-{# fix HTML separator in DataTableBundle 0.30.1 #}
-{% block column_collection_value -%}
-    {% for child in children -%}
-        {{- data_table_column_value(child) -}}
-        <span>
-            {%- if not loop.last -%}
-                {%- if separator_translatable -%}
-                    {%- set separator = separator|trans -%}
-                {%- endif -%}
-
-                {{ separator_html ? separator|raw : separator }}
-            {%- endif -%}
-        </span>
-    {%- endfor %}
-{%- endblock %}
 
 {% block column_header %}
     {% with {
@@ -458,3 +491,19 @@
 {% block table_body %}
     <tbody class="table-group-divider" style="--bs-border-opacity: 0.75; border-top-color: rgba(var(--bs-secondary-rgb),var(--bs-border-opacity)) !important;">{{ block('table_body_row') }}</tbody>
 {% endblock %}
+
+{# fix HTML separator in DataTableBundle 0.30.1 #}
+{% block column_collection_value -%}
+    {% for child in children -%}
+        {{- data_table_column_value(child) -}}
+        <span>
+            {%- if not loop.last -%}
+                {%- if separator_translatable -%}
+                    {%- set separator = separator|trans -%}
+                {%- endif -%}
+
+                {{ separator_html ? separator|raw : separator }}
+            {%- endif -%}
+        </span>
+    {%- endfor %}
+{%- endblock %}

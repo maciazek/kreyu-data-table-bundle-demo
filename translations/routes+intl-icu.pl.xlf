@@ -61,6 +61,38 @@
         <source>app_column_text</source>
         <target>Tekst</target>
       </trans-unit>
+      <trans-unit id="9ssHQjc" resname="app_contract_delete">
+        <source>app_contract_delete</source>
+        <target>Usuń umowę</target>
+      </trans-unit>
+      <trans-unit id="mCE51px" resname="app_contract_edit">
+        <source>app_contract_edit</source>
+        <target>Edytuj umowę</target>
+      </trans-unit>
+      <trans-unit id="en_rkgi" resname="app_contract_new">
+        <source>app_contract_new</source>
+        <target>Nowa umowa</target>
+      </trans-unit>
+      <trans-unit id="KZoyl1T" resname="app_contract_show">
+        <source>app_contract_show</source>
+        <target>Umowa</target>
+      </trans-unit>
+      <trans-unit id="yqgjvBi" resname="app_employee_delete">
+        <source>app_employee_delete</source>
+        <target>Usuń pracownika</target>
+      </trans-unit>
+      <trans-unit id="BdW0lI3" resname="app_employee_edit">
+        <source>app_employee_edit</source>
+        <target>Edytuj pracownika</target>
+      </trans-unit>
+      <trans-unit id="c495sBx" resname="app_employee_new">
+        <source>app_employee_new</source>
+        <target>Nowy pracownik</target>
+      </trans-unit>
+      <trans-unit id="FDhAcS4" resname="app_employee_show">
+        <source>app_employee_show</source>
+        <target>Pracownik</target>
+      </trans-unit>
       <trans-unit id="qfOF7qJ" resname="app_filter">
         <source>app_filter</source>
         <target>Filtry</target>
@@ -88,6 +120,22 @@
       <trans-unit id="c1KCzX0" resname="app_homepage_index">
         <source>app_homepage_index</source>
         <target>Strona główna</target>
+      </trans-unit>
+      <trans-unit id="4uTuJjy" resname="app_target_delete">
+        <source>app_target_delete</source>
+        <target>Usuń cel</target>
+      </trans-unit>
+      <trans-unit id="QPoXzzO" resname="app_target_edit">
+        <source>app_target_edit</source>
+        <target>Edytuj cel</target>
+      </trans-unit>
+      <trans-unit id="VfbezTr" resname="app_target_new">
+        <source>app_target_new</source>
+        <target>Nowy cel</target>
+      </trans-unit>
+      <trans-unit id="On_lwrv" resname="app_target_show">
+        <source>app_target_show</source>
+        <target>Cel</target>
       </trans-unit>
     </body>
   </file>

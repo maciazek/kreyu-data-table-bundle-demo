@@ -5,17 +5,25 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
+      <trans-unit id="6tlp1bV" resname="back_to_list">
+        <source>back_to_list</source>
+        <target>Back to list</target>
+      </trans-unit>
       <trans-unit id="MQ.yABS" resname="close">
         <source>close</source>
         <target>Close</target>
       </trans-unit>
+      <trans-unit id="YZdZVQP" resname="delete">
+        <source>delete</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="rRWZNxs" resname="delete.confirm">
+        <source>delete.confirm</source>
+        <target>Are you sure you want to delete this record?</target>
+      </trans-unit>
       <trans-unit id="yvn5BrF" resname="documentation">
         <source>documentation</source>
         <target>Documentation</target>
-      </trans-unit>
-      <trans-unit id="JiEhxTc" resname="edit">
-        <source>edit</source>
-        <target>Edit</target>
       </trans-unit>
       <trans-unit id="d9m85KE" resname="locale">
         <source>locale</source>
@@ -29,9 +37,9 @@
         <source>locale.pl</source>
         <target>Polish</target>
       </trans-unit>
-      <trans-unit id="HGMzUJ3" resname="show">
-        <source>show</source>
-        <target>Show</target>
+      <trans-unit id="FX3KkuQ" resname="save">
+        <source>save</source>
+        <target>Save</target>
       </trans-unit>
       <trans-unit id="TJ.MiOR" resname="source_code">
         <source>source_code</source>

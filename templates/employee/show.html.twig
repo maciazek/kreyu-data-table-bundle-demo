@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app_employee_show'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
+{% block header %}{{ 'app_employee_show'|trans({}, 'routes') }}{% endblock %}
+{% block toolbar %}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'success',
+        href: path('app_contract_new', {employeeId: employee.id}),
+        icon: 'plus-lg',
+        label: 'app_contract_new'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_contract_new'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'warning',
+        href: path('app_employee_edit', {id: employee.id}),
+        icon: 'pencil-square',
+        label: 'app_employee_edit'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_employee_edit'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ include('employee/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xl-5">
+            <table class="table table-hover table-bordered">
+                <tbody>
+                    <tr>
+                        <th>{{ 'employee.id'|trans({}, 'entities') }}</th>
+                        <td>{{ employee.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'employee.firstName'|trans({}, 'entities') }}</th>
+                        <td>{{ employee.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'employee.lastName'|trans({}, 'entities') }}</th>
+                        <td>{{ employee.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'employee.birthDate'|trans({}, 'entities') }}</th>
+                        <td>{{ employee.birthDate ? employee.birthDate|date('date_format'|trans({}, 'messages')) }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'employee.isManager'|trans({}, 'entities') }}</th>
+                        <td><i class="bi bi-{{ employee.isManager ? 'check-lg text-success' : 'x-lg text-danger' }}"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'employee.roles'|trans({}, 'entities') }}</th>
+                        <td>{{ roles|join(', ') }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'employee.lastLoginAt'|trans({}, 'entities') }}</th>
+                        <td>{{ employee.lastLoginAt ? employee.lastLoginAt|date('datetime_format'|trans({}, 'messages')) : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'employee.status'|trans({}, 'entities') }}</th>
+                        <td>{{ employee.status|trans }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-7">
+            <table class="table table-sm table-hover table-bordered align-middle">
+                <thead>
+                    <tr>
+                        <th class="w-0"></th>
+                        <th>{{ 'contract.title'|trans({}, 'entities') }}</th>
+                        <th>{{ 'contract.beginDate'|trans({}, 'entities') }}</th>
+                        <th>{{ 'contract.endDate'|trans({}, 'entities') }}</th>
+                        <th>{{ 'contract.salary'|trans({}, 'entities') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contract in contracts %}
+                        <tr>
+                            <td class="text-nowrap">
+                                {{ component('Button', {
+                                    tag: 'a',
+                                    context: 'info',
+                                    size: 'sm',
+                                    href: path('app_contract_show', {id: contract.id}),
+                                    icon: 'eye',
+                                    tooltip: {placement: 'left', title: 'app_contract_show'|trans({}, 'routes')},
+                                }) }}
+                                {{ component('Button', {
+                                    tag: 'a',
+                                    context: 'warning',
+                                    size: 'sm',
+                                    href: path('app_contract_edit', {id: contract.id}),
+                                    icon: 'pencil-square',
+                                    tooltip: {placement: 'right', title: 'app_contract_edit'|trans({}, 'routes')},
+                                }) }}
+                            </td>
+                            <td>{{ contract.title.name }}</td>
+                            <td>{{ contract.beginDate|date('date_format'|trans({}, 'messages')) }}</td>
+                            <td>{{ contract.endDate ? contract.endDate|date('date_format'|trans({}, 'messages')) }}</td>
+                            <td>{{ contract.salary }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

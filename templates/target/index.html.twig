@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Target index{% endblock %}
+
+{% block body %}
+    <h1>Target index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Month</th>
+                <th>Value</th>
+                <th>ValueDecimal</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for target in targets %}
+            <tr>
+                <td>{{ target.id }}</td>
+                <td>{{ target.month ? target.month|date('Y-m-d') : '' }}</td>
+                <td>{{ target.value }}</td>
+                <td>{{ target.valueDecimal }}</td>
+                <td>
+                    <a href="{{ path('app_target_show', {'id': target.id}) }}">show</a>
+                    <a href="{{ path('app_target_edit', {'id': target.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_target_new') }}">Create new</a>
+{% endblock %}

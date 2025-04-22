@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'app_contract_show'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
+{% block header %}{{ 'app_contract_show'|trans({}, 'routes') }}{% endblock %}
+{% block toolbar %}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'info',
+        href: path('app_employee_show', {id: contract.employee.id}),
+        icon: 'arrow-counterclockwise',
+        label: 'app_employee_show'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_employee_show'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'success',
+        href: path('app_target_new', {contractId: contract.id}),
+        icon: 'plus-lg',
+        label: 'app_target_new'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_target_new'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ component('Button', {
+        tag: 'a',
+        context: 'warning',
+        href: path('app_contract_edit', {id: contract.id}),
+        icon: 'pencil-square',
+        label: 'app_contract_edit'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_contract_edit'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+    {{ include('contract/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xl-6">
+            <table class="table table-hover table-bordered">
+                <tbody>
+                    <tr>
+                        <th>{{ 'contract.id'|trans({}, 'entities') }}</th>
+                        <td>{{ contract.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'contract.title'|trans({}, 'entities') }}</th>
+                        <td>{{ contract.title.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'contract.salaryInCents'|trans({}, 'entities') }}</th>
+                        <td>{{ contract.salaryInCents }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'contract.salary'|trans({}, 'entities') }}</th>
+                        <td>{{ contract.salary }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'contract.beginDate'|trans({}, 'entities') }}</th>
+                        <td>{{ contract.beginDate ? contract.beginDate|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'contract.endDate'|trans({}, 'entities') }}</th>
+                        <td>{{ contract.endDate ? contract.endDate|date('Y-m-d') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-6">
+            <table class="table table-sm table-hover table-bordered align-middle">
+                <thead>
+                    <tr>
+                        <th class="w-0"></th>
+                        <th>{{ 'target.month'|trans({}, 'entities') }}</th>
+                        <th>{{ 'target.value'|trans({}, 'entities') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for target in targets %}
+                        <tr>
+                            <td class="text-nowrap">
+                                {{ component('Button', {
+                                    tag: 'a',
+                                    context: 'info',
+                                    size: 'sm',
+                                    href: path('app_target_show', {id: target.id}),
+                                    icon: 'eye',
+                                    tooltip: {placement: 'left', title: 'app_target_show'|trans({}, 'routes')},
+                                }) }}
+                                {{ component('Button', {
+                                    tag: 'a',
+                                    context: 'warning',
+                                    size: 'sm',
+                                    href: path('app_target_edit', {id: target.id}),
+                                    icon: 'pencil-square',
+                                    tooltip: {placement: 'right', title: 'app_target_edit'|trans({}, 'routes')},
+                                }) }}
+                            </td>
+                            <td>{{ target.month|date('Y-m') }}</td>
+                            <td>{{ target.valueDecimal|format_number(style: 'percent') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

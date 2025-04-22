@@ -1,0 +1,42 @@
+{{ form_start(form, {attr: {id: form.vars.id}}) }}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row gx-3">
+                <div class="col-xl-6">
+                    {{ form_row(form.firstName) }}
+                </div>
+                <div class="col-xl-6">
+                    {{ form_row(form.lastName) }}
+                </div>
+                <div class="col-xl-6">
+                    {{ form_row(form.birthDate) }}
+                </div>
+                <div class="col-xl-6">
+                    {% if form.currentContract is defined %}
+                        {{ form_row(form.currentContract) }}
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+            <div class="row gx-3">
+                <div class="col-xl-6">
+                    {{ form_row(form.address.streetName) }}
+                </div>
+                <div class="col-xl-6">
+                    {{ form_row(form.address.buildingNumber) }}
+                </div>
+                <div class="col-xl-6">
+                    {{ form_row(form.address.postcode) }}
+                </div>
+                <div class="col-xl-6">
+                    {{ form_row(form.address.city) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.status) }}
+            {{ form_row(form.roles) }}
+            {{ form_row(form.isManager) }}
+        </div>
+    </div>
+{{ form_end(form) }}

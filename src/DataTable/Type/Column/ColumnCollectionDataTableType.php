@@ -15,13 +15,13 @@ use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatableMessage;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ColumnCollectionDataTableType extends AbstractDataTableType
 {
     public function __construct(
-        private TranslatorInterface $translator,
+        private UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -35,9 +35,7 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
             ->addColumn('entities', CollectionColumnType::class, [
                 'export' => true,
                 'entry_options' => [
-                    'formatter' => function (Contract $contract): string {
-                        return $contract->getTitle()->getName();
-                    },
+                    'formatter' => fn (Contract $contract): string => $contract->getTitle()->getName(),
                 ],
                 'property_path' => 'contracts',
             ])
@@ -49,12 +47,8 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
             ->addColumn('links', CollectionColumnType::class, [
                 'entry_type' => LinkColumnType::class,
                 'entry_options' => [
-                    'formatter' => function (Contract $contract): string {
-                        return $contract->getTitle()->getName();
-                    },
-                    'href' => function ($contract): string {
-                        return '#fakeroute'.$contract->getId();
-                    },
+                    'formatter' => fn (Contract $contract): string => $contract->getTitle()->getName(),
+                    'href' => fn (Contract $contract): string => $this->urlGenerator->generate('app_contract_show', ['id' => $contract->getId()]),
                 ],
                 'export' => true,
                 'property_path' => 'contracts',

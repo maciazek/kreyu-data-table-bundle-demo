@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DataTable\Type;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
+use App\Entity\Employee;
 use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Action\Type\ButtonActionType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\DateRangeFilterType;
@@ -25,12 +26,14 @@ use Kreyu\Bundle\DataTableBundle\Query\ProxyQueryInterface;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomepageDataTableType extends AbstractDataTableType
 {
     public function __construct(
         private TranslatorInterface $translator,
+        private UrlGeneratorInterface $urlGenerator,
         private DateRangeActiveFilterFormatter $dateRangeActiveFilterFormatter,
     ) {
     }
@@ -38,6 +41,13 @@ class HomepageDataTableType extends AbstractDataTableType
     public function buildDataTable(DataTableBuilderInterface $builder, array $options): void
     {
         $builder
+            ->addAction('new', ButtonActionType::class, [
+                'href' => $this->urlGenerator->generate('app_employee_new'),
+                'icon' => 'plus-lg',
+                'label' => 'app_employee_new',
+                'translation_domain' => 'routes',
+                'variant' => 'success',
+            ])
             ->addColumn('actions', ActionsColumnType::class, [
                 'actions' => [
                     'show' => [
@@ -47,9 +57,9 @@ class HomepageDataTableType extends AbstractDataTableType
                                 'class' => 'btn btn-sm btn-info',
                                 'data-bootstrap-target' => 'tooltip',
                                 'data-bs-placement' => 'left',
-                                'data-bs-title' => $this->translator->trans('show', [], 'buttons'),
+                                'data-bs-title' => $this->translator->trans('app_employee_show', [], 'routes'),
                             ],
-                            'href' => '#',
+                            'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', ['id' => $employee->getId()]),
                             'icon' => 'eye',
                             'label' => '',
                         ],
@@ -61,9 +71,9 @@ class HomepageDataTableType extends AbstractDataTableType
                                 'class' => 'btn btn-sm btn-warning',
                                 'data-bootstrap-target' => 'tooltip',
                                 'data-bs-placement' => 'right',
-                                'data-bs-title' => $this->translator->trans('edit', [], 'buttons'),
+                                'data-bs-title' => $this->translator->trans('app_employee_edit', [], 'routes'),
                             ],
-                            'href' => '#',
+                            'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', ['id' => $employee->getId()]),
                             'icon' => 'pencil',
                             'label' => '',
                         ],

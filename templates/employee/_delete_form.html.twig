@@ -1,0 +1,12 @@
+<form method="post" action="{{ path('app_employee_delete', {'id': employee.id}) }}" onsubmit="return confirm('{{ 'delete.confirm'|trans({}, 'buttons') }}');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ employee.id) }}">
+    {{ component('Button', {
+        tag: 'button',
+        type: 'submit',
+        context: 'danger',
+        icon: 'trash',
+        label: 'app_employee_delete'|trans({}, 'routes'),
+        tooltip: {placement: 'bottom', title: 'app_employee_delete'|trans({}, 'routes')},
+        responsive: true,
+    }) }}
+</form>

@@ -1,5 +1,6 @@
 twig:
     file_name_pattern: '*.twig'
+    form_themes: ['bootstrap_5_layout.html.twig']
     globals:
         app_name: '%app.name%'
         app_short_name: '%app.short_name%'

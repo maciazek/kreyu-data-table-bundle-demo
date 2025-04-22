@@ -17,6 +17,18 @@
         <source>date_format</source>
         <target>Y-m-d</target>
       </trans-unit>
+      <trans-unit id="Ad1uG6B" resname="datetime_format">
+        <source>datetime_format</source>
+        <target>Y-m-d H:i:s</target>
+      </trans-unit>
+      <trans-unit id="4PT3Z6y" resname="today">
+        <source>today</source>
+        <target>today</target>
+      </trans-unit>
+      <trans-unit id="g5zRFpL" resname="translation">
+        <source>translation</source>
+        <target>Translation</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
