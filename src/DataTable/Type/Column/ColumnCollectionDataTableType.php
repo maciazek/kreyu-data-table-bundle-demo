@@ -35,7 +35,7 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
             ->addColumn('entities', CollectionColumnType::class, [
                 'export' => true,
                 'entry_options' => [
-                    'formatter' => fn (Contract $contract): string => $contract->getTitle()->getName(),
+                    'formatter' => fn (Contract $contract) => $contract->getTitle()->getName(),
                 ],
                 'property_path' => 'contracts',
             ])
@@ -47,8 +47,8 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
             ->addColumn('links', CollectionColumnType::class, [
                 'entry_type' => LinkColumnType::class,
                 'entry_options' => [
-                    'formatter' => fn (Contract $contract): string => $contract->getTitle()->getName(),
-                    'href' => fn (Contract $contract): string => $this->urlGenerator->generate('app_contract_show', ['id' => $contract->getId()]),
+                    'formatter' => fn (Contract $contract) => $contract->getTitle()->getName(),
+                    'href' => fn (Contract $contract) => $this->urlGenerator->generate('app_contract_show', ['id' => $contract->getId()]),
                 ],
                 'export' => true,
                 'property_path' => 'contracts',
