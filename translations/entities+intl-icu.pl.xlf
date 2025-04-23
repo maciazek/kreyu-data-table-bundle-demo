@@ -105,6 +105,10 @@
         <source>employee.status</source>
         <target>Status</target>
       </trans-unit>
+      <trans-unit id="ExB1OVx" resname="employee.website">
+        <source>employee.website</source>
+        <target>Strona internetowa</target>
+      </trans-unit>
       <trans-unit id="3H_luNC" resname="target.id">
         <source>target.id</source>
         <target>#</target>

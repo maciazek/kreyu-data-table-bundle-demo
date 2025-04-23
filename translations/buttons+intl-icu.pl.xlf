@@ -9,6 +9,10 @@
         <source>back_to_list</source>
         <target>Wróć do listy</target>
       </trans-unit>
+      <trans-unit id="I5eXzR7" resname="click_here">
+        <source>click_here</source>
+        <target>Kliknij tutaj!</target>
+      </trans-unit>
       <trans-unit id="MQ.yABS" resname="close">
         <source>close</source>
         <target>Zamknij</target>

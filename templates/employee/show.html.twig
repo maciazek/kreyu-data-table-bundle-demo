@@ -46,6 +46,10 @@
                         <td>{{ employee.birthDate ? employee.birthDate|date('date_format'|trans({}, 'messages')) }}</td>
                     </tr>
                     <tr>
+                        <th>{{ 'employee.website'|trans({}, 'entities') }}</th>
+                        <td>{% if employee.website %}<a href="{{ employee.website }}">{{ employee.website }}</a>{% endif %}</td>
+                    </tr>
+                    <tr>
                         <th>{{ 'employee.isManager'|trans({}, 'entities') }}</th>
                         <td><i class="bi bi-{{ employee.isManager ? 'check-lg text-success' : 'x-lg text-danger' }}"></i></td>
                     </tr>

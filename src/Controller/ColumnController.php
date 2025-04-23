@@ -11,6 +11,7 @@ use App\DataTable\Type\Column\ColumnDateTimeDataTableType;
 use App\DataTable\Type\Column\ColumnEnumDataTableType;
 use App\DataTable\Type\Column\ColumnHtmlDataTableType;
 use App\DataTable\Type\Column\ColumnIconDataTableType;
+use App\DataTable\Type\Column\ColumnLinkDataTableType;
 use App\DataTable\Type\Column\ColumnMoneyDataTableType;
 use App\DataTable\Type\Column\ColumnNumberDataTableType;
 use App\DataTable\Type\Column\ColumnTemplateDataTableType;
@@ -161,6 +162,31 @@ final class ColumnController extends AbstractController
             'employees' => $dataTable->createView(),
             'source_code_classes' => [
                 ColumnBooleanDataTableType::class,
+            ],
+        ]);
+    }
+
+    #[Route('/link', name: 'app_column_link')]
+    public function link(Request $request, EmployeeRepository $employeeRepository): Response
+    {
+        $queryBuilder = $employeeRepository->createQueryBuilder('employee');
+
+        $dataTable = $this->createDataTable(ColumnLinkDataTableType::class, $queryBuilder, options: [
+            'themes' => [
+                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
+                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+            ],
+        ]);
+        $dataTable->handleRequest($request);
+
+        if ($dataTable->isExporting()) {
+            return $this->file($dataTable->export());
+        }
+
+        return $this->render('column/link.html.twig', [
+            'employees' => $dataTable->createView(),
+            'source_code_classes' => [
+                ColumnLinkDataTableType::class,
             ],
         ]);
     }

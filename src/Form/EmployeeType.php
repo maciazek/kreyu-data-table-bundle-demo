@@ -35,6 +35,7 @@ class EmployeeType extends AbstractType
             ->add('birthDate', DateType::class, [
                 'widget' => 'single_text',
             ])
+            ->add('website')
             ->add('address', AddressType::class)
             ->add('isManager')
             ->add('roles', EnumType::class, [

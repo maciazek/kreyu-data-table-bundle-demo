@@ -252,6 +252,21 @@
     </span>
 {%- endblock %}
 
+{% block column_link_value -%}
+    <a {% with { attr: { href, target }|filter(v => v != null)|merge(attr) } %}{{- block('attributes') -}}{% endwith %}>
+        {%- if translatable -%}
+            {%- if is_instance_of_translatable -%}
+                {# @var value Symfony\Contracts\Translation\TranslatableInterface #}
+                {{- translation_key|trans -}}
+            {%- else -%}
+                {{- translation_key|trans(translation_parameters, translation_domain) -}}
+            {%- endif -%}
+        {%- else -%}
+            {{- value -}}
+        {%- endif -%}
+    </a>
+{%- endblock %}
+
 {% block export_modal %}
     <div class="modal modal-blur fade" id="{{ export_form.vars.name ~ '__modal' }}" tabindex="-1" style="display: none;" aria-hidden="true" data-turbo="false">
         {% block export_modal_dialog %}

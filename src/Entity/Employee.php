@@ -27,6 +27,9 @@ class Employee
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $birthDate = null;
 
+    #[ORM\Column(length: 200, nullable: true)]
+    private ?string $website = null;
+
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Contract $currentContract = null;
 
@@ -93,6 +96,18 @@ class Employee
     public function setBirthDate(\DateTimeImmutable $birthDate): static
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): static
+    {
+        $this->website = $website;
 
         return $this;
     }

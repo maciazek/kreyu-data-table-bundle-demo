@@ -45,6 +45,10 @@
         <source>app_column_icon</source>
         <target>Icon</target>
       </trans-unit>
+      <trans-unit id="tY4SeAS" resname="app_column_link">
+        <source>app_column_link</source>
+        <target>Link</target>
+      </trans-unit>
       <trans-unit id="ev8Wwiv" resname="app_column_money">
         <source>app_column_money</source>
         <target>Money</target>

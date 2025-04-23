@@ -96,6 +96,7 @@ class SeedDatabaseCommand extends Command
             $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-5 years')));
             $employee->setStatus($faker->randomElement(EmployeeStatus::class));
             if ($employee->getStatus() !== EmployeeStatus::INA) {
+                $employee->setWebsite($faker->numberBetween(0, 3) === 0 ? null : $faker->url());
                 $employee->setRoles($faker->randomElements(EmployeeRole::class, $faker->numberBetween(0, count(EmployeeRole::cases()))));
             }
 
