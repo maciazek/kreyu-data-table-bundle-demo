@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb7a7a28eb83b73c87dd7c0c15bc4ca4",
+    "content-hash": "0443922f348b6954b45e1fcf9d597c70",
     "packages": [
         {
             "name": "composer/semver",
@@ -1370,16 +1370,16 @@
         },
         {
             "name": "kreyu/data-table-bundle",
-            "version": "v0.30.2",
+            "version": "dev-fix/multiple-choices",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Kreyu/data-table-bundle.git",
-                "reference": "cef7d92655fbc18df8dd300fe8d63c0689942c50"
+                "url": "https://github.com/maciazek/kreyu-data-table-bundle.git",
+                "reference": "405dca1c4011201940d8a8dd8a3130d8802cf2e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/cef7d92655fbc18df8dd300fe8d63c0689942c50",
-                "reference": "cef7d92655fbc18df8dd300fe8d63c0689942c50",
+                "url": "https://api.github.com/repos/maciazek/kreyu-data-table-bundle/zipball/405dca1c4011201940d8a8dd8a3130d8802cf2e0",
+                "reference": "405dca1c4011201940d8a8dd8a3130d8802cf2e0",
                 "shasum": ""
             },
             "require": {
@@ -1414,7 +1414,11 @@
                     "Kreyu\\Bundle\\DataTableBundle\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Kreyu\\Bundle\\DataTableBundle\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1429,16 +1433,15 @@
                 "symfony-ux"
             ],
             "support": {
-                "issues": "https://github.com/Kreyu/data-table-bundle/issues",
-                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.30.2"
+                "source": "https://github.com/maciazek/kreyu-data-table-bundle/tree/fix/multiple-choices"
             },
             "funding": [
                 {
-                    "url": "https://github.com/Kreyu",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/Kreyu"
                 }
             ],
-            "time": "2025-04-24T17:19:44+00:00"
+            "time": "2025-04-27T06:22:23+00:00"
         },
         {
             "name": "openspout/openspout",
@@ -7947,7 +7950,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "kreyu/data-table-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
