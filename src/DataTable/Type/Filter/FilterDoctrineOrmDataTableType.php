@@ -79,6 +79,10 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ->addFilter('lastName', StringFilterType::class, [
                 'label' => 'employee.lastName',
             ])
+            ->addFilter('name', StringFilterType::class, [
+                'label' => 'employee.name',
+                'query_path' => 'CONCAT(employee.firstName, \' \', employee.lastName)',
+            ])
             ->addFilter('salaryInCentsFrom', NumericFilterType::class, [
                 'default_operator' => Operator::GreaterThanEquals,
                 'label' => 'contract.salaryInCentsFrom',
