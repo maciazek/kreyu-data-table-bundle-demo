@@ -1369,16 +1369,16 @@
         },
         {
             "name": "kreyu/data-table-bundle",
-            "version": "v0.30.2",
+            "version": "v0.30.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kreyu/data-table-bundle.git",
-                "reference": "cef7d92655fbc18df8dd300fe8d63c0689942c50"
+                "reference": "6d02efbac179e92f4a688be69dd4a7a012374b75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/cef7d92655fbc18df8dd300fe8d63c0689942c50",
-                "reference": "cef7d92655fbc18df8dd300fe8d63c0689942c50",
+                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/6d02efbac179e92f4a688be69dd4a7a012374b75",
+                "reference": "6d02efbac179e92f4a688be69dd4a7a012374b75",
                 "shasum": ""
             },
             "require": {
@@ -1429,7 +1429,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kreyu/data-table-bundle/issues",
-                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.30.2"
+                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.30.3"
             },
             "funding": [
                 {
@@ -1437,7 +1437,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-24T17:19:44+00:00"
+            "time": "2025-07-01T07:15:52+00:00"
         },
         {
             "name": "openspout/openspout",
