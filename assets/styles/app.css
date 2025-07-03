@@ -9,6 +9,11 @@
     font-weight: 800;
 }
 
+.abbr {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
 aside {
     width: 230px !important;
     z-index: 1041 !important;
