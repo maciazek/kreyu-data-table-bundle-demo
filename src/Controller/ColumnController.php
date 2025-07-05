@@ -404,6 +404,7 @@ final class ColumnController extends AbstractController
             'source_code_classes' => [
                 ColumnIconDataTableType::class,
                 EmployeeStatus::class,
+                DataTableIconTheme::class,
             ],
         ]);
     }

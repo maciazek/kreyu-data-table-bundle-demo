@@ -56,6 +56,66 @@ class ColumnIconDataTableType extends AbstractDataTableType
                 'property_path' => 'status',
                 'sort' => 'status',
             ])
+            ->addColumn('boolean', IconColumnType::class, [
+                'export' => true,
+                'icon' => fn (?bool $isManager) => $isManager ? 'star' : null,
+                'property_path' => 'isManager',
+                'sort' => 'isManager',
+            ])
+            ->addColumn('isActive', IconColumnType::class, [
+                'export' => [
+                    'label' => 'Is active',
+                ],
+                'getter' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACT ? $employee->getStatus() : null,
+                'header_attr' => [
+                    'class' => 'w-0 abbr text-center',
+                    'data-bootstrap-target' => 'tooltip',
+                    'data-bs-placement' => 'top',
+                    'data-bs-title' => $this->translator->trans('App\\Enum\\EmployeeStatus::ACT', [], 'enums').'?',
+                ],
+                'icon' => fn (?EmployeeStatus $status) => $status?->getIcon(DataTableIconTheme::from($this->requestStack->getSession()->get('_data_table_icon_theme'))),
+                'icon_attr' => fn (?EmployeeStatus $status) => [
+                    'class' => 'text-'.$status?->getContext(),
+                ],
+                'label' => mb_substr($this->translator->trans('App\\Enum\\EmployeeStatus::ACT', [], 'enums'), 0, 1),
+                'property_path' => 'status',
+            ])
+            ->addColumn('isInactive', IconColumnType::class, [
+                'export' => [
+                    'label' => 'Is inactive',
+                ],
+                'getter' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::INA ? $employee->getStatus() : null,
+                'header_attr' => [
+                    'class' => 'w-0 abbr text-center',
+                    'data-bootstrap-target' => 'tooltip',
+                    'data-bs-placement' => 'top',
+                    'data-bs-title' => $this->translator->trans('App\\Enum\\EmployeeStatus::INA', [], 'enums').'?',
+                ],
+                'icon' => fn (?EmployeeStatus $status) => $status?->getIcon(DataTableIconTheme::from($this->requestStack->getSession()->get('_data_table_icon_theme'))),
+                'icon_attr' => fn (?EmployeeStatus $status) => [
+                    'class' => 'text-'.$status?->getContext(),
+                ],
+                'label' => mb_substr($this->translator->trans('App\\Enum\\EmployeeStatus::INA', [], 'enums'), 0, 1),
+                'property_path' => 'status',
+            ])
+            ->addColumn('isLongTermLeave', IconColumnType::class, [
+                'export' => [
+                    'label' => 'Is long term leave',
+                ],
+                'getter' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::LTL ? $employee->getStatus() : null,
+                'header_attr' => [
+                    'class' => 'w-0 abbr text-center',
+                    'data-bootstrap-target' => 'tooltip',
+                    'data-bs-placement' => 'top',
+                    'data-bs-title' => $this->translator->trans('App\\Enum\\EmployeeStatus::LTL', [], 'enums').'?',
+                ],
+                'icon' => fn (?EmployeeStatus $status) => $status?->getIcon(DataTableIconTheme::from($this->requestStack->getSession()->get('_data_table_icon_theme'))),
+                'icon_attr' => fn (?EmployeeStatus $status) => [
+                    'class' => 'text-'.$status?->getContext(),
+                ],
+                'label' => mb_substr($this->translator->trans('App\\Enum\\EmployeeStatus::LTL', [], 'enums'), 0, 1),
+                'property_path' => 'status',
+            ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([
