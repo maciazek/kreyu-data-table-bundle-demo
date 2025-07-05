@@ -56,6 +56,12 @@ class ColumnIconDataTableType extends AbstractDataTableType
                 'property_path' => 'status',
                 'sort' => 'status',
             ])
+            ->addColumn('boolean', IconColumnType::class, [
+                'export' => true,
+                'icon' => fn (?bool $isManager) => $isManager ? 'star' : null,
+                'property_path' => 'isManager',
+                'sort' => 'isManager',
+            ])
             ->addColumn('isActive', IconColumnType::class, [
                 'export' => [
                     'label' => 'Is active',

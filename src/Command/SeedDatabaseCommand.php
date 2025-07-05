@@ -126,7 +126,7 @@ class SeedDatabaseCommand extends Command
 
                 if ($employee->getStatus() !== EmployeeStatus::INA) {
                     $employee->setCurrentContract($contract);
-                    $employee->setIsManager($faker->boolean(25));
+                    $employee->setIsManager($faker->boolean(33));
                 }
 
                 // targets
