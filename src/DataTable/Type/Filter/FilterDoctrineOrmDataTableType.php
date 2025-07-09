@@ -6,8 +6,10 @@ namespace App\DataTable\Type\Filter;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Title;
+use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\BooleanFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\DateRangeFilterType;
+use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\DoctrineOrmFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\EntityFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\NumericFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\StringFilterType;
@@ -20,9 +22,11 @@ use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
+use Kreyu\Bundle\DataTableBundle\Filter\FilterData;
 use Kreyu\Bundle\DataTableBundle\Filter\Operator;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -83,6 +87,14 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'property_path' => 'roles',
                 'sort' => 'roles',
             ])
+            ->addColumn('status', EnumColumnType::class, [
+                'export' => true,
+                'label' => 'employee.status',
+                'sort' => 'status',
+                'value_attr' => fn (EmployeeStatus $status) => [
+                    'class' => 'badge fw-normal text-bg-'.$status->getContext(),
+                ],
+            ])
             ->addFilter('firstName', StringFilterType::class, [
                 'label' => 'employee.firstName',
             ])
@@ -127,6 +139,22 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 // https://github.com/ScientaNL/DoctrineJsonFunctions
                 'query_path' => 'JSON_ARRAY_LENGTH(employee.roles)', // SQLite
                 // 'query_path' => 'JSON_LENGTH(employee.roles)', // MySQL/MariaDB
+            ])
+            ->addFilter('status', DoctrineOrmFilterType::class, [
+                'active_filter_formatter' => function (FilterData $data) {
+                    return implode(', ', array_map(function ($item) {
+                        return EmployeeStatus::from($item)->trans($this->translator);
+                    }, $data->getValue()));
+                },
+                'default_operator' => Operator::In,
+                'form_options' => [
+                    'choices' => array_column(EmployeeStatus::cases(), 'value'),
+                    'choice_label' => fn ($choice) => EmployeeStatus::from($choice),
+                    'expanded' => true,
+                    'multiple' => true,
+                ],
+                'form_type' => ChoiceType::class,
+                'label' => 'employee.status',
             ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
