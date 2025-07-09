@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataTable\Type\Filter;
 
+use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Title;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\BooleanFilterType;
+use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\DateRangeFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\EntityFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\NumericFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\StringFilterType;
@@ -13,6 +15,7 @@ use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\BooleanColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\CollectionColumnType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\DateTimeColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
@@ -28,6 +31,7 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
 {
     public function __construct(
         private TranslatorInterface $translator,
+        private DateRangeActiveFilterFormatter $dateRangeActiveFilterFormatter,
     ) {
     }
 
@@ -42,6 +46,12 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ->addColumn('lastName', TextColumnType::class, [
                 'export' => true,
                 'label' => 'employee.lastName',
+                'sort' => true,
+            ])
+            ->addColumn('birthDate', DateTimeColumnType::class, [
+                'export' => true,
+                'format' => $this->translator->trans('date_format', [], 'messages'),
+                'label' => 'employee.birthDate',
                 'sort' => true,
             ])
             ->addColumn('salaryInCents', MoneyColumnType::class, [
@@ -83,6 +93,10 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'label' => 'employee.name',
                 'query_path' => 'CONCAT(employee.firstName, \' \', employee.lastName)',
             ])
+            ->addFilter('birthDate', DateRangeFilterType::class, [
+                'active_filter_formatter' => $this->dateRangeActiveFilterFormatter,
+                'label' => 'employee.birthDate',
+            ])
             ->addFilter('salaryInCentsFrom', NumericFilterType::class, [
                 'default_operator' => Operator::GreaterThanEquals,
                 'label' => 'contract.salaryInCentsFrom',
@@ -94,11 +108,11 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'query_path' => 'currentContract.salaryInCents',
             ])
             ->addFilter('title', EntityFilterType::class, [
+                'choice_label' => 'name',
                 'form_options' => [
                     'class' => Title::class,
                     'choice_label' => 'name',
                 ],
-                'choice_label' => 'name',
                 'label' => 'contract.title',
                 'query_path' => 'currentContract.title',
             ])
@@ -106,14 +120,13 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
                 'label' => 'employee.isManager',
             ])
             ->addFilter('numberOfRoles', NumericFilterType::class, [
+                'form_type' => IntegerType::class,
                 'label' => 'employee.numberOfRoles',
 
                 // to use JSON functions, install "scienta/doctrine-json-functions"
                 // https://github.com/ScientaNL/DoctrineJsonFunctions
                 'query_path' => 'JSON_ARRAY_LENGTH(employee.roles)', // SQLite
                 // 'query_path' => 'JSON_LENGTH(employee.roles)', // MySQL/MariaDB
-
-                'form_type' => IntegerType::class,
             ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
