@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb7a7a28eb83b73c87dd7c0c15bc4ca4",
+    "content-hash": "208d7318d2475483d951dfce7eb3f612",
     "packages": [
         {
             "name": "composer/semver",
@@ -1369,16 +1369,16 @@
         },
         {
             "name": "kreyu/data-table-bundle",
-            "version": "v0.30.3",
+            "version": "v0.31.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kreyu/data-table-bundle.git",
-                "reference": "6d02efbac179e92f4a688be69dd4a7a012374b75"
+                "reference": "fb6ae3e71b7667f51c2aeb0e5e7b6f3bb5483326"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/6d02efbac179e92f4a688be69dd4a7a012374b75",
-                "reference": "6d02efbac179e92f4a688be69dd4a7a012374b75",
+                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/fb6ae3e71b7667f51c2aeb0e5e7b6f3bb5483326",
+                "reference": "fb6ae3e71b7667f51c2aeb0e5e7b6f3bb5483326",
                 "shasum": ""
             },
             "require": {
@@ -1429,7 +1429,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kreyu/data-table-bundle/issues",
-                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.30.3"
+                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.31.1"
             },
             "funding": [
                 {
@@ -1437,7 +1437,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-01T07:15:52+00:00"
+            "time": "2025-07-09T12:23:27+00:00"
         },
         {
             "name": "openspout/openspout",
