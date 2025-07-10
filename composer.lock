@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "208d7318d2475483d951dfce7eb3f612",
+    "content-hash": "ec55c345be06cd98b2ef4fde70089521",
     "packages": [
         {
             "name": "composer/semver",
@@ -1369,16 +1369,16 @@
         },
         {
             "name": "kreyu/data-table-bundle",
-            "version": "v0.31.1",
+            "version": "dev-fix/default-filters",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Kreyu/data-table-bundle.git",
-                "reference": "fb6ae3e71b7667f51c2aeb0e5e7b6f3bb5483326"
+                "url": "https://github.com/maciazek/kreyu-data-table-bundle.git",
+                "reference": "40854a1f3521b73885ec9718fa87e58dceb81166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/fb6ae3e71b7667f51c2aeb0e5e7b6f3bb5483326",
-                "reference": "fb6ae3e71b7667f51c2aeb0e5e7b6f3bb5483326",
+                "url": "https://api.github.com/repos/maciazek/kreyu-data-table-bundle/zipball/40854a1f3521b73885ec9718fa87e58dceb81166",
+                "reference": "40854a1f3521b73885ec9718fa87e58dceb81166",
                 "shasum": ""
             },
             "require": {
@@ -1413,7 +1413,11 @@
                     "Kreyu\\Bundle\\DataTableBundle\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Kreyu\\Bundle\\DataTableBundle\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1428,16 +1432,15 @@
                 "symfony-ux"
             ],
             "support": {
-                "issues": "https://github.com/Kreyu/data-table-bundle/issues",
-                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.31.1"
+                "source": "https://github.com/maciazek/kreyu-data-table-bundle/tree/fix/default-filters"
             },
             "funding": [
                 {
-                    "url": "https://github.com/Kreyu",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/Kreyu"
                 }
             ],
-            "time": "2025-07-09T12:23:27+00:00"
+            "time": "2025-07-10T19:04:30+00:00"
         },
         {
             "name": "openspout/openspout",
@@ -7949,7 +7952,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "kreyu/data-table-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
