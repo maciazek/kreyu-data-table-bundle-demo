@@ -162,7 +162,7 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ->setDefaultFiltrationData(FiltrationData::fromArray([
                 // 'salaryInCentsFrom' => new FilterData(value: 1000000),
                 'isManager' => new FilterData(value: false),
-                // 'status' => new FilterData(value: [EmployeeStatus::ACT->value, EmployeeStatus::LTL->value]),
+                // 'status' => new FilterData(value: [EmployeeStatus::INA->value, EmployeeStatus::LTL->value]),
             ]))
             ->setDefaultPaginationData(PaginationData::fromArray([
                 'page' => 1,
