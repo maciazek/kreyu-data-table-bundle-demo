@@ -23,6 +23,7 @@ use Kreyu\Bundle\DataTableBundle\Column\Type\MoneyColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Filter\FilterData;
+use Kreyu\Bundle\DataTableBundle\Filter\FiltrationData;
 use Kreyu\Bundle\DataTableBundle\Filter\Operator;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
@@ -158,6 +159,11 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
+            ->setDefaultFiltrationData(FiltrationData::fromArray([
+                // 'salaryInCentsFrom' => new FilterData(value: 1000000),
+                'isManager' => new FilterData(value: false),
+                // 'status' => new FilterData(value: [EmployeeStatus::ACT->value, EmployeeStatus::LTL->value]),
+            ]))
             ->setDefaultPaginationData(PaginationData::fromArray([
                 'page' => 1,
                 'perPage' => 10,
