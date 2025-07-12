@@ -21,6 +21,8 @@ return array (
   'app_contract_edit' => 'Edytuj umowę',
   'app_contract_new' => 'Nowa umowa',
   'app_contract_show' => 'Umowa',
+  'app_employee_activate' => 'Aktywuj',
+  'app_employee_deactivate' => 'Dezaktywuj',
   'app_employee_delete' => 'Usuń pracownika',
   'app_employee_edit' => 'Edytuj pracownika',
   'app_employee_new' => 'Nowy pracownik',

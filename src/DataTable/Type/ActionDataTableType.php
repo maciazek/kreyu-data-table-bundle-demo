@@ -8,6 +8,7 @@ use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Employee;
 use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Action\Type\ButtonActionType;
+use Kreyu\Bundle\DataTableBundle\Action\Type\FormActionType;
 use Kreyu\Bundle\DataTableBundle\Action\Type\LinkActionType;
 use Kreyu\Bundle\DataTableBundle\Action\Type\ModalActionType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
@@ -47,6 +48,14 @@ class ActionDataTableType extends AbstractDataTableType
                 'export' => true,
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
             ])
+            ->addColumn('status', EnumColumnType::class, [
+                'export' => true,
+                'value_attr' => function (EmployeeStatus $status) {
+                    return [
+                        'class' => 'badge fw-normal text-bg-'.$status->getContext(),
+                    ];
+                },
+            ])
             ->addColumn('link', ActionsColumnType::class, [
                 'actions' => [
                     'show' => [
@@ -79,6 +88,40 @@ class ActionDataTableType extends AbstractDataTableType
                     ],
                 ],
                 'label' => 'Button',
+            ])
+            ->addColumn('form', ActionsColumnType::class, [
+                'actions' => [
+                    'activate' => [
+                        'type' => FormActionType::class,
+                        'type_options' => [
+                            'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_activate', [
+                                'id' => $employee->getId(),
+                            ]),
+                            'method' => 'POST',
+                            'icon' => 'arrow-bar-up',
+                            'label' => 'app_employee_activate',
+                            'translation_domain' => 'routes',
+                            'variant' => 'success',
+                            'visible' => fn (Employee $employee) => $employee->getStatus() !== EmployeeStatus::ACT,
+                        ],
+                    ],
+                    'deactivate' => [
+                        'type' => FormActionType::class,
+                        'type_options' => [
+                            'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_deactivate', [
+                                'id' => $employee->getId(),
+                            ]),
+                            'confirmation' => true,
+                            'method' => 'POST',
+                            'icon' => 'arrow-bar-down',
+                            'label' => 'app_employee_deactivate',
+                            'translation_domain' => 'routes',
+                            'variant' => 'danger',
+                            'visible' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACT,
+                        ],
+                    ],
+                ],
+                'label' => 'Form',
             ])
             ->addColumn('modal', ActionsColumnType::class, [
                 'actions' => [

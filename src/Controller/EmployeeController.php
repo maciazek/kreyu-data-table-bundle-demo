@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Employee;
 use App\Enum\EmployeeRole;
+use App\Enum\EmployeeStatus;
 use App\Form\EmployeeType;
 use App\Repository\ContractRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -91,6 +92,31 @@ final class EmployeeController extends AbstractController
             $entityManager->flush();
 
             $entityManager->remove($employee);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/activate', name: 'app_employee_activate', methods: ['POST'])]
+    public function activate(Employee $employee, EntityManagerInterface $entityManager): Response
+    {
+        if ($employee->getStatus() !== EmployeeStatus::ACT) {
+            $employee->setStatus(EmployeeStatus::ACT);
+
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/deactivate', name: 'app_employee_deactivate', methods: ['POST'])]
+    public function deactivate(Employee $employee, EntityManagerInterface $entityManager): Response
+    {
+        if ($employee->getStatus() === EmployeeStatus::ACT) {
+            $employee->setCurrentContract(null);
+            $employee->setStatus(EmployeeStatus::INA);
+
             $entityManager->flush();
         }
 

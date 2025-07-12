@@ -112,8 +112,74 @@
         {% with { attr, confirm_button_attr } %}{{ block('action_confirmation_modal') }}{% endwith %}
     {% endif %}
 
-    {{ parent() }}
+    {% set attr = { href, target }|filter(v => v != null)|merge(attr) %}
+    {% set tag = tag ?? 'a' %}
+
+    {% if batch %}
+        {% set attr = { 'data-kreyu--data-table-bundle--batch-target': 'identifierHolder' }|merge(attr) %}
+    {% endif %}
+
+    {# Button action should work like a link action styled to look like a button #}
+
+    <{{ tag }}{{ _self.attributes(attr) }}>
+        {{- data_table_theme_block(data_table, 'action_control', resetAttr = true) -}}
+    </{{ tag }}>
 {%- endblock %}
+
+{% block action_confirmation_modal %}
+    {% set modal_status_color_class = {
+        'info': 'primary',
+        'warning': 'warning',
+        'danger': 'danger',
+    }[confirmation.type] %}
+
+    <div class="modal modal-blur fade" id="{{ confirmation.identifier }}" tabindex="-1" style="display: none;" aria-hidden="true">
+        {% block action_confirmation_modal_dialog %}
+            <div class="modal-dialog" role="document">
+            {% block action_confirmation_modal_content %}
+                <div class="modal-content">
+                {% block action_confirmation_modal_status %}
+                    <div class="modal-status bg-{{ modal_status_color_class }}"></div>
+                {% endblock %}
+                {% block action_confirmation_modal_header %}
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold">
+                            {{ confirmation.label_title|trans({}, confirmation.translation_domain) }}
+                        </h5>
+                    </div>
+                {% endblock %}
+                {% block action_confirmation_modal_body %}
+                    <div class="modal-body">
+                        {{ confirmation.label_description|trans({}, confirmation.translation_domain) }}
+                    </div>
+                {% endblock %}
+                {% block action_confirmation_modal_footer %}
+                    <div class="modal-footer">
+                        <div class="btn-list">
+                            {% block action_confirmation_modal_cancel_button %}
+                                <a href="#" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    {{ confirmation.label_cancel|trans({}, confirmation.translation_domain) }}
+                                </a>
+                            {% endblock %}
+                            {% block action_confirmation_modal_confirm_button %}
+                                {% set confirm_button_tag = confirm_button_tag|default('a') %}
+                                {% set confirm_button_attr = {
+                                    class: 'btn btn-' ~ modal_status_color_class
+                                }|merge(confirm_button_attr|default({})) %}
+
+                                <{{ confirm_button_tag }} {% with { attr: confirm_button_attr } %}{{ block('attributes') }}{% endwith %}>
+                                    {{ confirmation.label_confirm|trans({}, confirmation.translation_domain) }}
+                                </{{ confirm_button_tag }}>
+                            {% endblock %}
+                        </div>
+                    </div>
+                {% endblock %}
+                </div>
+            {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
 
 {% block action_export %}
     {% set attr = {
@@ -162,6 +228,103 @@
         {% endwith %}
     {% endfor %}
 {% endblock %}
+
+{% block action_form_control -%}
+    {%- set variants = {
+        destructive: 'btn-danger',
+        danger: 'btn-danger',
+        primary: 'btn-primary',
+        secondary: 'btn-secondary',
+        success: 'btn-success',
+        info: 'btn-info',
+        warning: 'btn-warning',
+        light: 'btn-light',
+        dark: 'btn-dark',
+        link: 'btn-link',
+        'outline-destructive': 'btn-outline-danger',
+        'outline-danger': 'btn-outline-danger',
+        'outline-primary': 'btn-outline-primary',
+        'outline-secondary': 'btn-outline-secondary',
+        'outline-success': 'btn-outline-success',
+        'outline-info': 'btn-outline-info',
+        'outline-warning': 'btn-outline-warning',
+        'outline-light': 'btn-outline-light',
+        'outline-dark': 'btn-outline-dark',
+    }|merge(variants ?? {})|filter(e => e is not same as false) -%}
+
+    {% set base_classes = base_classes ?? 'btn btn-sm d-inline-flex align-items-center gap-2' %}
+    {% set variant_classes = variant_classes ?? variants[variant ?? default_variant ?? 'primary'] %}
+
+    {% set button_attr = button_attr|merge({ class: (base_classes ~ ' ' ~ variant_classes ~ ' ' ~ button_attr.class|default(''))|trim }) %}
+    {% set attr = attr|merge({ class: ('d-inline-block ' ~ attr.class|default(''))|trim }) %}
+
+    {% if confirmation %}
+        {% with {
+            button_tag: 'a',
+            button_attr: {
+                'type': 'button',
+                'data-bs-toggle': 'modal',
+                'data-bs-target': '#' ~ confirmation.identifier,
+            }|merge(button_attr)
+        } %}
+            {# @var string form_id - Unique identifier of the form #}
+            {# @var string action - URL that the form will be submitted to #}
+            {# @var string method - Form method, e.g. GET, POST, PATCH, PUT, DELETE #}
+            {# @var string html_friendly_method - HTML-friendly form method, so only GET or POST #}
+
+            {% set attr = { id: form_id, action, method: html_friendly_method }|merge(attr) %}
+
+            {% if batch %}
+                {% set attr = { 'data-kreyu--data-table-bundle--batch-target': 'identifierHolder' }|merge(attr) %}
+            {% endif %}
+
+            {% set button_tag = button_tag ?? 'button' %}
+            {% set button_attr = { type: 'submit' }|merge(button_attr) %}
+
+            {# Form action should work like a button action wrapped in a form to allow methods other than GET #}
+
+            <form{{ _self.attributes(attr) }}>
+                {% if method != html_friendly_method -%}
+                    <input type="hidden" name="_method" value="{{ method }}" />
+                {%- endif -%}
+
+                <{{ button_tag }}{{ _self.attributes(button_attr) }}>
+                    {{- data_table_theme_block(data_table, 'action_control', resetAttr = true) -}}
+                </{{ button_tag }}>
+            </form>
+        {% endwith %}
+
+        {% with { confirm_button_tag: 'button', confirm_button_attr: { type: 'submit', form: form_id } } %}
+            {{ block('action_confirmation_modal') }}
+        {% endwith %}
+    {% else %}
+        {# @var string form_id - Unique identifier of the form #}
+        {# @var string action - URL that the form will be submitted to #}
+        {# @var string method - Form method, e.g. GET, POST, PATCH, PUT, DELETE #}
+        {# @var string html_friendly_method - HTML-friendly form method, so only GET or POST #}
+
+        {% set attr = { id: form_id, action, method: html_friendly_method }|merge(attr) %}
+
+        {% if batch %}
+            {% set attr = { 'data-kreyu--data-table-bundle--batch-target': 'identifierHolder' }|merge(attr) %}
+        {% endif %}
+
+        {% set button_tag = button_tag ?? 'button' %}
+        {% set button_attr = { type: 'submit' }|merge(button_attr) %}
+
+        {# Form action should work like a button action wrapped in a form to allow methods other than GET #}
+
+        <form{{ _self.attributes(attr) }}>
+            {% if method != html_friendly_method -%}
+                <input type="hidden" name="_method" value="{{ method }}" />
+            {%- endif -%}
+
+            <{{ button_tag }}{{ _self.attributes(button_attr) }}>
+                {{- data_table_theme_block(data_table, 'action_control', resetAttr = true) -}}
+            </{{ button_tag }}>
+        </form>
+    {% endif %}
+{%- endblock %}
 
 {% block action_modal_control %}
     {%- set variants = {
