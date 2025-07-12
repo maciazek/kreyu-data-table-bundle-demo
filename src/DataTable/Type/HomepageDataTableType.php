@@ -54,7 +54,6 @@ class HomepageDataTableType extends AbstractDataTableType
                         'type' => ButtonActionType::class,
                         'type_options' => [
                             'attr' => [
-                                'class' => 'btn btn-sm btn-info',
                                 'data-bootstrap-target' => 'tooltip',
                                 'data-bs-placement' => 'left',
                                 'data-bs-title' => $this->translator->trans('app_employee_show', [], 'routes'),
@@ -62,13 +61,13 @@ class HomepageDataTableType extends AbstractDataTableType
                             'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', ['id' => $employee->getId()]),
                             'icon' => 'eye',
                             'label' => '',
+                            'variant' => 'info',
                         ],
                     ],
                     'edit' => [
                         'type' => ButtonActionType::class,
                         'type_options' => [
                             'attr' => [
-                                'class' => 'btn btn-sm btn-warning',
                                 'data-bootstrap-target' => 'tooltip',
                                 'data-bs-placement' => 'right',
                                 'data-bs-title' => $this->translator->trans('app_employee_edit', [], 'routes'),
@@ -76,6 +75,7 @@ class HomepageDataTableType extends AbstractDataTableType
                             'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', ['id' => $employee->getId()]),
                             'icon' => 'pencil',
                             'label' => '',
+                            'variant' => 'warning',
                         ],
                     ],
                 ],
