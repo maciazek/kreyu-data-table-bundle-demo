@@ -21,7 +21,11 @@
         tooltip: {placement: 'bottom', title: 'app_employee_edit'|trans({}, 'routes')},
         responsive: true,
     }) }}
-    {{ include('employee/_delete_form.html.twig') }}
+    {{ include('employee/_delete_button.html.twig') }}
+{% endblock %}
+
+{% block modals %}
+    {{ include('employee/_delete_modal.html.twig') }}
 {% endblock %}
 
 {% block body %}

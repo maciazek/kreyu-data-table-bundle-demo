@@ -14,7 +14,7 @@
                 "fetch": "eager"
             },
             "bootstrap-modal": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "eager"
             }
         },

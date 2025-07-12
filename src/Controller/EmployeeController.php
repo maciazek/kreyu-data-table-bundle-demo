@@ -35,7 +35,7 @@ final class EmployeeController extends AbstractController
             $entityManager->persist($employee);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee/new.html.twig', [
@@ -65,7 +65,7 @@ final class EmployeeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee/edit.html.twig', [
@@ -74,14 +74,26 @@ final class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_employee_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_employee_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
+        if ($request->getMethod() === 'GET') {
+            return $this->render('employee/_delete_modal_content.html.twig', [
+                'employee' => $employee,
+            ]);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$employee->getId(), $request->getPayload()->getString('_token'))) {
+            foreach ($employee->getContracts() as $contract) {
+                $contract->setCurrentTarget(null);
+            }
+            $employee->setCurrentContract(null);
+            $entityManager->flush();
+
             $entityManager->remove($employee);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
     }
 }

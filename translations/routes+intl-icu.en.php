@@ -1,6 +1,7 @@
 <?php
 
 return array (
+  'app_action_index' => 'Actions',
   'app_column' => 'Columns',
   'app_column_basic_options' => 'Basic options',
   'app_column_boolean' => 'Boolean',

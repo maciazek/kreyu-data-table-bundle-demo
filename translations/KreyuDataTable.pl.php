@@ -42,5 +42,6 @@ return array (
   'Are you sure you want to execute this action?' => 'Czy na pewno chcesz wykonać tę akcję?',
   'Confirm' => 'Tak, potwierdzam',
   'Cancel' => 'Nie, anuluj',
+  'Loading' => 'Ładowanie',
   'Search...' => 'Szukaj...',
 );
