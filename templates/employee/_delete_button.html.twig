@@ -1,0 +1,11 @@
+{{ component('Button', {
+    tag: 'button',
+    type: 'submit',
+    context: 'danger',
+    icon: 'trash',
+    label: 'app_employee_delete'|trans({}, 'routes'),
+    tooltip: {placement: 'bottom', title: 'app_employee_delete'|trans({}, 'routes')},
+    responsive: true,
+    'data-bs-toggle': 'modal',
+    'data-bs-target': '#deleteEmployeeModal',
+}) }}

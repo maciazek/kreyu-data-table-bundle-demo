@@ -5,3 +5,7 @@ aside .btn.active {
 nav {
     box-shadow: none !important;
 }
+
+.navbar-toggler {
+    display: inline-block;
+}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Employee;
 use App\Enum\EmployeeRole;
+use App\Enum\EmployeeStatus;
 use App\Form\EmployeeType;
 use App\Repository\ContractRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,7 +36,7 @@ final class EmployeeController extends AbstractController
             $entityManager->persist($employee);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee/new.html.twig', [
@@ -65,7 +66,7 @@ final class EmployeeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee/edit.html.twig', [
@@ -74,14 +75,51 @@ final class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_employee_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_employee_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
+        if ($request->getMethod() === 'GET') {
+            return $this->render('employee/_delete_modal_content.html.twig', [
+                'employee' => $employee,
+            ]);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$employee->getId(), $request->getPayload()->getString('_token'))) {
+            foreach ($employee->getContracts() as $contract) {
+                $contract->setCurrentTarget(null);
+            }
+            $employee->setCurrentContract(null);
+            $entityManager->flush();
+
             $entityManager->remove($employee);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/activate', name: 'app_employee_activate', methods: ['POST'])]
+    public function activate(Employee $employee, EntityManagerInterface $entityManager): Response
+    {
+        if ($employee->getStatus() !== EmployeeStatus::ACT) {
+            $employee->setStatus(EmployeeStatus::ACT);
+
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/deactivate', name: 'app_employee_deactivate', methods: ['POST'])]
+    public function deactivate(Employee $employee, EntityManagerInterface $entityManager): Response
+    {
+        if ($employee->getStatus() === EmployeeStatus::ACT) {
+            $employee->setCurrentContract(null);
+            $employee->setStatus(EmployeeStatus::INA);
+
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
     }
 }

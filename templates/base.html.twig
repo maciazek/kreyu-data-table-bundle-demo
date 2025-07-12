@@ -29,6 +29,7 @@
     app_filter_search_advanced: 'caret-right-fill',
     app_filter_expression_transformers: 'caret-right-fill',
     app_filter_events: 'caret-right-fill',
+    app_action_index: 'lightning',
 } %}
 
 {% set menu_component = component(menu, {elements: [
@@ -223,6 +224,15 @@
                 icon: icons.app_filter_events,
             },
         ],
+    },
+    {
+        id: 'app_action',
+        path: path('app_action_index'),
+        label: 'app_action_index'|trans({}, 'routes'),
+        active_routes: {
+            'app_action_index': null,
+        },
+        icon: icons.app_action_index,
     },
 ]}) %}
 
