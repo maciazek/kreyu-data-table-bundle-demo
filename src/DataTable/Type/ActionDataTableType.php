@@ -58,88 +58,74 @@ class ActionDataTableType extends AbstractDataTableType
             ])
             ->addColumn('link', ActionsColumnType::class, [
                 'actions' => [
-                    'show' => [
-                        'type' => LinkActionType::class,
-                        'type_options' => [
-                            'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', [
-                                'id' => $employee->getId(),
-                            ]),
-                            'icon' => 'eye',
-                            'label' => 'app_employee_show',
-                            'translation_domain' => 'routes',
-                        ],
-                    ],
+                    'show' => $builder->addRowAction('show', LinkActionType::class, [
+                        'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', [
+                            'id' => $employee->getId(),
+                        ]),
+                        'icon' => 'eye',
+                        'label' => 'app_employee_show',
+                        'translation_domain' => 'routes',
+                    ])->getRowAction('show'),
                 ],
                 'label' => 'Link',
             ])
             ->addColumn('button', ActionsColumnType::class, [
                 'actions' => [
-                    'edit' => [
-                        'type' => ButtonActionType::class,
-                        'type_options' => [
-                            'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', [
-                                'id' => $employee->getId(),
-                            ]),
-                            'icon' => 'pencil',
-                            'label' => 'app_employee_edit',
-                            'translation_domain' => 'routes',
-                            'variant' => 'warning',
-                        ],
-                    ],
+                    'edit' => $builder->addRowAction('edit', ButtonActionType::class, [
+                        'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', [
+                            'id' => $employee->getId(),
+                        ]),
+                        'icon' => 'pencil',
+                        'label' => 'app_employee_edit',
+                        'translation_domain' => 'routes',
+                        'variant' => 'warning',
+                    ])->getRowAction('edit'),
                 ],
                 'label' => 'Button',
             ])
             ->addColumn('form', ActionsColumnType::class, [
                 'actions' => [
-                    'activate' => [
-                        'type' => FormActionType::class,
-                        'type_options' => [
-                            'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_activate', [
-                                'id' => $employee->getId(),
-                            ]),
-                            'method' => 'POST',
-                            'icon' => 'arrow-bar-up',
-                            'label' => 'app_employee_activate',
-                            'translation_domain' => 'routes',
-                            'variant' => 'success',
-                            'visible' => fn (Employee $employee) => $employee->getStatus() !== EmployeeStatus::ACT,
-                        ],
-                    ],
-                    'deactivate' => [
-                        'type' => FormActionType::class,
-                        'type_options' => [
-                            'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_deactivate', [
-                                'id' => $employee->getId(),
-                            ]),
-                            'confirmation' => true,
-                            'method' => 'POST',
-                            'icon' => 'arrow-bar-down',
-                            'label' => 'app_employee_deactivate',
-                            'translation_domain' => 'routes',
-                            'variant' => 'danger',
-                            'visible' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACT,
-                        ],
-                    ],
+                    'activate' => $builder->addRowAction('activate', FormActionType::class, [
+                        'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_activate', [
+                            'id' => $employee->getId(),
+                        ]),
+                        'method' => 'POST',
+                        'icon' => 'arrow-bar-up',
+                        'label' => 'app_employee_activate',
+                        'translation_domain' => 'routes',
+                        'variant' => 'success',
+                        'visible' => fn (Employee $employee) => $employee->getStatus() !== EmployeeStatus::ACT,
+                    ])->getRowAction('activate'),
+                    'deactivate' => $builder->addRowAction('deactivate', FormActionType::class, [
+                        'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_deactivate', [
+                            'id' => $employee->getId(),
+                        ]),
+                        'confirmation' => true,
+                        'method' => 'POST',
+                        'icon' => 'arrow-bar-down',
+                        'label' => 'app_employee_deactivate',
+                        'translation_domain' => 'routes',
+                        'variant' => 'danger',
+                        'visible' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACT,
+                    ])->getRowAction('deactivate'),
                 ],
                 'label' => 'Form',
             ])
             ->addColumn('modal', ActionsColumnType::class, [
                 'actions' => [
-                    'delete' => [
-                        'type' => ModalActionType::class,
-                        'type_options' => [
-                            'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_delete', [
-                                'id' => $employee->getId(),
-                            ]),
-                            'icon' => 'trash',
-                            'label' => 'app_employee_delete',
-                            'translation_domain' => 'routes',
-                            'variant' => 'destructive',
-                        ],
-                    ],
+                    'delete' => $builder->addRowAction('delete', ModalActionType::class, [
+                        'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_delete', [
+                            'id' => $employee->getId(),
+                        ]),
+                        'icon' => 'trash',
+                        'label' => 'app_employee_delete',
+                        'translation_domain' => 'routes',
+                        'variant' => 'destructive',
+                    ])->getRowAction('delete'),
                 ],
                 'label' => 'Modal',
             ])
+            ->setAutoAddingActionsColumn(false)
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([

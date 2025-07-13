@@ -50,34 +50,28 @@ class HomepageDataTableType extends AbstractDataTableType
             ])
             ->addColumn('actions', ActionsColumnType::class, [
                 'actions' => [
-                    'show' => [
-                        'type' => ButtonActionType::class,
-                        'type_options' => [
-                            'attr' => [
-                                'data-bootstrap-target' => 'tooltip',
-                                'data-bs-placement' => 'left',
-                                'data-bs-title' => $this->translator->trans('app_employee_show', [], 'routes'),
-                            ],
-                            'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', ['id' => $employee->getId()]),
-                            'icon' => 'eye',
-                            'label' => '',
-                            'variant' => 'info',
+                    'show' => $builder->addRowAction('show', ButtonActionType::class, [
+                        'attr' => [
+                            'data-bootstrap-target' => 'tooltip',
+                            'data-bs-placement' => 'left',
+                            'data-bs-title' => $this->translator->trans('app_employee_show', [], 'routes'),
                         ],
-                    ],
-                    'edit' => [
-                        'type' => ButtonActionType::class,
-                        'type_options' => [
-                            'attr' => [
-                                'data-bootstrap-target' => 'tooltip',
-                                'data-bs-placement' => 'right',
-                                'data-bs-title' => $this->translator->trans('app_employee_edit', [], 'routes'),
-                            ],
-                            'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', ['id' => $employee->getId()]),
-                            'icon' => 'pencil',
-                            'label' => '',
-                            'variant' => 'warning',
+                        'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', ['id' => $employee->getId()]),
+                        'icon' => 'eye',
+                        'label' => '',
+                        'variant' => 'info',
+                    ])->getRowAction('show'),
+                    'edit' => $builder->addRowAction('edit', ButtonActionType::class, [
+                        'attr' => [
+                            'data-bootstrap-target' => 'tooltip',
+                            'data-bs-placement' => 'right',
+                            'data-bs-title' => $this->translator->trans('app_employee_edit', [], 'routes'),
                         ],
-                    ],
+                        'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', ['id' => $employee->getId()]),
+                        'icon' => 'pencil',
+                        'label' => '',
+                        'variant' => 'warning',
+                    ])->getRowAction('edit'),
                 ],
                 'header_attr' => [
                     'class' => 'w-0',
@@ -161,6 +155,7 @@ class HomepageDataTableType extends AbstractDataTableType
                 'form_type' => ChoiceType::class,
                 'label' => 'employee.status',
             ])
+            ->setAutoAddingActionsColumn(false)
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultPaginationData(PaginationData::fromArray([
