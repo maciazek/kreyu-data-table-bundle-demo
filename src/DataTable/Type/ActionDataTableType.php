@@ -8,6 +8,8 @@ use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Employee;
 use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Action\Type\ButtonActionType;
+use Kreyu\Bundle\DataTableBundle\Action\Type\Dropdown\DropdownActionType;
+use Kreyu\Bundle\DataTableBundle\Action\Type\Dropdown\LinkDropdownItemActionType;
 use Kreyu\Bundle\DataTableBundle\Action\Type\FormActionType;
 use Kreyu\Bundle\DataTableBundle\Action\Type\LinkActionType;
 use Kreyu\Bundle\DataTableBundle\Action\Type\ModalActionType;
@@ -124,6 +126,34 @@ class ActionDataTableType extends AbstractDataTableType
                     ])->getRowAction('delete'),
                 ],
                 'label' => 'Modal',
+            ])
+            ->addColumn('dropdown', ActionsColumnType::class, [
+                'actions' => [
+                    'dropdown' => $builder->addRowAction('dropdown', DropdownActionType::class, [
+                        'actions' => [
+                            $builder->createAction('show', LinkDropdownItemActionType::class, [
+                                'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', [
+                                    'id' => $employee->getId(),
+                                ]),
+                                'icon' => 'eye',
+                                'label' => 'app_employee_show',
+                                'translation_domain' => 'routes',
+                            ]),
+                            $builder->createAction('edit', LinkDropdownItemActionType::class, [
+                                'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', [
+                                    'id' => $employee->getId(),
+                                ]),
+                                'icon' => 'pencil',
+                                'label' => 'app_employee_edit',
+                                'translation_domain' => 'routes',
+                            ]),
+                        ],
+                        'icon' => 'list',
+                        'label' => 'Options',
+                        'variant' => 'secondary',
+                    ])->getRowAction('dropdown'),
+                ],
+                'label' => 'Dropdown',
             ])
             ->setAutoAddingActionsColumn(false)
             ->addExporter('ods', OdsExporterType::class)
