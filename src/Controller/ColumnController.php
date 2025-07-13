@@ -39,8 +39,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnBasicOptionsDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -65,8 +65,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnTextDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -95,8 +95,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnNumberDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -123,8 +123,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnMoneyDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -148,8 +148,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnBooleanDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -173,8 +173,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnLinkDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -198,8 +198,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnDateDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -223,8 +223,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnDateTimeDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -251,8 +251,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnDatePeriodDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -279,8 +279,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnCollectionDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -305,8 +305,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnEnumDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -338,8 +338,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnTemplateDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -363,8 +363,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnHtmlDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -389,8 +389,8 @@ final class ColumnController extends AbstractController
 
         $dataTable = $this->createDataTable(ColumnIconDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);

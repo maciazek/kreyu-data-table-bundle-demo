@@ -1,9 +1,14 @@
 {% set data_table_theme = app.session.get('_data_table_theme') %}
 
-{% if data_table_theme in ['B5S', 'B5C'] %}
+{% if data_table_theme in [
+    enum('App\\Enum\\DataTableTheme').BOOTSTRAP_5,
+    enum('App\\Enum\\DataTableTheme').BOOTSTRAP_5_CUSTOM,
+] %}
     {% set template = 'app_bootstrap.html.twig' %}
     {% set menu = 'BootstrapMenu' %}
-{% elseif data_table_theme in ['TAB'] %}
+{% elseif data_table_theme in [
+    enum('App\\Enum\\DataTableTheme').TABLER,
+] %}
     {% set template = 'app_tabler.html.twig' %}
     {% set menu = 'TablerMenu' %}
 {% endif %}

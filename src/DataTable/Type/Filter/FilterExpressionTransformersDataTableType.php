@@ -74,7 +74,7 @@ class FilterExpressionTransformersDataTableType extends AbstractDataTableType
                     }),
                 ],
                 'form_options' => [
-                    'choices' => array_column(EmployeeRole::cases(), 'name'),
+                    'choices' => array_column(EmployeeRole::cases(), 'value'),
                     'choice_label' => function ($choice) {
                         return EmployeeRole::from($choice);
                     },

@@ -8,35 +8,35 @@ enum EmployeeStatus: string implements TranslatableInterface
 {
     use TranslatableEnumTrait;
 
-    case ACT = 'ACT'; // Active
-    case INA = 'INA'; // Inactive
-    case LTL = 'LTL'; // Long term leave
+    case ACTIVE = 'ACT';
+    case INACTIVE = 'INA';
+    case LONG_TERM_LEAVE = 'LTL';
 
     public function getContext(): string
     {
         return match ($this) {
-            self::ACT => 'success',
-            self::INA => 'danger',
-            self::LTL => 'warning',
+            self::ACTIVE => 'success',
+            self::INACTIVE => 'danger',
+            self::LONG_TERM_LEAVE => 'warning',
         };
     }
 
     public function getIcon(DataTableIconTheme $dataTableIconTheme): string
     {
         switch ($dataTableIconTheme) {
-            case DataTableIconTheme::BIW:
+            case DataTableIconTheme::BOOTSTRAP_ICONS_WEBFONT:
             default:
                 return match ($this) {
-                    self::ACT => 'check-circle-fill',
-                    self::INA => 'x-square-fill',
-                    self::LTL => 'exclamation-triangle-fill',
+                    self::ACTIVE => 'check-circle-fill',
+                    self::INACTIVE => 'x-square-fill',
+                    self::LONG_TERM_LEAVE => 'exclamation-triangle-fill',
                 };
                 break;
-            case DataTableIconTheme::TIW:
+            case DataTableIconTheme::TABLER_ICONS_WEBFONT:
                 return match ($this) {
-                    self::ACT => 'circle-check-filled',
-                    self::INA => 'square-x-filled',
-                    self::LTL => 'alert-triangle-filled',
+                    self::ACTIVE => 'circle-check-filled',
+                    self::INACTIVE => 'square-x-filled',
+                    self::LONG_TERM_LEAVE => 'alert-triangle-filled',
                 };
                 break;
         }

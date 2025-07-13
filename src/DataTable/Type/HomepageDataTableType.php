@@ -146,7 +146,7 @@ class HomepageDataTableType extends AbstractDataTableType
                     return EmployeeStatus::from($data->getValue());
                 },
                 'form_options' => [
-                    'choices' => array_column(EmployeeStatus::cases(), 'name'),
+                    'choices' => array_column(EmployeeStatus::cases(), 'value'),
                     'choice_label' => function ($choice) {
                         return EmployeeStatus::from($choice);
                     },

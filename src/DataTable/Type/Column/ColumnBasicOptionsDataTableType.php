@@ -55,7 +55,7 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
                 'sort' => 'firstName',
                 'value_attr' => function (string $value, Employee $employee) {
                     return [
-                        'class' => $employee->getStatus() === EmployeeStatus::INA ? 'text-danger' : '',
+                        'class' => $employee->getStatus() === EmployeeStatus::INACTIVE ? 'text-danger' : '',
                     ];
                 },
             ])
@@ -63,7 +63,7 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
                 'export' => true,
                 'property_path' => 'lastName',
                 'formatter' => function (string $value, Employee $employee, ColumnInterface $column, array $options) {
-                    return $employee->getStatus() === EmployeeStatus::INA ? $value.' ❌' : $value;
+                    return $employee->getStatus() === EmployeeStatus::INACTIVE ? $value.' ❌' : $value;
                 },
                 'sort' => 'lastName',
             ])

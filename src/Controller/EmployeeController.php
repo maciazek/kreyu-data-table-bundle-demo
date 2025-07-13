@@ -107,8 +107,8 @@ final class EmployeeController extends AbstractController
     #[Route('/{id}/activate', name: 'app_employee_activate', methods: ['POST'])]
     public function activate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
-        if ($employee->getStatus() !== EmployeeStatus::ACT) {
-            $employee->setStatus(EmployeeStatus::ACT);
+        if ($employee->getStatus() !== EmployeeStatus::ACTIVE) {
+            $employee->setStatus(EmployeeStatus::ACTIVE);
 
             $entityManager->flush();
         }
@@ -121,9 +121,9 @@ final class EmployeeController extends AbstractController
     #[Route('/{id}/deactivate', name: 'app_employee_deactivate', methods: ['POST'])]
     public function deactivate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
-        if ($employee->getStatus() === EmployeeStatus::ACT) {
+        if ($employee->getStatus() === EmployeeStatus::ACTIVE) {
             $employee->setCurrentContract(null);
-            $employee->setStatus(EmployeeStatus::INA);
+            $employee->setStatus(EmployeeStatus::INACTIVE);
 
             $entityManager->flush();
         }
