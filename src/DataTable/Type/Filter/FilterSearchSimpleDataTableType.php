@@ -38,7 +38,7 @@ class FilterSearchSimpleDataTableType extends AbstractDataTableType
                 'property_path' => 'currentContract?.title.name',
             ])
             ->setSearchHandler(function (ProxyQueryInterface $query, string $search) {
-                return $query
+                $query
                     ->andWhere('employee.firstName LIKE :search OR employee.lastName LIKE :search OR currentContractTitle.name LIKE :search')
                     ->setParameter('search', '%'.$search.'%')
                 ;

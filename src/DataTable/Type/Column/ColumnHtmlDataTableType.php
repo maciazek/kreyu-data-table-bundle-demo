@@ -35,13 +35,23 @@ class ColumnHtmlDataTableType extends AbstractDataTableType
                 'export' => [
                     'formatter' => fn (string $value) => strip_tags($value), // make readable in export
                 ],
-                'getter' => fn (Employee $employee) => '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'.$employee->getStatus()->trans($this->translator).'</i></b></span>',
+                'getter' => function (Employee $employee) {
+                    return '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'
+                        .$employee->getStatus()->trans($this->translator)
+                        .'</i></b></span>'
+                    ;
+                },
             ])
             ->addColumn('stripTags', HtmlColumnType::class, [
                 'export' => [
                     'formatter' => fn (string $value) => strip_tags($value), // make readable in export
                 ],
-                'getter' => fn (Employee $employee) => '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'.$employee->getStatus()->trans($this->translator).'</i></b></span>',
+                'getter' => function (Employee $employee) {
+                    return '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'
+                        .$employee->getStatus()->trans($this->translator)
+                        .'</i></b></span>'
+                    ;
+                },
                 'strip_tags' => true,
             ])
             ->addColumn('allowedTags', HtmlColumnType::class, [
@@ -49,12 +59,22 @@ class ColumnHtmlDataTableType extends AbstractDataTableType
                 'export' => [
                     'formatter' => fn (string $value) => strip_tags($value), // make readable in export
                 ],
-                'getter' => fn (Employee $employee) => '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'.$employee->getStatus()->trans($this->translator).'</i></b></span>',
+                'getter' => function (Employee $employee) {
+                    return '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'
+                        .$employee->getStatus()->trans($this->translator)
+                        .'</i></b></span>'
+                    ;
+                },
                 'strip_tags' => true,
             ])
             ->addColumn('raw', HtmlColumnType::class, [
                 'export' => true,
-                'getter' => fn (Employee $employee) => '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'.$employee->getStatus()->trans($this->translator).'</i></b></span>',
+                'getter' => function (Employee $employee) {
+                    return '<span class="badge fw-normal text-bg-'.$employee->getStatus()->getContext().'"><b><i>'
+                        .$employee->getStatus()->trans($this->translator)
+                        .'</i></b></span>'
+                    ;
+                },
                 'raw' => false,
                 'value_attr' => [
                     'class' => 'font-monospace',

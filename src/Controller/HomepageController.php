@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\DataTable\Type\HomepageDataTableType;
-use App\Enum\DataTableIconTheme;
-use App\Enum\DataTableTheme;
 use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;

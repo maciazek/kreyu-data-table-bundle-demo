@@ -39,11 +39,9 @@ class ColumnEnumDataTableType extends AbstractDataTableType
                 'export' => true,
                 'property_path' => 'status',
                 'sort' => 'status',
-                'value_attr' => function (EmployeeStatus $status) {
-                    return [
-                        'class' => 'badge fw-normal text-bg-'.$status->getContext(),
-                    ];
-                },
+                'value_attr' => fn (EmployeeStatus $status) => [
+                    'class' => 'badge fw-normal text-bg-'.$status->getContext(),
+                ],
             ])
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DataTable\Type\Column;
 
 use App\Entity\Employee;
-use App\Enum\DataTableIconTheme;
 use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
@@ -49,7 +48,9 @@ class ColumnIconDataTableType extends AbstractDataTableType
             ])
             ->addColumn('dynamic', IconColumnType::class, [
                 'export' => true,
-                'icon' => fn (EmployeeStatus $status) => $status->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme')),
+                'icon' => function (EmployeeStatus $status) {
+                    return $status->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme'));
+                },
                 'icon_attr' => fn (EmployeeStatus $status) => [
                     'class' => 'text-'.$status->getContext(),
                 ],
@@ -66,14 +67,18 @@ class ColumnIconDataTableType extends AbstractDataTableType
                 'export' => [
                     'label' => 'Is active',
                 ],
-                'getter' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACTIVE ? $employee->getStatus() : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getStatus() === EmployeeStatus::ACTIVE ? $employee->getStatus() : null;
+                },
                 'header_attr' => [
                     'class' => 'w-0 abbr text-center',
                     'data-bootstrap-target' => 'tooltip',
                     'data-bs-placement' => 'top',
                     'data-bs-title' => EmployeeStatus::ACTIVE->trans($this->translator).'?',
                 ],
-                'icon' => fn (?EmployeeStatus $status) => $status?->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme')),
+                'icon' => function (?EmployeeStatus $status) {
+                    return $status?->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme'));
+                },
                 'icon_attr' => fn (?EmployeeStatus $status) => [
                     'class' => 'text-'.$status?->getContext(),
                 ],
@@ -84,14 +89,18 @@ class ColumnIconDataTableType extends AbstractDataTableType
                 'export' => [
                     'label' => 'Is inactive',
                 ],
-                'getter' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::INACTIVE ? $employee->getStatus() : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getStatus() === EmployeeStatus::INACTIVE ? $employee->getStatus() : null;
+                },
                 'header_attr' => [
                     'class' => 'w-0 abbr text-center',
                     'data-bootstrap-target' => 'tooltip',
                     'data-bs-placement' => 'top',
                     'data-bs-title' => EmployeeStatus::INACTIVE->trans($this->translator).'?',
                 ],
-                'icon' => fn (?EmployeeStatus $status) => $status?->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme')),
+                'icon' => function (?EmployeeStatus $status) {
+                    return $status?->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme'));
+                },
                 'icon_attr' => fn (?EmployeeStatus $status) => [
                     'class' => 'text-'.$status?->getContext(),
                 ],
@@ -102,14 +111,18 @@ class ColumnIconDataTableType extends AbstractDataTableType
                 'export' => [
                     'label' => 'Is long term leave',
                 ],
-                'getter' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::LONG_TERM_LEAVE ? $employee->getStatus() : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getStatus() === EmployeeStatus::LONG_TERM_LEAVE ? $employee->getStatus() : null;
+                },
                 'header_attr' => [
                     'class' => 'w-0 abbr text-center',
                     'data-bootstrap-target' => 'tooltip',
                     'data-bs-placement' => 'top',
                     'data-bs-title' => EmployeeStatus::LONG_TERM_LEAVE->trans($this->translator).'?',
                 ],
-                'icon' => fn (?EmployeeStatus $status) => $status?->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme')),
+                'icon' => function (?EmployeeStatus $status) {
+                    return $status?->getIcon($this->requestStack->getSession()->get('_data_table_icon_theme'));
+                },
                 'icon_attr' => fn (?EmployeeStatus $status) => [
                     'class' => 'text-'.$status?->getContext(),
                 ],

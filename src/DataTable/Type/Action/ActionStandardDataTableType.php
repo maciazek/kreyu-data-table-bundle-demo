@@ -147,11 +147,9 @@ class ActionStandardDataTableType extends AbstractDataTableType
             ])
             ->addColumn('status', EnumColumnType::class, [
                 'export' => true,
-                'value_attr' => function (EmployeeStatus $status) {
-                    return [
-                        'class' => 'badge fw-normal text-bg-'.$status->getContext(),
-                    ];
-                },
+                'value_attr' => fn (EmployeeStatus $status) => [
+                    'class' => 'badge fw-normal text-bg-'.$status->getContext(),
+                ],
             ])
             ->setAutoAddingActionsColumn(false)
             ->addExporter('ods', OdsExporterType::class)

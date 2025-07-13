@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\DataTable\Type\Action\ActionCompactDataTableType;
 use App\DataTable\Type\Action\ActionStandardDataTableType;
-use App\Enum\DataTableIconTheme;
-use App\Enum\DataTableTheme;
 use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;

@@ -44,9 +44,7 @@ class FilterExpressionTransformersDataTableType extends AbstractDataTableType
                 'sort' => 'roles',
             ])
             ->addFilter('roles', DoctrineOrmFilterType::class, [
-                'active_filter_formatter' => function (FilterData $data) {
-                    return EmployeeRole::from($data->getValue());
-                },
+                'active_filter_formatter' => fn (FilterData $data) => EmployeeRole::from($data->getValue()),
                 'expression_transformers' => [
                     new CallbackExpressionTransformer(function (mixed $expression) {
                         // to use JSON functions, install "scienta/doctrine-json-functions"
@@ -75,9 +73,7 @@ class FilterExpressionTransformersDataTableType extends AbstractDataTableType
                 ],
                 'form_options' => [
                     'choices' => array_column(EmployeeRole::cases(), 'value'),
-                    'choice_label' => function ($choice) {
-                        return EmployeeRole::from($choice);
-                    },
+                    'choice_label' => fn ($choice) => EmployeeRole::from($choice),
                 ],
                 'form_type' => ChoiceType::class,
                 'label' => 'employee.roles',

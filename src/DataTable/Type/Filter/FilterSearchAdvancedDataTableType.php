@@ -40,7 +40,7 @@ class FilterSearchAdvancedDataTableType extends AbstractDataTableType
             ])
             ->addFilter(DataTableBuilderInterface::SEARCH_FILTER_NAME, SearchFilterType::class, [
                 'handler' => function (ProxyQueryInterface $query, string $search) {
-                    return $query
+                    $query
                         ->andWhere('employee.firstName LIKE :search OR employee.lastName LIKE :search OR currentContractTitle.name LIKE :search')
                         ->setParameter('search', '%'.$search.'%')
                     ;
