@@ -7,8 +7,6 @@ use App\DataTable\Type\Filter\FilterEventsDataTableType;
 use App\DataTable\Type\Filter\FilterExpressionTransformersDataTableType;
 use App\DataTable\Type\Filter\FilterSearchAdvancedDataTableType;
 use App\DataTable\Type\Filter\FilterSearchSimpleDataTableType;
-use App\Enum\DataTableIconTheme;
-use App\Enum\DataTableTheme;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -17,7 +17,6 @@ use App\DataTable\Type\Column\ColumnNumberDataTableType;
 use App\DataTable\Type\Column\ColumnTemplateDataTableType;
 use App\DataTable\Type\Column\ColumnTextDataTableType;
 use App\Enum\DataTableIconTheme;
-use App\Enum\DataTableTheme;
 use App\Enum\EmployeeRole;
 use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
