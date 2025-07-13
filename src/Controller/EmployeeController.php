@@ -36,7 +36,9 @@ final class EmployeeController extends AbstractController
             $entityManager->persist($employee);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
+            return $request->getSession()->get('_redirect_to')
+                ? $this->redirect($request->getSession()->get('_redirect_to'))
+                : $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee/new.html.twig', [
@@ -66,7 +68,9 @@ final class EmployeeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
+            return $request->getSession()->get('_redirect_to')
+                ? $this->redirect($request->getSession()->get('_redirect_to'))
+                : $this->redirectToRoute('app_employee_show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('employee/edit.html.twig', [
@@ -95,11 +99,13 @@ final class EmployeeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/activate', name: 'app_employee_activate', methods: ['POST'])]
-    public function activate(Employee $employee, EntityManagerInterface $entityManager): Response
+    public function activate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
         if ($employee->getStatus() !== EmployeeStatus::ACT) {
             $employee->setStatus(EmployeeStatus::ACT);
@@ -107,11 +113,13 @@ final class EmployeeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/deactivate', name: 'app_employee_deactivate', methods: ['POST'])]
-    public function deactivate(Employee $employee, EntityManagerInterface $entityManager): Response
+    public function deactivate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
         if ($employee->getStatus() === EmployeeStatus::ACT) {
             $employee->setCurrentContract(null);
@@ -120,6 +128,8 @@ final class EmployeeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_action_index', [], Response::HTTP_SEE_OTHER);
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
     }
 }

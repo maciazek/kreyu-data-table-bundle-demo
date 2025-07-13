@@ -1,7 +1,9 @@
 <?php
 
 return array (
-  'app_action_index' => 'Akcje',
+  'app_action' => 'Akcje',
+  'app_action_compact' => 'Kompaktowe',
+  'app_action_standard' => 'Standardowe',
   'app_column' => 'Kolumny',
   'app_column_basic_options' => 'Opcje podstawowe',
   'app_column_boolean' => 'Logiczna',

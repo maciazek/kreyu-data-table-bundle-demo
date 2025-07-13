@@ -29,7 +29,8 @@
     app_filter_search_advanced: 'caret-right-fill',
     app_filter_expression_transformers: 'caret-right-fill',
     app_filter_events: 'caret-right-fill',
-    app_action_index: 'lightning',
+    app_action_standard: 'caret-right-fill',
+    app_action_compact: 'caret-right-fill',
 } %}
 
 {% set menu_component = component(menu, {elements: [
@@ -227,13 +228,28 @@
     },
     {
         id: 'app_action',
-        path: path('app_action_index'),
-        label: 'app_action_index'|trans({}, 'routes'),
-        active_routes: {
-            'app_action_index': null,
-        },
-        icon: icons.app_action_index,
-    },
+        label: 'app_action'|trans({}, 'routes'),
+        children: [
+            {
+                id: 'app_action_standard',
+                path: path('app_action_standard'),
+                label: 'app_action_standard'|trans({}, 'routes'),
+                active_routes: {
+                    'app_action_standard': null,
+                },
+                icon: icons.app_action_standard,
+            },
+            {
+                id: 'app_action_compact',
+                path: path('app_action_compact'),
+                label: 'app_action_compact'|trans({}, 'routes'),
+                active_routes: {
+                    'app_action_compact': null,
+                },
+                icon: icons.app_action_compact,
+            },
+        ]
+    }
 ]}) %}
 
 {% extends template %}

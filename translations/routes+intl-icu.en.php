@@ -1,7 +1,9 @@
 <?php
 
 return array (
-  'app_action_index' => 'Actions',
+  'app_action' => 'Actions',
+  'app_action_compact' => 'Compact',
+  'app_action_standard' => 'Standard',
   'app_column' => 'Columns',
   'app_column_basic_options' => 'Basic options',
   'app_column_boolean' => 'Boolean',
