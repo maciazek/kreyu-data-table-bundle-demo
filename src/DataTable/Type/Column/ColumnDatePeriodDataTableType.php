@@ -31,27 +31,57 @@ class ColumnDatePeriodDataTableType extends AbstractDataTableType
             ])
             ->addColumn('basic', DatePeriodColumnType::class, [
                 'export' => true,
-                'getter' => fn (Employee $employee) => $employee->getCurrentContract() ? new \DatePeriod($employee->getCurrentContract()->getBeginDate(), new \DateInterval('P1D'), $employee->getCurrentContract()->getEndDate() ?? new \DateTime()) : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getCurrentContract() ? new \DatePeriod(
+                        $employee->getCurrentContract()->getBeginDate(),
+                        new \DateInterval('P1D'),
+                        $employee->getCurrentContract()->getEndDate() ?? new \DateTime()
+                    ) : null;
+                },
             ])
             ->addColumn('customFormat', DatePeriodColumnType::class, [
                 'export' => true,
                 'format' => 'm/d/y H:i',
-                'getter' => fn (Employee $employee) => $employee->getCurrentContract() ? new \DatePeriod($employee->getCurrentContract()->getBeginDate(), new \DateInterval('P1D'), $employee->getCurrentContract()->getEndDate() ?? new \DateTime()) : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getCurrentContract() ? new \DatePeriod(
+                        $employee->getCurrentContract()->getBeginDate(),
+                        new \DateInterval('P1D'),
+                        $employee->getCurrentContract()->getEndDate() ?? new \DateTime()
+                    ) : null;
+                },
             ])
             ->addColumn('customTimezone', DatePeriodColumnType::class, [
                 'export' => true,
-                'getter' => fn (Employee $employee) => $employee->getCurrentContract() ? new \DatePeriod($employee->getCurrentContract()->getBeginDate(), new \DateInterval('P1D'), $employee->getCurrentContract()->getEndDate() ?? new \DateTime()) : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getCurrentContract() ? new \DatePeriod(
+                        $employee->getCurrentContract()->getBeginDate(),
+                        new \DateInterval('P1D'),
+                        $employee->getCurrentContract()->getEndDate() ?? new \DateTime()
+                    ) : null;
+                },
                 'timezone' => 'Pacific/Kiritimati',
             ])
             ->addColumn('customSeparator', DatePeriodColumnType::class, [
                 'export' => true,
-                'getter' => fn (Employee $employee) => $employee->getCurrentContract() ? new \DatePeriod($employee->getCurrentContract()->getBeginDate(), new \DateInterval('P1D'), $employee->getCurrentContract()->getEndDate() ?? new \DateTime()) : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getCurrentContract() ? new \DatePeriod(
+                        $employee->getCurrentContract()->getBeginDate(),
+                        new \DateInterval('P1D'),
+                        $employee->getCurrentContract()->getEndDate() ?? new \DateTime()
+                    ) : null;
+                },
                 'separator' => ' — ',
             ])
             ->addColumn('customAll', DatePeriodColumnType::class, [
                 'export' => true,
                 'format' => 'm/d/y H:i',
-                'getter' => fn (Employee $employee) => $employee->getCurrentContract() ? new \DatePeriod($employee->getCurrentContract()->getBeginDate(), new \DateInterval('P1D'), $employee->getCurrentContract()->getEndDate() ?? new \DateTime()) : null,
+                'getter' => function (Employee $employee) {
+                    return $employee->getCurrentContract() ? new \DatePeriod(
+                        $employee->getCurrentContract()->getBeginDate(),
+                        new \DateInterval('P1D'),
+                        $employee->getCurrentContract()->getEndDate() ?? new \DateTime()
+                    ) : null;
+                },
                 'separator' => ' — ',
                 'timezone' => 'Pacific/Kiritimati',
             ])

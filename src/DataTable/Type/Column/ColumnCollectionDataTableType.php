@@ -48,7 +48,9 @@ class ColumnCollectionDataTableType extends AbstractDataTableType
                 'entry_type' => LinkColumnType::class,
                 'entry_options' => [
                     'formatter' => fn (Contract $contract) => $contract->getTitle()->getName(),
-                    'href' => fn (Contract $contract) => $this->urlGenerator->generate('app_contract_show', ['id' => $contract->getId()]),
+                    'href' => fn (Contract $contract) => $this->urlGenerator->generate('app_contract_show', [
+                        'id' => $contract->getId(),
+                    ]),
                 ],
                 'export' => true,
                 'property_path' => 'contracts',

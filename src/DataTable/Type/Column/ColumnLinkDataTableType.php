@@ -39,7 +39,9 @@ class ColumnLinkDataTableType extends AbstractDataTableType
             ->addColumn('route', LinkColumnType::class, [
                 'export' => true,
                 'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
-                'href' => fn (string $value, Employee $employee) => $this->urlGenerator->generate('app_employee_show', ['id' => $employee->getId()]),
+                'href' => fn (string $value, Employee $employee) => $this->urlGenerator->generate('app_employee_show', [
+                    'id' => $employee->getId(),
+                ]),
             ])
             ->addColumn('formatter', LinkColumnType::class, [
                 'export' => true,

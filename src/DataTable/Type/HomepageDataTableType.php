@@ -54,7 +54,9 @@ class HomepageDataTableType extends AbstractDataTableType
                     'data-bs-placement' => 'left',
                     'data-bs-title' => $this->translator->trans('app_employee_show', [], 'routes'),
                 ],
-                'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', ['id' => $employee->getId()]),
+                'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', [
+                    'id' => $employee->getId()
+                ]),
                 'icon' => 'eye',
                 'label' => '',
                 'variant' => 'info',
@@ -65,7 +67,9 @@ class HomepageDataTableType extends AbstractDataTableType
                     'data-bs-placement' => 'right',
                     'data-bs-title' => $this->translator->trans('app_employee_edit', [], 'routes'),
                 ],
-                'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', ['id' => $employee->getId()]),
+                'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_edit', [
+                    'id' => $employee->getId(),
+                ]),
                 'icon' => 'pencil',
                 'label' => '',
                 'variant' => 'warning',
