@@ -53,39 +53,31 @@ class ColumnBasicOptionsDataTableType extends AbstractDataTableType
                     'class' => 'text-success',
                 ],
                 'sort' => 'firstName',
-                'value_attr' => function (string $value, Employee $employee) {
-                    return [
-                        'class' => $employee->getStatus() === EmployeeStatus::INACTIVE ? 'text-danger' : '',
-                    ];
-                },
+                'value_attr' => fn (string $value, Employee $employee) => [
+                    'class' => $employee->getStatus() === EmployeeStatus::INACTIVE ? 'text-danger' : '',
+                ],
             ])
             ->addColumn('formatter', TextColumnType::class, [
                 'export' => true,
                 'property_path' => 'lastName',
-                'formatter' => function (string $value, Employee $employee, ColumnInterface $column, array $options) {
+                'formatter' => function (string $value, Employee $employee) {
                     return $employee->getStatus() === EmployeeStatus::INACTIVE ? $value.' ❌' : $value;
                 },
                 'sort' => 'lastName',
             ])
             ->addColumn('getter', TextColumnType::class, [
                 'export' => true,
-                'getter' => function (Employee $employee) {
-                    return $employee->getFirstName().' '.$employee->getLastName();
-                },
+                'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
             ])
             ->addColumn('translation', TextColumnType::class, [
                 'export' => true,
                 'label' => new TranslatableMessage('translation', [], 'messages'),
-                'getter' => function (Employee $employee) {
-                    return count($employee->getRoles() ?? []);
-                },
+                'getter' => fn (Employee $employee) => count($employee->getRoles() ?? []),
                 'value_translation_domain' => 'entities',
                 'value_translation_key' => 'employee.rolesCount',
-                'value_translation_parameters' => function (int $count, Employee $employee) {
-                    return [
-                        'count' => $count,
-                    ];
-                },
+                'value_translation_parameters' => fn (int $count) => [
+                    'count' => $count,
+                ],
             ])
             ->addColumn('invisible', TextColumnType::class, [
                 'visible' => false,

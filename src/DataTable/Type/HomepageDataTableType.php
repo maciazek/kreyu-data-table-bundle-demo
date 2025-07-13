@@ -114,15 +114,13 @@ class HomepageDataTableType extends AbstractDataTableType
                 'export' => true,
                 'label' => 'employee.status',
                 'sort' => 'status',
-                'value_attr' => function (EmployeeStatus $status) {
-                    return [
-                        'class' => 'badge fw-normal text-bg-'.$status->getContext(),
-                    ];
-                },
+                'value_attr' => fn (EmployeeStatus $status) => [
+                    'class' => 'badge fw-normal text-bg-'.$status->getContext(),
+                ],
             ])
             ->addFilter(DataTableBuilderInterface::SEARCH_FILTER_NAME, SearchFilterType::class, [
                 'handler' => function (ProxyQueryInterface $query, string $search) {
-                    return $query
+                    $query
                         ->andWhere('employee.firstName LIKE :search OR employee.lastName LIKE :search OR currentContractTitle.name LIKE :search')
                         ->setParameter('search', '%'.$search.'%')
                     ;
@@ -142,14 +140,10 @@ class HomepageDataTableType extends AbstractDataTableType
                 'label' => 'employee.birthDate',
             ])
             ->addFilter('status', DoctrineOrmFilterType::class, [
-                'active_filter_formatter' => function (FilterData $data) {
-                    return EmployeeStatus::from($data->getValue());
-                },
+                'active_filter_formatter' => fn (FilterData $data) => EmployeeStatus::from($data->getValue()),
                 'form_options' => [
                     'choices' => array_column(EmployeeStatus::cases(), 'value'),
-                    'choice_label' => function ($choice) {
-                        return EmployeeStatus::from($choice);
-                    },
+                    'choice_label' => fn ($choice) => EmployeeStatus::from($choice),
                 ],
                 'form_type' => ChoiceType::class,
                 'label' => 'employee.status',

@@ -40,11 +40,9 @@ class ColumnTemplateDataTableType extends AbstractDataTableType
                 'export' => true,
                 'property_path' => 'currentContract?.currentTarget.value',
                 'template_path' => 'column/_progressbar.html.twig',
-                'template_vars' => function (?int $value) {
-                    return [
-                        'value' => $value,
-                    ];
-                },
+                'template_vars' => fn (?int $value) => [
+                    'value' => $value,
+                ],
             ])
             ->addColumn('chart', TemplateColumnType::class, [
                 'header_attr' => [
