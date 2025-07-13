@@ -24,6 +24,13 @@ class RequestSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
+        // save uri so it can return to the correct datatable
+        if (str_starts_with($request->attributes->getString('_route'), 'app_action')
+            || str_starts_with($request->attributes->getString('_route'), 'app_homepage')
+        ) {
+            $request->getSession()->set('_redirect_to', $request->getUri());
+        }
+
         // try to see if the locale has been set as a _locale routing parameter
         if ($locale = $request->query->get('_locale')) {
             // store new locale in session

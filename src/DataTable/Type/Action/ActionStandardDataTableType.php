@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DataTable\Type;
+namespace App\DataTable\Type\Action;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Employee;
@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class ActionDataTableType extends AbstractDataTableType
+class ActionStandardDataTableType extends AbstractDataTableType
 {
     public function __construct(
         private TranslatorInterface $translator,
@@ -45,18 +45,6 @@ class ActionDataTableType extends AbstractDataTableType
                 'label' => 'app_employee_new',
                 'translation_domain' => 'routes',
                 'variant' => 'success',
-            ])
-            ->addColumn('name', TextColumnType::class, [
-                'export' => true,
-                'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
-            ])
-            ->addColumn('status', EnumColumnType::class, [
-                'export' => true,
-                'value_attr' => function (EmployeeStatus $status) {
-                    return [
-                        'class' => 'badge fw-normal text-bg-'.$status->getContext(),
-                    ];
-                },
             ])
             ->addColumn('link', ActionsColumnType::class, [
                 'actions' => [
@@ -154,6 +142,18 @@ class ActionDataTableType extends AbstractDataTableType
                     ])->getRowAction('dropdown'),
                 ],
                 'label' => 'Dropdown',
+            ])
+            ->addColumn('name', TextColumnType::class, [
+                'export' => true,
+                'getter' => fn (Employee $employee) => $employee->getFirstName().' '.$employee->getLastName(),
+            ])
+            ->addColumn('status', EnumColumnType::class, [
+                'export' => true,
+                'value_attr' => function (EmployeeStatus $status) {
+                    return [
+                        'class' => 'badge fw-normal text-bg-'.$status->getContext(),
+                    ];
+                },
             ])
             ->setAutoAddingActionsColumn(false)
             ->addExporter('ods', OdsExporterType::class)
