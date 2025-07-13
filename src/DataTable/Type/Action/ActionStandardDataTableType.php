@@ -24,7 +24,6 @@ use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class ActionStandardDataTableType extends AbstractDataTableType
 {
@@ -32,7 +31,6 @@ class ActionStandardDataTableType extends AbstractDataTableType
         private TranslatorInterface $translator,
         private UrlGeneratorInterface $urlGenerator,
         private DateRangeActiveFilterFormatter $dateRangeActiveFilterFormatter,
-        private CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
 
