@@ -30,8 +30,8 @@ final class HomepageController extends AbstractController
 
         $dataTable = $this->createDataTable(HomepageDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);

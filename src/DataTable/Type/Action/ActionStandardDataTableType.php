@@ -82,7 +82,7 @@ class ActionStandardDataTableType extends AbstractDataTableType
                         'label' => 'app_employee_activate',
                         'translation_domain' => 'routes',
                         'variant' => 'success',
-                        'visible' => fn (Employee $employee) => $employee->getStatus() !== EmployeeStatus::ACT,
+                        'visible' => fn (Employee $employee) => $employee->getStatus() !== EmployeeStatus::ACTIVE,
                     ])->getRowAction('activate'),
                     'deactivate' => $builder->addRowAction('deactivate', FormActionType::class, [
                         'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_deactivate', [
@@ -94,7 +94,7 @@ class ActionStandardDataTableType extends AbstractDataTableType
                         'label' => 'app_employee_deactivate',
                         'translation_domain' => 'routes',
                         'variant' => 'danger',
-                        'visible' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACT,
+                        'visible' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACTIVE,
                     ])->getRowAction('deactivate'),
                 ],
                 'label' => 'Form',

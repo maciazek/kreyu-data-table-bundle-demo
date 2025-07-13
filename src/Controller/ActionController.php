@@ -26,8 +26,8 @@ final class ActionController extends AbstractController
 
         $dataTable = $this->createDataTable(ActionStandardDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -52,8 +52,8 @@ final class ActionController extends AbstractController
 
         $dataTable = $this->createDataTable(ActionCompactDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);

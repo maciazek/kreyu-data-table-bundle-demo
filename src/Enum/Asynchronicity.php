@@ -8,6 +8,6 @@ enum Asynchronicity: string implements TranslatableInterface
 {
     use TranslatableEnumTrait;
 
-    case ASY = 'ASY'; // Async
-    case SYN = 'SYN'; // Sync
+    case ASYNC = 'ASY';
+    case SYNC = 'SYN';
 }

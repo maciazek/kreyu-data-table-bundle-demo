@@ -82,7 +82,7 @@ class ActionCompactDataTableType extends AbstractDataTableType
                 'icon' => 'arrow-bar-up',
                 'label' => '',
                 'variant' => 'success',
-                'visible' => fn (Employee $employee) => $employee->getStatus() !== EmployeeStatus::ACT,
+                'visible' => fn (Employee $employee) => $employee->getStatus() !== EmployeeStatus::ACTIVE,
             ])
             ->addRowAction('deactivate', FormActionType::class, [
                 'action' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_deactivate', [
@@ -98,7 +98,7 @@ class ActionCompactDataTableType extends AbstractDataTableType
                 'icon' => 'arrow-bar-down',
                 'label' => '',
                 'variant' => 'danger',
-                'visible' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACT,
+                'visible' => fn (Employee $employee) => $employee->getStatus() === EmployeeStatus::ACTIVE,
             ])
             ->addRowAction('delete', ModalActionType::class, [
                 'attr' => [

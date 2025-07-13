@@ -8,16 +8,16 @@ enum DataTableTheme: string implements TranslatableInterface
 {
     use TranslatableEnumTrait;
 
-    case B5S = 'B5S'; // Bootstrap 5
-    case B5C = 'B5C'; // Bootstrap 5 (custom)
-    case TAB = 'TAB'; // Tabler
+    case BOOTSTRAP_5 = 'B5S';
+    case BOOTSTRAP_5_CUSTOM = 'B5C';
+    case TABLER = 'TAB';
 
     public function getPath(): string
     {
         return match ($this) {
-            self::B5S => '@KreyuDataTable/themes/bootstrap_5.html.twig',
-            self::B5C => 'themes/data_table_bootstrap_5.html.twig',
-            self::TAB => '@KreyuDataTable/themes/tabler.html.twig',
+            self::BOOTSTRAP_5 => '@KreyuDataTable/themes/bootstrap_5.html.twig',
+            self::BOOTSTRAP_5_CUSTOM => 'themes/data_table_bootstrap_5.html.twig',
+            self::TABLER => '@KreyuDataTable/themes/tabler.html.twig',
         };
     }
 }

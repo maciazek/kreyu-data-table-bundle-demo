@@ -95,7 +95,7 @@ class SeedDatabaseCommand extends Command
             $employee->setBirthDate(\DateTimeImmutable::createFromMutable($faker->dateTimeInInterval('-60 years', '+35 years')));
             $employee->setLastLoginAt($faker->numberBetween(0, 3) === 0 ? null : \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-5 years')));
             $employee->setStatus($faker->randomElement(EmployeeStatus::class));
-            if ($employee->getStatus() !== EmployeeStatus::INA) {
+            if ($employee->getStatus() !== EmployeeStatus::INACTIVE) {
                 $employee->setWebsite($faker->numberBetween(0, 3) === 0 ? null : $faker->url());
                 $employee->setRoles($faker->randomElements(EmployeeRole::class, $faker->numberBetween(0, count(EmployeeRole::cases()))));
             }
@@ -103,7 +103,7 @@ class SeedDatabaseCommand extends Command
             $this->entityManager->persist($employee);
 
             // address
-            if ($employee->getStatus() !== EmployeeStatus::INA) {
+            if ($employee->getStatus() !== EmployeeStatus::INACTIVE) {
                 $address = new Address();
                 $address->setStreetName($faker->streetName());
                 $address->setBuildingNumber($faker->buildingNumber());
@@ -124,7 +124,7 @@ class SeedDatabaseCommand extends Command
                 $contract->setEndDate($faker->numberBetween(0, 2) === 0 ? null : \DateTimeImmutable::createFromMutable($faker->dateTimeInInterval('-10 years', '+8 years')));
                 $this->entityManager->persist($contract);
 
-                if ($employee->getStatus() !== EmployeeStatus::INA) {
+                if ($employee->getStatus() !== EmployeeStatus::INACTIVE) {
                     $employee->setCurrentContract($contract);
                     $employee->setIsManager($faker->boolean(33));
                 }

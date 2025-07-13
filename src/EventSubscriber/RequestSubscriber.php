@@ -55,7 +55,7 @@ class RequestSubscriber implements EventSubscriberInterface
         }
 
         // try to see if asynchronicity option has been set as a _asynchronicity routing parameter
-        if ($asynchronicity = $request->query->get('_asynchronicity')) {
+        if ($asynchronicity = $request->query->getEnum('_asynchronicity', Asynchronicity::class)) {
             // store new asynchronicity option in session
             $request->getSession()->set('_asynchronicity', $asynchronicity);
 
@@ -74,11 +74,11 @@ class RequestSubscriber implements EventSubscriberInterface
                 ),
             );
         } else { // if no explicit asynchronicity option has been set on this request, use one from the session
-            $request->getSession()->set('_asynchronicity', $request->getSession()->get('_asynchronicity', Asynchronicity::SYN->value));
+            $request->getSession()->set('_asynchronicity', $request->getSession()->get('_asynchronicity', Asynchronicity::SYNC));
         }
 
         // try to see if the data table theme has been set as a routing parameter
-        if ($dataTableTheme = $request->query->get('_data_table_theme')) {
+        if ($dataTableTheme = $request->query->getEnum('_data_table_theme', DataTableTheme::class)) {
             // store new data table theme in session
             $request->getSession()->set('_data_table_theme', $dataTableTheme);
 
@@ -97,13 +97,13 @@ class RequestSubscriber implements EventSubscriberInterface
                 ),
             );
         } else { // if no explicit data table theme has been set on this request, use one from the session
-            $request->getSession()->set('_data_table_theme', $request->getSession()->get('_data_table_theme', DataTableTheme::B5C->value));
+            $request->getSession()->set('_data_table_theme', $request->getSession()->get('_data_table_theme', DataTableTheme::BOOTSTRAP_5_CUSTOM));
         }
 
         // try to see if the data table icon theme has been set as a routing parameter
-        if ($dataTableTheme = $request->query->get('_data_table_icon_theme')) {
+        if ($dataTableIconTheme = $request->query->getEnum('_data_table_icon_theme', DataTableIconTheme::class)) {
             // store new data table icon theme in session
-            $request->getSession()->set('_data_table_icon_theme', $dataTableTheme);
+            $request->getSession()->set('_data_table_icon_theme', $dataTableIconTheme);
 
             // remove data table icon theme from URL
             $queryInputBag = $request->query;
@@ -120,7 +120,7 @@ class RequestSubscriber implements EventSubscriberInterface
                 ),
             );
         } else { // if no explicit data table icon theme has been set on this request, use one from the session
-            $request->getSession()->set('_data_table_icon_theme', $request->getSession()->get('_data_table_icon_theme', DataTableIconTheme::BIW->value));
+            $request->getSession()->set('_data_table_icon_theme', $request->getSession()->get('_data_table_icon_theme', DataTableIconTheme::BOOTSTRAP_ICONS_WEBFONT));
         }
     }
 

@@ -8,14 +8,14 @@ enum DataTableIconTheme: string implements TranslatableInterface
 {
     use TranslatableEnumTrait;
 
-    case BIW = 'BIW'; // Bootstrap Icons (webfont)
-    case TIW = 'TIW'; // Tabler Icons (webfont)
+    case BOOTSTRAP_ICONS_WEBFONT = 'BIW';
+    case TABLER_ICONS_WEBFONT = 'TIW';
 
     public function getPath(): string
     {
         return match ($this) {
-            self::BIW => '@KreyuDataTable/themes/bootstrap_icons_webfont.html.twig',
-            self::TIW => '@KreyuDataTable/themes/tabler_icons_webfont.html.twig',
+            self::BOOTSTRAP_ICONS_WEBFONT => '@KreyuDataTable/themes/bootstrap_icons_webfont.html.twig',
+            self::TABLER_ICONS_WEBFONT => '@KreyuDataTable/themes/tabler_icons_webfont.html.twig',
         };
     }
 }

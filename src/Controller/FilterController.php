@@ -33,8 +33,8 @@ final class FilterController extends AbstractController
 
         $dataTable = $this->createDataTable(FilterDoctrineOrmDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -63,8 +63,8 @@ final class FilterController extends AbstractController
 
         $dataTable = $this->createDataTable(FilterSearchSimpleDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -93,8 +93,8 @@ final class FilterController extends AbstractController
 
         $dataTable = $this->createDataTable(FilterSearchAdvancedDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -118,8 +118,8 @@ final class FilterController extends AbstractController
 
         $dataTable = $this->createDataTable(FilterExpressionTransformersDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
@@ -148,8 +148,8 @@ final class FilterController extends AbstractController
 
         $dataTable = $this->createDataTable(FilterEventsDataTableType::class, $queryBuilder, options: [
             'themes' => [
-                DataTableTheme::from($request->getSession()->get('_data_table_theme'))->getPath(),
-                DataTableIconTheme::from($request->getSession()->get('_data_table_icon_theme'))->getPath(),
+                $request->getSession()->get('_data_table_theme')->getPath(),
+                $request->getSession()->get('_data_table_icon_theme')->getPath(),
             ],
         ]);
         $dataTable->handleRequest($request);
