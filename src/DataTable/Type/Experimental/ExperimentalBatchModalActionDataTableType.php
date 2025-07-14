@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DataTable\Type\Action;
+namespace App\DataTable\Type\Experimental;
 
 use App\Entity\Employee;
 use App\Enum\EmployeeStatus;
@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class ActionStandardDataTableType extends AbstractDataTableType
+class ExperimentalBatchModalActionDataTableType extends AbstractDataTableType
 {
     public function __construct(
         private TranslatorInterface $translator,
@@ -58,6 +58,13 @@ class ActionStandardDataTableType extends AbstractDataTableType
                 'label' => 'app_employee_batch_deactivate',
                 'translation_domain' => 'routes',
                 'variant' => 'danger',
+            ])
+            ->addBatchAction('batchDelete', ModalActionType::class, [
+                'href' => $this->urlGenerator->generate('app_employee_batch_delete'),
+                'icon' => 'trash',
+                'label' => 'app_employee_batch_delete',
+                'translation_domain' => 'routes',
+                'variant' => 'destructive',
             ])
             ->addColumn('link', ActionsColumnType::class, [
                 'actions' => [

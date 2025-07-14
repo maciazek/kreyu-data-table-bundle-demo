@@ -170,4 +170,35 @@ final class EmployeeController extends AbstractController
             ? $this->redirect($request->getSession()->get('_redirect_to'))
             : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/batch_delete', name: 'app_employee_batch_delete', methods: ['GET', 'POST'])]
+    public function batchDelete(Request $request, EmployeeRepository $employeeRepository, EntityManagerInterface $entityManager): Response
+    {
+        $employees = $employeeRepository->findBy([
+            'id' => array_map(fn ($id) => intval($id), $request->query->all('id')),
+        ]);
+
+        if ($request->getMethod() === 'GET') {
+            return $this->render('employee/_batch_delete_modal_content.html.twig', [
+                'employees' => $employees,
+            ]);
+        }
+
+        if ($this->isCsrfTokenValid('delete'.implode('_', array_map(fn ($employee) => $employee->getId(), $employees)), $request->getPayload()->getString('_token'))) {
+            foreach ($employees as $employee) {
+                foreach ($employee->getContracts() as $contract) {
+                    $contract->setCurrentTarget(null);
+                }
+                $employee->setCurrentContract(null);
+                $entityManager->flush();
+
+                $entityManager->remove($employee);
+            }
+            $entityManager->flush();
+        }
+
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+    }
 }

@@ -25,8 +25,9 @@ class RequestSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
 
         // save uri so it can return to the correct datatable
-        if (str_starts_with($request->attributes->getString('_route'), 'app_action')
-            || str_starts_with($request->attributes->getString('_route'), 'app_homepage')
+        if (str_starts_with($request->attributes->getString('_route'), 'app_homepage')
+            || str_starts_with($request->attributes->getString('_route'), 'app_action')
+            || str_starts_with($request->attributes->getString('_route'), 'app_experimental')
         ) {
             $request->getSession()->set('_redirect_to', $request->getUri());
         }
