@@ -55,7 +55,7 @@ class HomepageDataTableType extends AbstractDataTableType
                     'data-bs-title' => $this->translator->trans('app_employee_show', [], 'routes'),
                 ],
                 'href' => fn (Employee $employee) => $this->urlGenerator->generate('app_employee_show', [
-                    'id' => $employee->getId()
+                    'id' => $employee->getId(),
                 ]),
                 'icon' => 'eye',
                 'label' => '',
