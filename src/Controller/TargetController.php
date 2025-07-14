@@ -23,6 +23,14 @@ final class TargetController extends AbstractController
     //     ]);
     // }
 
+    #[Route('/{id}/show', name: 'app_target_show', methods: ['GET'])]
+    public function show(Target $target): Response
+    {
+        return $this->render('target/show.html.twig', [
+            'target' => $target,
+        ]);
+    }
+
     #[Route('/new/{contractId}', name: 'app_target_new', methods: ['GET', 'POST'])]
     public function new(Request $request, #[MapEntity(id: 'contractId')] Contract $contract, EntityManagerInterface $entityManager): Response
     {
@@ -41,14 +49,6 @@ final class TargetController extends AbstractController
         return $this->render('target/new.html.twig', [
             'target' => $target,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_target_show', methods: ['GET'])]
-    public function show(Target $target): Response
-    {
-        return $this->render('target/show.html.twig', [
-            'target' => $target,
         ]);
     }
 

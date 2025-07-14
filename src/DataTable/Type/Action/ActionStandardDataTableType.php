@@ -44,6 +44,23 @@ class ActionStandardDataTableType extends AbstractDataTableType
                 'translation_domain' => 'routes',
                 'variant' => 'success',
             ])
+            ->addBatchAction('batchActivate', FormActionType::class, [
+                'action' => $this->urlGenerator->generate('app_employee_batch_activate'),
+                'method' => 'POST',
+                'icon' => 'arrow-bar-up',
+                'label' => 'app_employee_batch_activate',
+                'translation_domain' => 'routes',
+                'variant' => 'success',
+            ])
+            ->addBatchAction('batchDeactivate', FormActionType::class, [
+                'action' => $this->urlGenerator->generate('app_employee_batch_deactivate'),
+                'confirmation' => true,
+                'method' => 'POST',
+                'icon' => 'arrow-bar-down',
+                'label' => 'app_employee_batch_deactivate',
+                'translation_domain' => 'routes',
+                'variant' => 'danger',
+            ])
             ->addColumn('link', ActionsColumnType::class, [
                 'actions' => [
                     'show' => $builder->addRowAction('show', LinkActionType::class, [

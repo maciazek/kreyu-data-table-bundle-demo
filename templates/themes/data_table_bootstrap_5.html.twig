@@ -478,8 +478,33 @@
     </div>
 {% endblock %}
 
-{% block table_head %}
-    <thead style="--bs-table-bg: var(--bs-card-cap-bg);">{{ block('table_head_row', theme) }}</thead>
+{% block batch_action_bar %}
+    <div class="card-header px-2" hidden data-kreyu--data-table-bundle--batch-target="batchActionBar">
+        <div class="d-flex justify-content-start align-items-center gap-2">
+            {{ block('batch_action_bar_title', theme) }}
+            {{ block('batch_action_bar_actions', theme) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block batch_action_bar_title %}
+    {% set wrapper_attr = { class: 'card-title fs-6 fw-normal text-muted mb-0' }|merge(wrapper_attr|default({})) %}
+
+    <div {% with { attr: wrapper_attr } %}{{ block('attributes') }}{% endwith %}>
+        {{ 'Selected'|trans({}, 'KreyuDataTable') }}: <span data-kreyu--data-table-bundle--batch-target="selectedCounter">0</span>
+    </div>
+{% endblock %}
+
+{% block batch_action_bar_actions %}
+    <div class="card-actions">
+        <div class="d-flex flex-row gap-1">
+            {% for action in batch_actions %}
+                <div>
+                    {{ data_table_action(action) }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block column_actions_value %}
@@ -812,4 +837,8 @@
 
 {% block table_body %}
     <tbody class="table-group-divider" style="--bs-border-opacity: 0.75; border-top-color: rgba(var(--bs-secondary-rgb),var(--bs-border-opacity)) !important;">{{ block('table_body_row') }}</tbody>
+{% endblock %}
+
+{% block table_head %}
+    <thead style="--bs-table-bg: var(--bs-card-cap-bg);">{{ block('table_head_row', theme) }}</thead>
 {% endblock %}

@@ -24,6 +24,15 @@ final class ContractController extends AbstractController
     //     ]);
     // }
 
+    #[Route('/{id}/show', name: 'app_contract_show', methods: ['GET'])]
+    public function show(Contract $contract, TargetRepository $targetRepository): Response
+    {
+        return $this->render('contract/show.html.twig', [
+            'contract' => $contract,
+            'targets' => $targetRepository->findByContract($contract, ['month' => 'asc']),
+        ]);
+    }
+
     #[Route('/new/{employeeId}', name: 'app_contract_new', methods: ['GET', 'POST'])]
     public function new(Request $request, #[MapEntity(id: 'employeeId')] Employee $employee, EntityManagerInterface $entityManager): Response
     {
@@ -42,15 +51,6 @@ final class ContractController extends AbstractController
         return $this->render('contract/new.html.twig', [
             'contract' => $contract,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_contract_show', methods: ['GET'])]
-    public function show(Contract $contract, TargetRepository $targetRepository): Response
-    {
-        return $this->render('contract/show.html.twig', [
-            'contract' => $contract,
-            'targets' => $targetRepository->findByContract($contract, ['month' => 'asc']),
         ]);
     }
 

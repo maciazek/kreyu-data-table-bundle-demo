@@ -16,6 +16,7 @@ use Kreyu\Bundle\DataTableBundle\Action\Type\ModalActionType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\OdsExporterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\OpenSpout\Exporter\Type\XlsxExporterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\ActionsColumnType;
+use Kreyu\Bundle\DataTableBundle\Column\Type\CheckboxColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\EnumColumnType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\TextColumnType;
 use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
@@ -43,6 +44,23 @@ class ActionCompactDataTableType extends AbstractDataTableType
                 'label' => 'app_employee_new',
                 'translation_domain' => 'routes',
                 'variant' => 'success',
+            ])
+            ->addBatchAction('batchActivate', FormActionType::class, [
+                'action' => $this->urlGenerator->generate('app_employee_batch_activate'),
+                'method' => 'POST',
+                'icon' => 'arrow-bar-up',
+                'label' => 'app_employee_batch_activate',
+                'translation_domain' => 'routes',
+                'variant' => 'success',
+            ])
+            ->addBatchAction('batchDeactivate', FormActionType::class, [
+                'action' => $this->urlGenerator->generate('app_employee_batch_deactivate'),
+                'confirmation' => true,
+                'method' => 'POST',
+                'icon' => 'arrow-bar-down',
+                'label' => 'app_employee_batch_deactivate',
+                'translation_domain' => 'routes',
+                'variant' => 'danger',
             ])
             ->addRowAction('show', LinkActionType::class, [
                 'attr' => [
@@ -141,7 +159,12 @@ class ActionCompactDataTableType extends AbstractDataTableType
                 'label' => '',
                 'variant' => 'secondary',
             ])
-            ->addColumn('actions', ActionsColumnType::class, [
+            ->addColumn(DataTableBuilderInterface::BATCH_CHECKBOX_COLUMN_NAME, CheckboxColumnType::class, [
+                'header_attr' => [
+                    'class' => 'w-0 px-2',
+                ],
+            ])
+            ->addColumn(DataTableBuilderInterface::ACTIONS_COLUMN_NAME, ActionsColumnType::class, [
                 'actions' => $builder->getRowActions(),
                 'header_attr' => [
                     'class' => 'w-0',
@@ -161,6 +184,7 @@ class ActionCompactDataTableType extends AbstractDataTableType
                     'class' => 'badge fw-normal text-bg-'.$status->getContext(),
                 ],
             ])
+            ->setAutoAddingBatchCheckboxColumn(false)
             ->setAutoAddingActionsColumn(false)
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
