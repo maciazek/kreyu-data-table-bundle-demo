@@ -31,6 +31,8 @@ return array (
   'app_employee_edit' => 'Edit employee',
   'app_employee_new' => 'New employee',
   'app_employee_show' => 'Employee',
+  'app_experimental' => 'Experimental ⚠️',
+  'app_experimental_default_filters' => 'Default filters',
   'app_filter' => 'Filters',
   'app_filter_doctrine_orm' => 'Doctrine ORM',
   'app_filter_events' => 'Events',

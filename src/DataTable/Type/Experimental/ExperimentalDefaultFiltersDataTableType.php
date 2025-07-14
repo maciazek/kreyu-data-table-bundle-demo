@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DataTable\Type\Filter;
+namespace App\DataTable\Type\Experimental;
 
 use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Title;
@@ -32,7 +32,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class FilterDoctrineOrmDataTableType extends AbstractDataTableType
+class ExperimentalDefaultFiltersDataTableType extends AbstractDataTableType
 {
     public function __construct(
         private TranslatorInterface $translator,
@@ -160,7 +160,9 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ->addExporter('ods', OdsExporterType::class)
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultFiltrationData(FiltrationData::fromArray([
-                'salaryInCentsFrom' => new FilterData(value: 1000000),
+                // 'salaryInCentsFrom' => new FilterData(value: 1000000),
+                'isManager' => new FilterData(value: false),
+                'status' => new FilterData(value: [EmployeeStatus::INACTIVE->value, EmployeeStatus::LONG_TERM_LEAVE->value]),
             ]))
             ->setDefaultPaginationData(PaginationData::fromArray([
                 'page' => 1,

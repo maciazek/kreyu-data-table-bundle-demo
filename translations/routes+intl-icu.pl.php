@@ -31,6 +31,8 @@ return array (
   'app_employee_edit' => 'Edytuj pracownika',
   'app_employee_new' => 'Nowy pracownik',
   'app_employee_show' => 'Pracownik',
+  'app_experimental' => 'Eksperymentalne ⚠️',
+  'app_experimental_default_filters' => 'Domyślne filtry',
   'app_filter' => 'Filtry',
   'app_filter_doctrine_orm' => 'Doctrine ORM',
   'app_filter_events' => 'Zdarzenia',
