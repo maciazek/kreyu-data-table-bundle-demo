@@ -7,6 +7,7 @@ use App\Enum\EmployeeRole;
 use App\Enum\EmployeeStatus;
 use App\Form\EmployeeType;
 use App\Repository\ContractRepository;
+use App\Repository\EmployeeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,18 @@ final class EmployeeController extends AbstractController
     //         'employees' => $employeeRepository->findAll(),
     //     ]);
     // }
+
+    #[Route('/{id}/show', name: 'app_employee_show', methods: ['GET'])]
+    public function show(Employee $employee, ContractRepository $contractRepository, TranslatorInterface $translator): Response
+    {
+        return $this->render('employee/show.html.twig', [
+            'employee' => $employee,
+            'contracts' => $contractRepository->findByEmployee($employee, ['beginDate' => 'asc']),
+            'roles' => array_map(function (EmployeeRole $role) use ($translator): string {
+                return $role->trans($translator);
+            }, $employee->getRoles() ?? []),
+        ]);
+    }
 
     #[Route('/new', name: 'app_employee_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -47,18 +60,6 @@ final class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_employee_show', methods: ['GET'])]
-    public function show(Employee $employee, ContractRepository $contractRepository, TranslatorInterface $translator): Response
-    {
-        return $this->render('employee/show.html.twig', [
-            'employee' => $employee,
-            'contracts' => $contractRepository->findByEmployee($employee, ['beginDate' => 'asc']),
-            'roles' => array_map(function (EmployeeRole $role) use ($translator): string {
-                return $role->trans($translator);
-            }, $employee->getRoles() ?? []),
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_employee_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
@@ -79,6 +80,72 @@ final class EmployeeController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/activate', name: 'app_employee_activate', methods: ['POST'])]
+    public function activate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
+    {
+        if ($employee->getStatus() !== EmployeeStatus::ACTIVE) {
+            $employee->setStatus(EmployeeStatus::ACTIVE);
+
+            $entityManager->flush();
+        }
+
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/batch_activate', name: 'app_employee_batch_activate', methods: ['POST'])]
+    public function batchActivate(Request $request, EmployeeRepository $employeeRepository, EntityManagerInterface $entityManager): Response
+    {
+        $employees = $employeeRepository->findBy([
+            'id' => array_map(fn ($id) => intval($id), $request->request->all('id')),
+        ]);
+        foreach ($employees as $employee) {
+            if ($employee->getStatus() !== EmployeeStatus::ACTIVE) {
+                $employee->setStatus(EmployeeStatus::ACTIVE);
+            }
+        }
+        $entityManager->flush();
+
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/deactivate', name: 'app_employee_deactivate', methods: ['POST'])]
+    public function deactivate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
+    {
+        if ($employee->getStatus() === EmployeeStatus::ACTIVE) {
+            $employee->setCurrentContract(null);
+            $employee->setStatus(EmployeeStatus::INACTIVE);
+
+            $entityManager->flush();
+        }
+
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/batch_deactivate', name: 'app_employee_batch_deactivate', methods: ['POST'])]
+    public function batchDeactivate(Request $request, EmployeeRepository $employeeRepository, EntityManagerInterface $entityManager): Response
+    {
+        $employees = $employeeRepository->findBy([
+            'id' => array_map(fn ($id) => intval($id), $request->request->all('id')),
+        ]);
+        foreach ($employees as $employee) {
+            if ($employee->getStatus() === EmployeeStatus::ACTIVE) {
+                $employee->setCurrentContract(null);
+                $employee->setStatus(EmployeeStatus::INACTIVE);
+            }
+        }
+        $entityManager->flush();
+
+        return $request->getSession()->get('_redirect_to')
+            ? $this->redirect($request->getSession()->get('_redirect_to'))
+            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/{id}/delete', name: 'app_employee_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
     {
@@ -96,35 +163,6 @@ final class EmployeeController extends AbstractController
             $entityManager->flush();
 
             $entityManager->remove($employee);
-            $entityManager->flush();
-        }
-
-        return $request->getSession()->get('_redirect_to')
-            ? $this->redirect($request->getSession()->get('_redirect_to'))
-            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/{id}/activate', name: 'app_employee_activate', methods: ['POST'])]
-    public function activate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
-    {
-        if ($employee->getStatus() !== EmployeeStatus::ACTIVE) {
-            $employee->setStatus(EmployeeStatus::ACTIVE);
-
-            $entityManager->flush();
-        }
-
-        return $request->getSession()->get('_redirect_to')
-            ? $this->redirect($request->getSession()->get('_redirect_to'))
-            : $this->redirectToRoute('app_homepage_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/{id}/deactivate', name: 'app_employee_deactivate', methods: ['POST'])]
-    public function deactivate(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
-    {
-        if ($employee->getStatus() === EmployeeStatus::ACTIVE) {
-            $employee->setCurrentContract(null);
-            $employee->setStatus(EmployeeStatus::INACTIVE);
-
             $entityManager->flush();
         }
 

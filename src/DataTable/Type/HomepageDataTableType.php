@@ -74,7 +74,7 @@ class HomepageDataTableType extends AbstractDataTableType
                 'label' => '',
                 'variant' => 'warning',
             ])
-            ->addColumn('actions', ActionsColumnType::class, [
+            ->addColumn(DataTableBuilderInterface::ACTIONS_COLUMN_NAME, ActionsColumnType::class, [
                 'actions' => $builder->getRowActions(),
                 'header_attr' => [
                     'class' => 'w-0',

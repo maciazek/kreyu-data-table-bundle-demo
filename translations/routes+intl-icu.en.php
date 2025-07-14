@@ -24,6 +24,8 @@ return array (
   'app_contract_new' => 'New contract',
   'app_contract_show' => 'Contract',
   'app_employee_activate' => 'Activate',
+  'app_employee_batch_activate' => 'Activate',
+  'app_employee_batch_deactivate' => 'Deactivate',
   'app_employee_deactivate' => 'Deactivate',
   'app_employee_delete' => 'Delete employee',
   'app_employee_edit' => 'Edit employee',
