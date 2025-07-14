@@ -1,0 +1,32 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title fw-bold">{{ 'Action confirmation'|trans({}, 'KreyuDataTable') }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'close'|trans({}, 'buttons') }}"></button>
+        </div>
+        <div class="modal-body">
+            <span>{{ 'Are you sure you want to execute this action?'|trans({}, 'KreyuDataTable') }}</span>
+        </div>
+        <div class="modal-footer">
+            <form method="post" action="{{ path('app_employee_batch_delete', {id: employees|map((employee) => employee.id)}) }}" href="" data-id="">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ employees|map((employee) => employee.id)|join('_')) }}">
+                <div class="btn-list">
+                    {{ component('Button', {
+                        tag: 'button',
+                        type: 'button',
+                        context: 'secondary',
+                        label: 'Cancel'|trans({}, 'KreyuDataTable'),
+                        'data-bs-dismiss': 'modal',
+                    }) }}
+                    {{ component('Button', {
+                        tag: 'button',
+                        type: 'submit',
+                        context: 'danger',
+                        icon: 'trash',
+                        label: 'Confirm'|trans({}, 'KreyuDataTable'),
+                    }) }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

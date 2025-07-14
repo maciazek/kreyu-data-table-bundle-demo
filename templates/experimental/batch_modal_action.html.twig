@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'app_experimental'|trans({}, 'routes') }} - {{ 'app_experimental_default_filters'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
-{% block header %}<span class="text-secondary">{{ 'app_experimental'|trans({}, 'routes') }}<i class="bi bi-chevron-right mx-1"></i></span>{{ 'app_experimental_default_filters'|trans({}, 'routes') }}{% endblock %}
+{% block title %}{{ 'app_experimental'|trans({}, 'routes') }} - {{ 'app_experimental_batch_modal_action'|trans({}, 'routes') }} • {{ parent() }}{% endblock %}
+{% block header %}<span class="text-secondary">{{ 'app_experimental'|trans({}, 'routes') }}<i class="bi bi-chevron-right mx-1"></i></span>{{ 'app_experimental_batch_modal_action'|trans({}, 'routes') }}{% endblock %}
 {% block toolbar %}
     {{ component('Button', {
         tag: 'a',
         context: 'outline-primary',
-        href: 'https://data-table-bundle.swroblewski.pl/reference/types/filter#doctrine-orm',
+        href: 'https://data-table-bundle.swroblewski.pl/reference/types/action.html',
         icon: 'book',
         target: '_blank',
         label: 'documentation'|trans({}, 'buttons'),

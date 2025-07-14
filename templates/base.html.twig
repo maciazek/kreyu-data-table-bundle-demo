@@ -37,6 +37,7 @@
     app_action_standard: 'caret-right-fill',
     app_action_compact: 'caret-right-fill',
     app_experimental_default_filters: 'caret-right-fill',
+    app_experimental_batch_modal_action: 'caret-right-fill',
 } %}
 
 {% set menu_component = component(menu, {elements: [
@@ -268,6 +269,15 @@
                     'app_experimental_default_filters': null,
                 },
                 icon: icons.app_experimental_default_filters,
+            },
+            {
+                id: 'app_experimental_batch_modal_action',
+                path: path('app_experimental_batch_modal_action'),
+                label: 'app_experimental_batch_modal_action'|trans({}, 'routes'),
+                active_routes: {
+                    'app_experimental_batch_modal_action': null,
+                },
+                icon: icons.app_experimental_batch_modal_action,
             },
         ]
     },
