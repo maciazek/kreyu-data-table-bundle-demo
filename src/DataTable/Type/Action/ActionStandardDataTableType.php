@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DataTable\Type\Action;
 
-use App\DataTable\Filter\Formatter\DateRangeActiveFilterFormatter;
 use App\Entity\Employee;
 use App\Enum\EmployeeStatus;
 use Kreyu\Bundle\DataTableBundle\Action\Type\ButtonActionType;
@@ -30,7 +29,6 @@ class ActionStandardDataTableType extends AbstractDataTableType
     public function __construct(
         private TranslatorInterface $translator,
         private UrlGeneratorInterface $urlGenerator,
-        private DateRangeActiveFilterFormatter $dateRangeActiveFilterFormatter,
     ) {
     }
 
