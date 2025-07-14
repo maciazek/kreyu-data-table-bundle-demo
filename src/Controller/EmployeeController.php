@@ -134,7 +134,7 @@ final class EmployeeController extends AbstractController
             'id' => array_map(fn ($id) => intval($id), $request->request->all('id')),
         ]);
         foreach ($employees as $employee) {
-            if ($employee->getStatus() === EmployeeStatus::ACTIVE) {
+            if ($employee->getStatus() !== EmployeeStatus::INACTIVE) {
                 $employee->setCurrentContract(null);
                 $employee->setStatus(EmployeeStatus::INACTIVE);
             }
