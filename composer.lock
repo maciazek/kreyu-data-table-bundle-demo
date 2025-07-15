@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "208d7318d2475483d951dfce7eb3f612",
+    "content-hash": "b89ea44869971a4fc543a9d010030a95",
     "packages": [
         {
             "name": "composer/semver",
@@ -1369,16 +1369,16 @@
         },
         {
             "name": "kreyu/data-table-bundle",
-            "version": "v0.31.2",
+            "version": "dev-fix/batch-modal-action",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Kreyu/data-table-bundle.git",
-                "reference": "2df63d0557a84d8d4a91b1ce2c6c8347de9f21d0"
+                "url": "https://github.com/maciazek/kreyu-data-table-bundle.git",
+                "reference": "998de6f7778349c2525fa7a070cb625d678225bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/2df63d0557a84d8d4a91b1ce2c6c8347de9f21d0",
-                "reference": "2df63d0557a84d8d4a91b1ce2c6c8347de9f21d0",
+                "url": "https://api.github.com/repos/maciazek/kreyu-data-table-bundle/zipball/998de6f7778349c2525fa7a070cb625d678225bf",
+                "reference": "998de6f7778349c2525fa7a070cb625d678225bf",
                 "shasum": ""
             },
             "require": {
@@ -1413,7 +1413,11 @@
                     "Kreyu\\Bundle\\DataTableBundle\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Kreyu\\Bundle\\DataTableBundle\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1428,16 +1432,15 @@
                 "symfony-ux"
             ],
             "support": {
-                "issues": "https://github.com/Kreyu/data-table-bundle/issues",
-                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.31.2"
+                "source": "https://github.com/maciazek/kreyu-data-table-bundle/tree/fix/batch-modal-action"
             },
             "funding": [
                 {
-                    "url": "https://github.com/Kreyu",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/Kreyu"
                 }
             ],
-            "time": "2025-07-12T17:17:37+00:00"
+            "time": "2025-07-15T16:24:28+00:00"
         },
         {
             "name": "openspout/openspout",
@@ -7949,7 +7952,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "kreyu/data-table-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
