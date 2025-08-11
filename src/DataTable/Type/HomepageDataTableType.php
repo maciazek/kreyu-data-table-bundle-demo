@@ -22,8 +22,11 @@ use Kreyu\Bundle\DataTableBundle\DataTableBuilderInterface;
 use Kreyu\Bundle\DataTableBundle\Filter\FilterData;
 use Kreyu\Bundle\DataTableBundle\Filter\Type\SearchFilterType;
 use Kreyu\Bundle\DataTableBundle\Pagination\PaginationData;
+use Kreyu\Bundle\DataTableBundle\Persistence\PersistenceAdapterInterface;
+use Kreyu\Bundle\DataTableBundle\Persistence\PersistenceSubjectProviderInterface;
 use Kreyu\Bundle\DataTableBundle\Query\ProxyQueryInterface;
 use Kreyu\Bundle\DataTableBundle\Type\AbstractDataTableType;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -35,6 +38,14 @@ class HomepageDataTableType extends AbstractDataTableType
         private TranslatorInterface $translator,
         private UrlGeneratorInterface $urlGenerator,
         private DateRangeActiveFilterFormatter $dateRangeActiveFilterFormatter,
+
+        #[Autowire(service: 'kreyu_data_table.personalization.persistence.adapter.cache')]
+        private PersistenceAdapterInterface $persistenceAdapter,
+
+        // in real app, you should use 'kreyu_data_table.persistence.subject_provider.token_storage'
+        // or create custom persistence subject provider
+        #[Autowire(service: 'kreyu_data_table.persistence.subject_provider.static')]
+        private PersistenceSubjectProviderInterface $persistenceSubjectProvider,
     ) {
     }
 
@@ -166,6 +177,9 @@ class HomepageDataTableType extends AbstractDataTableType
     {
         $resolver->setDefaults([
             'personalization_enabled' => true,
+            'personalization_persistence_enabled' => true,
+            'personalization_persistence_adapter' => $this->persistenceAdapter,
+            'personalization_persistence_subject_provider' => $this->persistenceSubjectProvider,
             'translation_domain' => 'entities',
         ]);
     }
