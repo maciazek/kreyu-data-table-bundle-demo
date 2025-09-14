@@ -1276,12 +1276,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maciazek/kreyu-data-table-bundle.git",
-                "reference": "998de6f7778349c2525fa7a070cb625d678225bf"
+                "reference": "9601ad5570a36523512619794357588f063cddfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maciazek/kreyu-data-table-bundle/zipball/998de6f7778349c2525fa7a070cb625d678225bf",
-                "reference": "998de6f7778349c2525fa7a070cb625d678225bf",
+                "url": "https://api.github.com/repos/maciazek/kreyu-data-table-bundle/zipball/9601ad5570a36523512619794357588f063cddfd",
+                "reference": "9601ad5570a36523512619794357588f063cddfd",
                 "shasum": ""
             },
             "require": {
@@ -1343,7 +1343,7 @@
                     "url": "https://github.com/Kreyu"
                 }
             ],
-            "time": "2025-07-15T16:24:28+00:00"
+            "time": "2025-09-14T14:01:17+00:00"
         },
         {
             "name": "openspout/openspout",
