@@ -14,7 +14,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.3",
         "fakerphp/faker": "^1.24",
-        "kreyu/data-table-bundle": "^0.31.1",
+        "kreyu/data-table-bundle": "^0.32.1",
         "openspout/openspout": "^4.28",
         "scienta/doctrine-json-functions": "^6.3",
         "symfony/asset": "6.4.*",

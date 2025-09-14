@@ -34,7 +34,6 @@ return array (
   'app_employee_show' => 'Pracownik',
   'app_experimental' => 'Eksperymentalne ⚠️',
   'app_experimental_batch_modal_action' => 'Masowa akcja w oknie dialogowym',
-  'app_experimental_default_filters' => 'Domyślne filtry',
   'app_filter' => 'Filtry',
   'app_filter_doctrine_orm' => 'Doctrine ORM',
   'app_filter_events' => 'Zdarzenia',
