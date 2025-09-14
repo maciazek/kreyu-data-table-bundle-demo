@@ -161,6 +161,8 @@ class FilterDoctrineOrmDataTableType extends AbstractDataTableType
             ->addExporter('xlsx', XlsxExporterType::class)
             ->setDefaultFiltrationData(FiltrationData::fromArray([
                 'salaryInCentsFrom' => new FilterData(value: 1000000),
+                'isManager' => new FilterData(value: false),
+                'status' => new FilterData(value: [EmployeeStatus::ACTIVE->value, EmployeeStatus::LONG_TERM_LEAVE->value]),
             ]))
             ->setDefaultPaginationData(PaginationData::fromArray([
                 'page' => 1,

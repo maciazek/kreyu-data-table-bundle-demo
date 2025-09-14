@@ -17,36 +17,6 @@ final class ExperimentalController extends AbstractController
 {
     use DataTableFactoryAwareTrait;
 
-    #[Route('/default_filters', name: 'app_experimental_default_filters')]
-    public function defaultFilters(Request $request, EmployeeRepository $employeeRepository): Response
-    {
-        $queryBuilder = $employeeRepository->createQueryBuilder('employee')
-            ->leftJoin('employee.currentContract', 'currentContract')
-            ->leftJoin('currentContract.title', 'currentContractTitle')
-            ->addSelect('currentContract')
-            ->addSelect('currentContractTitle')
-        ;
-
-        $dataTable = $this->createDataTable(ExperimentalDefaultFiltersDataTableType::class, $queryBuilder, options: [
-            'themes' => [
-                $request->getSession()->get('_data_table_theme')->getPath(),
-                $request->getSession()->get('_data_table_icon_theme')->getPath(),
-            ],
-        ]);
-        $dataTable->handleRequest($request);
-
-        if ($dataTable->isExporting()) {
-            return $this->file($dataTable->export());
-        }
-
-        return $this->render('experimental/default_filters.html.twig', [
-            'employees' => $dataTable->createView(),
-            'source_code_classes' => [
-                ExperimentalDefaultFiltersDataTableType::class,
-            ],
-        ]);
-    }
-
     #[Route('/batch_modal_action', name: 'app_experimental_batch_modal_action')]
     public function batchModalAction(Request $request, EmployeeRepository $employeeRepository): Response
     {

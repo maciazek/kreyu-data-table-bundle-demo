@@ -566,16 +566,9 @@
 
 {% block column_link_value -%}
     <a {% with { attr: { href, target }|filter(v => v != null)|merge(attr) } %}{{- block('attributes') -}}{% endwith %}>
-        {%- if translatable -%}
-            {%- if is_instance_of_translatable -%}
-                {# @var value Symfony\Contracts\Translation\TranslatableInterface #}
-                {{- translation_key|trans -}}
-            {%- else -%}
-                {{- translation_key|trans(translation_parameters, translation_domain) -}}
-            {%- endif -%}
-        {%- else -%}
-            {{- value -}}
-        {%- endif -%}
+        {% with { attr: { } } %}
+            {{- block('column_text_value') -}}
+        {% endwith %}
     </a>
 {%- endblock %}
 

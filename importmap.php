@@ -28,13 +28,13 @@ return [
         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
     'bootstrap' => [
-        'version' => '5.3.7',
+        'version' => '5.3.8',
     ],
     '@popperjs/core' => [
         'version' => '2.11.8',
     ],
     'bootstrap/dist/css/bootstrap.min.css' => [
-        'version' => '5.3.7',
+        'version' => '5.3.8',
         'type' => 'css',
     ],
     '@fontsource/noto-sans/latin.css' => [
@@ -64,11 +64,11 @@ return [
         'type' => 'css',
     ],
     '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
-        'version' => '3.34.0',
+        'version' => '3.34.1',
         'type' => 'css',
     ],
     '@tabler/core' => [
-        'version' => '1.3.2',
+        'version' => '1.4.0',
     ],
     'autosize' => [
         'version' => '6.0.1',
@@ -77,7 +77,7 @@ return [
         'version' => '7.6.1',
     ],
     '@tabler/core/dist/css/tabler.min.css' => [
-        'version' => '1.3.2',
+        'version' => '1.4.0',
         'type' => 'css',
     ],
     '@hotwired/turbo' => [
