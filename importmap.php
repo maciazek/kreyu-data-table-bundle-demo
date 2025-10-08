@@ -38,11 +38,11 @@ return [
         'type' => 'css',
     ],
     '@fontsource/noto-sans/latin.css' => [
-        'version' => '5.2.7',
+        'version' => '5.2.10',
         'type' => 'css',
     ],
     '@fontsource/noto-sans/latin-ext.css' => [
-        'version' => '5.2.7',
+        'version' => '5.2.10',
         'type' => 'css',
     ],
     'bootstrap-icons/font/bootstrap-icons.min.css' => [
@@ -56,15 +56,15 @@ return [
         'version' => '1.15.6',
     ],
     '@fontsource/roboto-mono/latin.css' => [
-        'version' => '5.2.6',
+        'version' => '5.2.8',
         'type' => 'css',
     ],
     '@fontsource/roboto-mono/latin-ext.css' => [
-        'version' => '5.2.6',
+        'version' => '5.2.8',
         'type' => 'css',
     ],
     '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
-        'version' => '3.34.1',
+        'version' => '3.35.0',
         'type' => 'css',
     ],
     '@tabler/core' => [
@@ -81,7 +81,7 @@ return [
         'type' => 'css',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.13',
+        'version' => '8.0.18',
     ],
     'chart.js' => [
         'version' => '4.5.0',
