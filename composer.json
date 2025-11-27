@@ -14,33 +14,33 @@
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.3",
         "fakerphp/faker": "^1.24",
-        "kreyu/data-table-bundle": "^0.32.1",
+        "kreyu/data-table-bundle": "^0.32.2",
         "openspout/openspout": "^4.28",
         "scienta/doctrine-json-functions": "^6.3",
-        "symfony/asset": "6.4.*",
-        "symfony/asset-mapper": "6.4.*",
-        "symfony/console": "6.4.*",
-        "symfony/dotenv": "6.4.*",
+        "symfony/asset": "7.4.*",
+        "symfony/asset-mapper": "7.4.*",
+        "symfony/console": "7.4.*",
+        "symfony/dotenv": "7.4.*",
         "symfony/flex": "^2",
-        "symfony/framework-bundle": "6.4.*",
-        "symfony/runtime": "6.4.*",
-        "symfony/security-csrf": "6.4.*",
+        "symfony/framework-bundle": "7.4.*",
+        "symfony/runtime": "7.4.*",
+        "symfony/security-csrf": "7.4.*",
         "symfony/stimulus-bundle": "^2.23",
-        "symfony/translation": "6.4.*",
-        "symfony/twig-bundle": "6.4.*",
-        "symfony/uid": "6.4.*",
+        "symfony/translation": "7.4.*",
+        "symfony/twig-bundle": "7.4.*",
+        "symfony/uid": "7.4.*",
         "symfony/ux-chartjs": "^2.23",
         "symfony/ux-turbo": "^2.23",
         "symfony/ux-twig-component": "^2.23",
-        "symfony/yaml": "6.4.*",
+        "symfony/yaml": "7.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.70",
         "symfony/maker-bundle": "^1.62",
-        "symfony/stopwatch": "6.4.*",
-        "symfony/web-profiler-bundle": "6.4.*"
+        "symfony/stopwatch": "7.4.*",
+        "symfony/web-profiler-bundle": "7.4.*"
     },
     "config": {
         "allow-plugins": {
@@ -88,7 +88,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.4.*",
+            "require": "7.4.*",
             "docker": false
         }
     }
