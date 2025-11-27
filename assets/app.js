@@ -1,5 +1,5 @@
 // stimulus
-import './bootstrap.js';
+import './stimulus_bootstrap.js';
 
 // icons
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
