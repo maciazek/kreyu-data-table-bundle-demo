@@ -1,5 +1,5 @@
 name: kreyu-data-table-bundle-demo
-type: php
+type: symfony
 docroot: "public"
 php_version: "8.2"
 webserver_type: nginx-fpm
