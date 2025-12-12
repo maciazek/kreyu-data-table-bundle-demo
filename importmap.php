@@ -81,10 +81,10 @@ return [
         'type' => 'css',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.18',
+        'version' => '8.0.20',
     ],
     'chart.js' => [
-        'version' => '4.5.0',
+        'version' => '4.5.1',
     ],
     '@kurkle/color' => [
         'version' => '0.4.0',
