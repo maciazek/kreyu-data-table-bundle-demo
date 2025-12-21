@@ -30,7 +30,7 @@ composer install
 
 Create database:
 ```
-php bin/console doctrine:database:create
+php bin/console doctrine:schema:create
 ```
 
 Load database structure and fake data:
