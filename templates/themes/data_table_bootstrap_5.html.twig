@@ -473,7 +473,10 @@
 
     <div class="d-inline-block w-auto">
         {% for child in filtration_form.vars.search_fields %}
-            {{ form_widget(child.value, { attr: { form: filtration_form.vars.id, class: 'form-control-sm' } }) }}
+            <div class="input-group input-group-sm">
+                {{ form_widget(child.value, { attr: { form: filtration_form.vars.id, class: 'form-control-sm' } }) }}
+                <button class="btn btn-sm btn-info" type="submit" form="{{ filtration_form.vars.id }}"><i class="bi bi-search"></i></button>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
