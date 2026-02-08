@@ -64,7 +64,7 @@ return [
         'type' => 'css',
     ],
     '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
-        'version' => '3.35.0',
+        'version' => '3.36.1',
         'type' => 'css',
     ],
     '@tabler/core' => [
@@ -81,7 +81,7 @@ return [
         'type' => 'css',
     ],
     '@hotwired/turbo' => [
-        'version' => '8.0.20',
+        'version' => '8.0.23',
     ],
     'chart.js' => [
         'version' => '4.5.1',
