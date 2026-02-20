@@ -52,6 +52,14 @@
 
                 <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
+                        {# persistence cleaner #}
+                        <li class="nav-item">
+                            <a href="{{ path('app_homepage_clear_persistence', {redirect_route: app.current_route, redirect_route_parameters: app.current_route_parameters}) }}" class="nav-link d-flex align-items-center text-warning" role="button" data-bootstrap-target="tooltip" data-bs-placement="bottom" data-bs-title="{{ 'app_homepage_clear_persistence'|trans({}, 'routes') }}">
+                                <i class="bi bi-x-square me-2 me-md-0"></i>
+                                <span class="d-inline d-md-none">{{ 'app_homepage_clear_persistence'|trans({}, 'routes') }}</span>
+                            </a>
+                        </li>
+
                         {# locale switcher #}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'locale'|trans({}, 'buttons') }}">

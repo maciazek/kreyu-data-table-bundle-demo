@@ -41,6 +41,7 @@ return array (
   'app_filter_search_advanced' => 'Wyszukiwanie (złożone)',
   'app_filter_search_simple' => 'Wyszukiwanie (proste)',
   'app_homepage_index' => 'Strona główna',
+  'app_homepage_clear_persistence' => 'Wyczyść ustawienia tabel',
   'app_target_delete' => 'Usuń cel',
   'app_target_edit' => 'Edytuj cel',
   'app_target_new' => 'Nowy cel',

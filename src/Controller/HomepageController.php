@@ -7,6 +7,8 @@ use App\DataTable\Type\HomepageDataTableType;
 use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
+use Kreyu\Bundle\DataTableBundle\Persistence\PersistenceClearerInterface;
+use Kreyu\Bundle\DataTableBundle\Persistence\StaticPersistenceSubjectProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,5 +48,26 @@ final class HomepageController extends AbstractController
                 DateRangeActiveFilterFormatter::class,
             ],
         ]);
+    }
+
+    #[Route('/clear-persistence', name: 'app_homepage_clear_persistence', methods: ['GET'])]
+    public function clearPersistence(Request $request, PersistenceClearerInterface $persistenceClearer): Response
+    {
+        $persistenceClearer->clear(new StaticPersistenceSubjectProvider());
+
+        // in real app, you would probably use something like this:
+        // $persistenceClearer->clear($currentUser);
+        //
+        // in that case, your User must implement PersistenceSubjectInterface, for example:
+        // public function getDataTablePersistenceIdentifier(): string
+        // {
+        //     return (string)$this->username;
+        // }
+
+        // go back to where you were
+        $route = $request->query->get('redirect_route');
+        $routeParameters = $request->query->all('redirect_route_parameters');
+
+        return $this->redirectToRoute($route, $routeParameters);
     }
 }

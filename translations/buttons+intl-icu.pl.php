@@ -16,6 +16,6 @@ return array (
   'theme.auto' => 'Automatyczny',
   'theme.dark' => 'Ciemny',
   'theme.light' => 'Jasny',
-  'toggle_offcanvas_menu' => 'Pokaż/ukryj boczne menu',
   'toggle_navbar_menu' => 'Pokaż/ukryj górne menu',
+  'toggle_offcanvas_menu' => 'Pokaż/ukryj boczne menu',
 );

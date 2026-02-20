@@ -16,6 +16,6 @@ return array (
   'theme.auto' => 'Auto',
   'theme.dark' => 'Dark',
   'theme.light' => 'Light',
-  'toggle_offcanvas_menu' => 'Toggle offcanvas menu',
   'toggle_navbar_menu' => 'Toggle navbar menu',
+  'toggle_offcanvas_menu' => 'Toggle offcanvas menu',
 );
