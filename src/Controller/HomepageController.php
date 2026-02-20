@@ -46,6 +46,7 @@ final class HomepageController extends AbstractController
                 HomepageDataTableType::class,
                 EmployeeStatus::class,
                 DateRangeActiveFilterFormatter::class,
+                HomepageController::class,
             ],
         ]);
     }
