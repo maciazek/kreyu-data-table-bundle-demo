@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\DataTable\Type\Experimental\ExperimentalBatchModalActionDataTableType;
-use App\DataTable\Type\Experimental\ExperimentalDefaultFiltersDataTableType;
 use App\Enum\EmployeeStatus;
 use App\Repository\EmployeeRepository;
 use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
