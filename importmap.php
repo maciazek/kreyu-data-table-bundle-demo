@@ -53,7 +53,7 @@ return [
         'version' => '3.2.2',
     ],
     'sortablejs' => [
-        'version' => '1.15.6',
+        'version' => '1.15.7',
     ],
     '@fontsource/roboto-mono/latin.css' => [
         'version' => '5.2.8',
@@ -64,7 +64,7 @@ return [
         'type' => 'css',
     ],
     '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
-        'version' => '3.36.1',
+        'version' => '3.41.1',
         'type' => 'css',
     ],
     '@tabler/core' => [

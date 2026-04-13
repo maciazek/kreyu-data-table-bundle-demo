@@ -28,9 +28,6 @@ class ColumnTemplateDataTableType extends AbstractDataTableType
 
     public function buildDataTable(DataTableBuilderInterface $builder, array $options): void
     {
-        $translator = $this->translator;
-        $chartBuilder = $this->chartBuilder;
-
         $builder
             ->addColumn('name', TextColumnType::class, [
                 'export' => true,
@@ -50,7 +47,7 @@ class ColumnTemplateDataTableType extends AbstractDataTableType
                 ],
                 'property_path' => 'currentContract?.targets',
                 'template_path' => 'column/_chart.html.twig',
-                'template_vars' => function (?PersistentCollection $targets) use ($translator, $chartBuilder) {
+                'template_vars' => function (?PersistentCollection $targets) {
                     if ($targets === null) {
                         return [
                             'chart' => null,
@@ -66,12 +63,12 @@ class ColumnTemplateDataTableType extends AbstractDataTableType
                         ];
                     }, $targets->getValues());
 
-                    $chart = $chartBuilder->createChart(Chart::TYPE_BAR);
+                    $chart = $this->chartBuilder->createChart(Chart::TYPE_BAR);
                     $chart->setData([
                         'labels' => array_column($values, 'month'),
                         'datasets' => [
                             [
-                                'label' => $translator->trans('target.value', [], 'entities'),
+                                'label' => $this->translator->trans('target.value', [], 'entities'),
                                 'backgroundColor' => array_column($values, 'backgroundColor'),
                                 'borderColor' => array_column($values, 'borderColor'),
                                 'data' => array_column($values, 'value'),
