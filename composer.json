@@ -5,42 +5,48 @@
     "description": "A minimal Symfony project recommended to create bare bones applications",
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/maciazek/kreyu-data-table-bundle.git"
+        }
+    ],
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/dbal": "^4",
-        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-bundle": "^3.2",
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.3",
         "fakerphp/faker": "^1.24",
-        "kreyu/data-table-bundle": "^0.33.0",
+        "kreyu/data-table-bundle": "dev-fix/sf8",
         "openspout/openspout": "^4.28",
         "scienta/doctrine-json-functions": "^6.3",
-        "symfony/asset": "7.4.*",
-        "symfony/asset-mapper": "7.4.*",
-        "symfony/console": "7.4.*",
-        "symfony/dotenv": "7.4.*",
+        "symfony/asset": "8.0.*",
+        "symfony/asset-mapper": "8.0.*",
+        "symfony/console": "8.0.*",
+        "symfony/dotenv": "8.0.*",
         "symfony/flex": "^2",
-        "symfony/framework-bundle": "7.4.*",
-        "symfony/runtime": "7.4.*",
-        "symfony/security-csrf": "7.4.*",
+        "symfony/framework-bundle": "8.0.*",
+        "symfony/runtime": "8.0.*",
+        "symfony/security-csrf": "8.0.*",
         "symfony/stimulus-bundle": "^2.23",
-        "symfony/translation": "7.4.*",
-        "symfony/twig-bundle": "7.4.*",
-        "symfony/uid": "7.4.*",
+        "symfony/translation": "8.0.*",
+        "symfony/twig-bundle": "8.0.*",
+        "symfony/uid": "8.0.*",
         "symfony/ux-chartjs": "^2.23",
         "symfony/ux-turbo": "^2.23",
         "symfony/ux-twig-component": "^2.23",
-        "symfony/yaml": "7.4.*",
+        "symfony/yaml": "8.0.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.70",
         "symfony/maker-bundle": "^1.62",
-        "symfony/stopwatch": "7.4.*",
-        "symfony/web-profiler-bundle": "7.4.*"
+        "symfony/stopwatch": "8.0.*",
+        "symfony/web-profiler-bundle": "8.0.*"
     },
     "config": {
         "allow-plugins": {
@@ -88,7 +94,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.4.*",
+            "require": "8.0.*",
             "docker": false
         }
     }
